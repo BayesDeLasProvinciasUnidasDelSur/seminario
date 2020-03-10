@@ -1,0 +1,45 @@
+\documentclass[10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\input{../../../aux/tikzlibrarybayesnet.code.tex}
+\input{../../../aux/encabezado.tex}
+\makeatletter
+\newcommand{\vast}{\bBigg@{2.5}}
+\newcommand{\Vast}{\bBigg@{14.5}}
+\makeatother
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+
+\tikz{ %
+        
+        \node[det, fill=black!10] (r) {$r_{ij}$} ; %
+        \node[const, left=of r, xshift=-1.4cm] (r_name) {\small Resultado observado ($r$)}; 
+        \node[const, right=of r] (dr) {\large $ r_{ij} = \mathbb{I}(p_i>p_j)$}; 
+          
+         \node[latent, above=of r, xshift=-0.8cm] (p1) {$p_i$} ; %
+         \node[latent, above=of r, xshift=0.8cm] (p2) {$p_j$} ; %
+         \node[const, left=of p1, xshift=-0.55cm, yshift=0.2cm] (p_name) {\small Rendimiento aleatorio oculto ($p$)}; 
+         \node[const, left=of p1, xshift=-0.55cm, yshift=-0.2cm] (p_name) {\small centrado en la habilidad estimada ($s$)}; 
+         
+         
+         
+         \node[const, right=of p2] (dp2) {\large $p \sim N(s,\beta^2)$};
+         
+%          \node[latent, above=of p1, fill=black, minimum size=1pt] (s1) {} ; %
+%          \node[latent, above=of p2, fill=black, minimum size=1pt] (s2) {} ; %
+%          \node[const, above=of s1] (ds1) {\large $s_i$};
+%          \node[const, above=of s2] (ds2) {\large $s_j$};
+%          \node[const, left=of s1, xshift=-.85cm, yshift=0.2cm] (s_name) {Habilidad estimada}; 
+%          
+         \edge {p1,p2} {r};
+         %\edge {s1} {p1};
+         %\edge {s2} {p2};
+         
+         \node[invisible, right=of p2, xshift=4.75cm] (s-dist) {};
+} 
+
+
+\end{document}

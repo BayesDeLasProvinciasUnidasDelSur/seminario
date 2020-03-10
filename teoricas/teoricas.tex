@@ -1,0 +1,3543 @@
+\documentclass[shownotes]{beamer}
+\input{../../aux/diapo_encabezado.tex}
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\title[Distribuciones de creencias]{Técnicas para calcular distribuciones de creencias \\
+\large Estimaci\'on de habilidad en la industria del video juego}
+
+\author[Gustavo Landfried]{Gustavo Landfried \\ \scriptsize \texttt{@GALandfried} \includegraphics[width=0.025\textwidth]{../../Imagenes/twitter.png} \\\vspace{.75cm}
+Licenciado en Ciencias Antropológicas \\
+Doctorando en Ciencias de la Computación}
+
+\institute[DC-ICC-CONICET]{\vspace{1.25cm} \includegraphics[width=0.4\textwidth]{../../Imagenes/dc-logo}}
+\date{}
+
+\begin{document}
+
+\small
+
+\begin{frame}[noframenumbering]
+ 
+%  \begin{textblock}{100}(18,14)
+%  \includegraphics[width=0.27\textwidth]{../../Imagenes/logoAntropocaos} 
+%  \end{textblock}
+%   \begin{textblock}{100}(57,13.5)
+%  \includegraphics[width=0.57\textwidth]{../../Imagenes/argonautasDelCaos} 
+%  \end{textblock}
+% 
+ \vspace{.5cm}
+\maketitle
+ 
+\end{frame}
+
+
+\section{Incertidumbre}
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \Large Incertidumbre
+\end{center}
+\end{textblock}
+
+\vspace{0.75cm}
+
+% La incertidumbre es algo con lo que aprendimos a convivir cotidianamente.
+% De alguna forma somos capaces de evaluar la situaciones en contextos donde la información es incompleta.
+\begin{figure}[H]     
+     \centering \normalsize
+     \begin{subfigure}[b]{0.75\textwidth}
+       \includegraphics[width=1\textwidth]{../../Imagenes/incertidumbre.jpeg} 
+     \end{subfigure}
+\end{figure}
+
+\end{frame}
+
+\subsection{Sorpresa}
+\begin{frame}
+\only<1>{
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Sorpresa
+\end{center}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Sorpresa
+ 
+ \normalsize El punto d\'ebil de las creencias
+\end{center}
+\end{textblock}
+}
+
+
+% Ante la incertidumbre, lo Poder evaluarlas lo mejor posible es fundamental.
+% Tener creencias falsas siempre fue muy peligroso.
+\begin{textblock}{118}(5,24)
+  \begin{figure}[H]     
+     \centering \normalsize
+     \begin{subfigure}[b]{0.9\textwidth}
+       \includegraphics[width=1\textwidth]{../../Imagenes/peligro_predador.jpeg} 
+     \end{subfigure}
+\end{figure}
+\end{textblock}
+ 
+ 
+ 
+\end{frame}
+
+\subsection{¿Cómo estimar habilidades?}
+
+\begin{frame}
+ \begin{textblock}{128}(0,8)
+\begin{center}
+ \large ¿Cómo estimar habilidades?
+\end{center}
+\end{textblock}
+\vspace{1.25cm}
+
+  \begin{figure}[H]     
+     \centering \normalsize
+     \begin{subfigure}[b]{0.4\textwidth}
+       \includegraphics[page=1,width=\textwidth]{../../Imagenes/elo.jpeg} 
+       \caption*{\footnotesize Arpad Elo}
+     \end{subfigure}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+ \begin{textblock}{128}(0,8)
+\begin{center}
+ \large Modelo Elo
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+
+\Wider[2cm]{
+\begin{figure}[H]     
+     \centering
+     \begin{subfigure}[b]{1\textwidth}
+       \includegraphics[width=1\textwidth]{imagenes/elo_model.pdf} 
+     \end{subfigure}
+\end{figure}
+}
+
+\end{frame}
+
+
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \normalsize \ \ Probabilidad de ganar (gr\'afica)
+\end{center}
+\end{textblock}
+\vspace{0.5cm}
+
+ 
+\begin{figure}[H]     
+     \centering
+     \begin{subfigure}[b]{0.7\textwidth}
+       \includegraphics[width=1\textwidth]{imagenes/probaOfWin_2D.pdf} 
+     \end{subfigure}
+\end{figure}
+  
+\end{frame}
+ 
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Estimaci\'on Elo 
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+
+\begin{equation*}
+s_i^{\text{new}} = s_i^{\text{old}} + K \Delta
+\end{equation*}
+
+\pause
+\vspace{0.25cm}
+
+
+\begin{equation*}
+\Delta = \underbrace{(2\,r_{ij}-1)}_{\hfrac{\textbf{\tiny Signo}} {\text{\tiny del resultado}}} \, \underbrace{(1 - P(r_{ij}|s_i,s_j))}_{\hfrac{\textbf{\tiny Sorpresa}}{\text{\tiny del resultado}}}
+\end{equation*}
+
+
+\vspace{0.25cm}
+
+\onslide<3->{
+\begin{center}
+ Modelo de solución
+\end{center}
+\vspace{-0.3cm}
+\Wider[-3cm]{
+\begin{mdframed}[backgroundcolor=black!15]
+\begin{figure}[H]     
+     \centering 
+     \begin{subfigure}[b]{0.75\textwidth}
+       \includegraphics[width=1\textwidth]{imagenes/elo_solucion.pdf} 
+     \end{subfigure}
+\end{figure}
+\end{mdframed}
+}
+
+
+}
+
+\end{frame}
+
+
+% \begin{frame}
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+%  \large Debilidades del sistema Elo
+% \end{center}
+% \end{textblock}
+% 
+% \begin{itemize}
+%   \item[$\bullet$] La actualizaci\'on depende de un valor arbitrario, $K$ \pause
+%   \item[$\bullet$] No hay noci\'on de la incertidumbre de la estimaci\'on \pause
+%   \item[$\bullet$] Solo sirve para competencias individuales 
+% \end{itemize}
+%  
+%  
+% %  
+% \end{frame}
+
+
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \Large Hoy 
+ 
+ \large Estimaci\'on de habilidad en la industria del video juego
+\end{center}
+\end{textblock}
+
+\vspace{0.75cm}
+
+\Wider[1cm]{
+  \begin{figure}[H]     
+     \centering \normalsize
+     \begin{subfigure}[b]{1\textwidth}
+       \includegraphics[width=1\textwidth]{../../Imagenes/messi_datos.jpeg} 
+     \end{subfigure}
+\end{figure}
+}
+
+\pause
+\normalsize
+\vspace{1.2cm}
+
+\centering \large Inferencia Bayesiana
+
+
+%técnicas de inferencia Bayesiana que se usan hoy en día en la industria de los vídeo juegos para estimar habilidades, predecir quién va a ganar y cuantificar la evidencia que los datos ofrecen a favor de modelos alternativos.
+
+% Hoy
+% 
+% \begin{itemize}
+% \small 
+%  \item $\bullet$ T\'ecnicas para calcular distibuciones de creencias \'optimas
+% % En esta charla vamos a contar las técnicas que se usan hoy en d\'ia en la industria de los video juegos estimar distibuciones de creencias optimas sobre la habilidad de los jugadores.
+%  
+% \pause
+% 
+% \item $\bullet$ Beneficios de contar con distibuciones de creencias \'optimas
+% % para predecir quién va a ganar y cuantificar la evidencia que los datos ofrecen a favor de modelos alternativos.
+% 
+% \end{itemize}
+
+\end{frame}
+
+
+%\subsection{Cómo saber (lo) que (no) sabés}
+\subsection{¿Por qu\'e inferencia Bayesiana?}
+
+\begin{frame}
+\begin{textblock}{128}(0,7)
+\begin{center}
+ \large ¿Por qu\'e inferencia Bayesiana?
+\end{center}
+\end{textblock}
+
+
+% \begin{textblock}{128}(0,7)
+% \begin{center}
+%  \Large Cómo saber (lo) qu$\overset{\text{\tiny ($\prime$)}}{\text{e}}$ (no) sabés
+% \end{center}
+% \end{textblock}
+
+
+\vspace{0.75cm}
+\pause
+
+ \Wider[-3cm]{
+ \begin{mdframed}[backgroundcolor=black!15]
+ \centering
+Permite computar creencias óptimas
+
+dadas restricciones: modelos y datos
+ \end{mdframed}
+}
+
+\only<2>{
+ \begin{textblock}{128}(0,92)
+  \tiny \centering Books: \href{http://gen.lib.rus.ec/book/index.php?md5=0AF108CB2FEFA5A20F7B186BC2C88656}{Jaynes. Probability theor, the logic of science} -- \href{http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf}{Bishop. Pattern recognition and machine learning}
+ \end{textblock}
+}
+
+ 
+\end{frame}
+
+
+\section{Inferencia Bayesiana}
+
+\subsection{Principio de máxima incertidumbre}
+
+\begin{frame}
+\only<1-3>{
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Principio de máxima incertidumbre
+\end{center}
+\end{textblock} 
+}
+
+\only<4->{
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Principio de máxima incertidumbre \\
+ Honestidad
+\end{center}
+\end{textblock} 
+}
+
+\only<1>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_0}     
+ \end{textblock}
+}
+
+%reason for one outcome to occur more often than any other, then the events are assigned equal probabilities. This is called the principle of insufficient reason, or principle of indifference, and goes back to Laplace.
+
+\only<2>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_1}     
+ \end{textblock}
+}
+
+\only<3-4>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_2}     
+ \end{textblock}
+}
+
+\only<5>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_3}     
+ \end{textblock}
+}
+\only<6>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_4}     
+ \end{textblock}
+}
+\only<7>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_5}     
+ \end{textblock}
+}
+\only<8>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_6}     
+ \end{textblock}
+}
+\only<9>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_7}     
+ \end{textblock}
+}
+\only<10>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_8}     
+ \end{textblock}
+}
+\only<11>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_9}     
+ \end{textblock}
+}
+\only<12>{
+ \begin{textblock}{128}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{imagenes/montyHall_10}     
+ \end{textblock}
+}
+
+
+
+
+
+
+
+% 
+% \only<4>{
+%  \begin{textblock}{128}(0,82)\centering
+%  \centering
+%  ¿Y sin resticción, si hubiera abiero cualquier puerta?
+%  \end{textblock}
+% 
+% }
+
+\end{frame}
+
+
+
+\subsection{Entrop\'ia}
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large La sorpresa fuente de informaci\'on \\
+ Entrop\'ia
+\end{center}
+\end{textblock} 
+  \vspace{1.5cm}
+  
+% if we are told that a highly improbable event has just occurred, we will
+% have received more information than if we were told that some very likely event
+% has just occurred, and if we knew that the event was certain to happen we would
+% receive no information. Our measure of information content will therefore depend
+% on the probability distribution p(x), and we therefore look for a quantity h(x) that
+% is a monotonic function of the probability p(x) and that expresses the information
+% content. The form of h(·) can be found by noting that if we have two events x
+% and y that are unrelated, then the information gain from observing both of them
+% should be the sum of the information gained from each of them separately, so that
+% h(x, y) = h(x) + h(y). Two unrelated events will be statistically independent and
+% so p(x, y) = p(x)p(y).
+  
+  \pause
+  
+Informaci\'on extraida de la sorpresa, 
+\begin{equation*}
+ h(x) = -\log P(x)
+\end{equation*}
+
+\pause \vspace{0.75cm}
+
+Informaci\'on esperada, 
+\begin{equation*}
+ H(X) = \sum_x P(x) h(x)
+\end{equation*}
+
+\pause
+
+\vspace{0.3cm}
+
+\Wider[-1.5cm]{
+\begin{mdframed}[backgroundcolor=black!20]
+\centering
+\textbf{Honestidad: m\'axima entrop\'ia}
+
+ M\'axima información esperada $\Leftrightarrow$ Máxima incertidumbre  
+ \end{mdframed}
+
+
+}
+\centering
+
+ 
+%máxima incertidumbre, m\'axima información esperada.
+ 
+%Maximum entropy: grantiza máxima 
+% Le pone un l\'imite a la sorpresa  en caso de que nuestra creencia
+%We interpret Shannon's theorem as indicating that, out of all distributions p i that agree with the constraints, the one that maximizes the Shannon entropy represents the ``most honest'' description of our state of knowledge, in the following sense: it expresses the enumeration of the possibilities and the evidence E ; but is careful to assume nothing beyond that.
+
+%In 1948, thanks of Shannon, it was now a theorem that any measure of the "amount of uncertainty" in a probability distribution is necessarily the information entropy equation, related to old entropy of thermodynamics, or inconsistent.
+
+\only<5>{
+ \begin{textblock}{128}(0,92)
+  \tiny \centering \href{https://doi.org/10.1002/j.1538-7305.1948.tb01338.x}{Shannon, 1948. A mathematical theory of communication} -- \href{https://doi.org/10.1103/PhysRev.106.620}{Jaynes, 1957. Information theory and statistical mechanics} 
+ \end{textblock}
+}
+
+\end{frame}
+
+ \subsection{M\'axima entrop\'ia}
+  \begin{frame}
+ \begin{textblock}{128}(0,8)
+ \begin{center}
+ \large M\'axima entrop\'ia \\ 
+ \normalsize ante estados igualmente posibles
+ \end{center}
+ \end{textblock}
+\vspace{-1cm}
+ %``equally possible'' cases which
+ 
+ %two tosses of a die, N = 6^2 = 36.
+ \begin{center}
+\includegraphics[width=0.23\textwidth]{../../Imagenes/dosdados.jpg}
+ \end{center}
+ 
+  \pause
+ 
+ \vspace{0.5cm}
+ 
+ \begin{equation*}
+  \text{Creencia}(A) = \frac{\text{Cantidad de estados en que $A$ es verdadera}}{\text{Cantidad de estados totales}}
+ \end{equation*}
+ 
+ \end{frame}
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+  \large M\'axima entrop\'ia \\
+ 
+ \normalsize ante estados no igualmente posibles
+\end{center}
+\end{textblock}
+
+\vspace{-1.75cm}
+
+\begin{table}[H]
+\begin{tabular}{lllll}
+                      &                       &    $y_j$            &                       &  \\[0.1cm] \cline{2-4}
+\multicolumn{1}{l|}{} & \multicolumn{1}{l|}{\textcolor{white}{$n_{ij}$}} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  \\[0.1cm] \cline{2-4}
+\multicolumn{1}{l|}{$x_i$} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{$n_{ij}$} & \multicolumn{1}{l|}{} &  $f_i$ \\[0.1cm] \cline{2-4}
+\multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{\textcolor{white}{$n_{ij}$}} &  \\[0.1cm] \cline{2-4}
+&  & ${c_j}$ & & $N$
+\end{tabular}
+\end{table}
+
+\only<2>{\begin{textblock}{128}(11,58)
+Creencia conjunta: $ C(X = x_i, Y= y_j) = $
+\end{textblock}}
+
+\only<3->{\begin{textblock}{128}(11,58) 
+ Creencia conjunta: $ C(X = x_i, Y= y_j) = \frac{n_{ij}}{N}$
+\end{textblock}}
+
+\only<4>{\begin{textblock}{128}(11,66.5) 
+Creencia marginal: $ C(X = x_i) =  \color{white} \frac{\sum_j n_{ij}}{N}$\end{textblock}}
+
+
+\only<5>{\begin{textblock}{128}(11,66.5) 
+Creencia marginal: $ C(X = x_i) = \frac{f_i}{N}\color{white} = \frac{\sum_j n_{ij}}{N}$\end{textblock}}
+
+\only<6>{\begin{textblock}{128}(11,66.5) 
+Creencia marginal: $ C(X = x_i) =  \frac{f_i}{N} = \frac{\sum_j n_{ij}}{N}$
+\end{textblock}}
+
+\only<7->{\begin{textblock}{128}(11,66.5) 
+Creencia marginal: $ C(X = x_i) =  \frac{f_i}{N} = \sum_j C(X=x_i, Y= y_j) \color{white} = \frac{\sum_j n_{ij}}{N}$
+\end{textblock}}
+
+
+\only<8>{\begin{textblock}{128}(11,76)
+Creencia condicional: $ C(Y= y_j|X=x_i) = \color{white} \frac{C(X = x_i , Y = y_j)}{C(X = x_i)}  $
+\end{textblock}}
+
+\only<9>{\begin{textblock}{128}(11,76)
+Creencia condicional: $ C(Y= y_j|X=x_i) = \frac{n_{ij}}{f_i} \color{white} \frac{C(X = x_i , Y = y_j)}{C(X = x_i)}  $
+\end{textblock}}
+
+\only<10>{\begin{textblock}{128}(11,76)
+Creencia condicional: $ C(Y= y_j|X=x_i) =\frac{n_{ij}}{N} \frac{N}{f_i} \color{white} \frac{C(X = x_i , Y = y_j)}{C(X = x_i)}    $
+\end{textblock}}
+
+\only<11->{\begin{textblock}{128}(11,76)
+Creencia condicional: $ C(Y= y_j|X=x_i) = \frac{n_{ij}}{N} \frac{N}{f_i} = \frac{C(X = x_i , Y = y_j)}{C(X = x_i)}  $
+\end{textblock}}
+
+\end{frame}
+
+
+\subsection{Las reglas de la probabilidad}
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Las reglas de la probabilidad
+\end{center}
+\end{textblock}
+
+
+\vspace{0.75cm}
+
+
+
+\begin{equation*}
+  \text{Marginal}_{i} = \sum_j \text{Conjunta}_{ij}  \ \ \ \ \ \ \ \ \ \ \ \  \text{Condicional}_{j|i} = \frac{\text{Conjunta}_{ij}}{\text{Marginal}_{i}}
+\end{equation*}
+
+\pause
+\vspace{0.75cm}
+
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+ \centering \textbf{Regla de la suma}
+ 
+ 
+\begin{equation*}
+ P(X) = \sum_Y P(X,Y)
+\end{equation*}
+ 
+ \justifying \footnotesize
+  Cualquier distribución marginal puede ser obtenida integrando la distribución conjunta
+
+ \end{column}
+ \begin{column}{0.5\textwidth}
+\centering  \textbf{Regla del producto}
+
+\begin{equation*}
+ P(X,Y) = P(Y|X) P(X)
+\end{equation*}
+
+ \justifying \footnotesize
+Cualquier distribución conjunta puede ser expresada como el producto de distribuciones condicionales uni-dimensionles.
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
+ \begin{frame}
+ \begin{textblock}{128}(0,8)
+ \begin{center}
+  \large Las reglas de la probabilidad
+ \end{center}
+ \end{textblock}
+\vspace{0.7cm} 
+ 
+ 
+  \centering 
+  
+   \Wider[-0.5cm]{
+  \begin{framed}
+  \centering
+ Teorema de Cox
+  
+Son las reglas del razonamiento con incertidumbre
+  \end{framed}
+}
+ 
+ 
+\vspace{1cm}
+ \Wider[0.5cm]{
+
+Las \'unicas que grantizan:
+\begin{itemize}
+\small
+ \item[$\bullet$] Representaci\'on de las creencias con valores reales 
+ \item[$\bullet$] Consistencia, cualquier camino lleva a la misma conclusión 
+ \item[$\bullet$] Actualizaci\'on de las creencias en la direcci\'on de la evidencia
+\end{itemize}
+}
+ 
+% In 1946, thanks to Cox, it was now a theorem that any set of rules for conducting inference, in which we represent degrees of plausibility by real numbers, is necessarily either equivalent to the Laplace-Jefreys rules, or inconsistent
+ 
+\only<2>{
+ \begin{textblock}{128}(0,92)
+  \tiny \centering  \href{https://doi.org/10.1119/1.1990764}{Cox, R (1946). Probability, frequency and reasonable expectation.}
+ \end{textblock}
+ }
+%  
+ \end{frame}
+
+\subsection{Teorema de Bayes}
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Teorema de Bayes 
+\end{center}
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{128}(0,43)
+\begin{equation*}
+ P(X,Y) = P(Y,X)
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<2>{
+\begin{textblock}{128}(0,43)
+\begin{equation*}
+ P(Y|X) P(X) =  P(X,Y) = P(Y,X) = P(X|Y) P(Y)
+\end{equation*}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{128}(0,43)
+\begin{equation*}
+ P(Y|X) P(X) = P(X|Y) P(Y) 
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<4>{
+\begin{textblock}{128}(0,43)
+\begin{equation*}
+ P(Y|X) = \frac{p(X|Y) p(Y)}{p(X)}
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<5>{
+\begin{textblock}{128}(0,43)
+\begin{equation*}
+P(\text{Hip\'otesis }|\text{ Datos}) = \frac{P(\text{Datos }|\text{ Hip\'otesis}) P(\text{Hip\'otesis})}{P(\text{Datos})}
+\end{equation*}
+\end{textblock}
+
+}
+
+
+\only<6>{
+\begin{textblock}{128}(0,37.75)
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis }|\text{ Datos})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos})}_{\text{\scriptsize Evidencia}}}
+\end{equation*}
+\end{textblock}
+
+}
+
+\vspace{0.2cm}
+
+\only<7->{  
+%\vspace{0.3cm}
+\Wider[2cm]{
+\begin{textblock}{128}(0,34.25) 
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis }|\text{ Datos, Modelo})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis, Modelo})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis }|\text{ Modelo})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos }|\text{ Modelo})}_{\text{\scriptsize Evidencia}}}
+\end{equation*}
+
+\end{textblock}
+
+}
+}
+
+\only<8->{  
+\begin{textblock}{78}(25,70)
+\begin{mdframed}[backgroundcolor=black!30]
+\centering \vspace{0.05cm}
+El \textbf{modelo} es lo que permite relacionar 
+
+los \textbf{datos} con nuestras \textbf{hipótesis}! 
+\vspace{0.1cm}
+\end{mdframed}
+\end{textblock}
+}
+
+
+
+
+
+\end{frame}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%
+% \subsection{Ejemplo: crisis de replicabilidad}
+% \small 
+% 
+% \begin{frame}
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+%  \large Ejemplo: crisis de replicabilidad
+% \end{center}
+% \end{textblock}
+% \vspace{0.5cm}
+% 
+% 
+% 
+% \only<2-10>{
+% \begin{textblock}{108}(8,25)
+%  $\bullet$ $P(\text{detecta señal} \mid \text{hipótesis verdadera})=0.95$
+% \end{textblock}
+% }
+% \only<11->{
+% \begin{textblock}{108}(8,25)
+%  $\bullet$ $P(\text{detecta señal} \mid \text{hipótesis verdadera})=\bm{0.999}$
+% \end{textblock}
+% }
+% 
+% 
+% \only<3-11>{
+% \begin{textblock}{108}(8,32)
+%  $\bullet$ $P(\text{detecta señal}\mid\text{hipótesis falsa})=0.01$
+%  \end{textblock}
+%  }
+%  
+% \only<12->{
+% \begin{textblock}{108}(8,32)
+%  $\bullet$ $P(\text{detecta señal}\mid\text{hipótesis falsa})=\bm{0.001}$
+%  \end{textblock}
+%  }
+%  
+%  \only<4>{
+%  \begin{textblock}{108}(8,39)
+%  $\bullet$ $P(\text{hipótesis verdadera})= $
+%  \end{textblock}
+% }
+% \only<5-9>{
+%  \begin{textblock}{108}(8,39)
+%  $\bullet$ $P(\text{hipótesis verdadera})= 0.01$
+%  \end{textblock}
+% }
+% \only<10>{
+%  \begin{textblock}{108}(8,39)
+%  $\bullet$ $P(\text{hipótesis verdadera})= \bm{0.1}$
+%  \end{textblock}
+% }
+% \only<11-12>{
+%  \begin{textblock}{108}(8,39)
+%  $\bullet$ $P(\text{hipótesis verdadera})= 0.01$
+%  \end{textblock}
+% }
+% \only<13->{
+%  \begin{textblock}{108}(8,39)
+%  $\bullet$ $P(\text{hipótesis verdadera})= \bm{0.001}$
+%  \end{textblock}
+% }
+% 
+% 
+% 
+%  \only<6>{
+%   \begin{textblock}{128}(0,48)
+%  
+% \footnotesize
+%  
+% \begin{equation*}
+% \begin{split}
+%  P(\text{ hv } | \text{ ds }) & =  P(\text{ hipótesis verdadera } | \text{ detecta señal }) \\[0.3cm] 
+%  & \color{white}  = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds })} \\[0.3cm] 
+%  & \color{white} = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds } | \text{ hv })P(\text{ hv })+P(\text{ ds }  | \text{ $\neg$hv })P(\text{$\neg$hv})}  \approx \bm{0.5}
+% \end{split}
+%  \end{equation*}
+%  \end{textblock}
+%  }
+%  
+%   \only<7>{
+%   \begin{textblock}{128}(0,48)
+%  
+% \footnotesize
+%  
+% \begin{equation*}
+% \begin{split}
+%  P(\text{ hv } | \text{ ds }) & =  P(\text{ hipótesis verdadera } | \text{ detecta señal }) \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds })} \\[0.3cm] 
+%  & \color{white} = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds } | \text{ hv })P(\text{ hv })+P(\text{ ds } | \text{ $\neg$hv })P(\text{$\neg$hv})} \approx \bm{0.5}
+% \end{split}
+%  \end{equation*}
+%  \end{textblock}
+%  }
+% 
+%  
+%   \only<8>{
+%   \begin{textblock}{128}(0,48)
+%  
+% \footnotesize
+%  
+% \begin{equation*}
+% \begin{split}
+%  P(\text{ hv } | \text{ ds }) & =  P(\text{ hipótesis verdadera } | \text{ detecta señal }) \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds })} \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds } | \text{ hv })P(\text{ hv })+P(\text{ ds } | \text{ $\neg$hv })P(\text{$\neg$hv})} \color{white} \approx \bm{0.5}
+% \end{split}
+%  \end{equation*}
+%  \end{textblock}
+%  }
+% 
+%  
+% \only<9>{
+%   \begin{textblock}{128}(0,48)
+%  
+% \footnotesize
+%  
+% \begin{equation*}
+% \begin{split}
+%  P(\text{ hv } | \text{ ds }) & =  P(\text{ hipótesis verdadera } | \text{ detecta señal }) \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds })} \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds } | \text{ hv })P(\text{ hv })+P(\text{ ds } | \text{ $\neg$hv })P(\text{$\neg$hv})} \approx \bm{0.5}
+% \end{split}
+%  \end{equation*}
+%  \end{textblock}
+%  }
+% 
+% 
+% \only<10>{
+%   \begin{textblock}{128}(0,48)
+%  
+% \footnotesize
+%  
+% \begin{equation*}
+% \begin{split}
+%  P(\text{ hv } | \text{ ds }) & =  P(\text{ hipótesis verdadera } | \text{ detecta señal }) \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds })} \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds } | \text{ hv })P(\text{ hv })+P(\text{ ds } | \text{ $\neg$hv })P(\text{$\neg$hv})} \approx \bm{0.9}
+% \end{split}
+%  \end{equation*}
+%  \end{textblock}
+%  }
+% 
+%  
+%  
+% \only<11>{
+%   \begin{textblock}{128}(0,48)
+%  
+% \footnotesize
+%  
+% \begin{equation*}
+% \begin{split}
+%  P(\text{ hv } | \text{ ds }) & =  P(\text{ hipótesis verdadera } | \text{ detecta señal }) \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds })} \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds } | \text{ hv })P(\text{ hv })+P(\text{ ds } | \text{ $\neg$hv })P(\text{$\neg$hv})} \approx \bm{0.5}
+% \end{split}
+%  \end{equation*}
+%  \end{textblock}
+%  }
+% 
+%  
+% \only<12>{
+%   \begin{textblock}{128}(0,48)
+%  
+% \footnotesize
+%  
+% \begin{equation*}
+% \begin{split}
+%  P(\text{ hv } | \text{ ds }) & =  P(\text{ hipótesis verdadera } | \text{ detecta señal }) \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds })} \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds } | \text{ hv })P(\text{ hv })+P(\text{ ds } | \text{ $\neg$hv })P(\text{$\neg$hv})} \approx \bm{0.9}
+% \end{split}
+%  \end{equation*}
+%  \end{textblock}
+%  }
+% 
+% 
+%  \only<13->{
+%   \begin{textblock}{128}(0,48)
+%  
+% \footnotesize
+%  
+% \begin{equation*}
+% \begin{split}
+%  P(\text{ hv } | \text{ ds }) & =  P(\text{ hipótesis verdadera } | \text{ detecta señal }) \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds })} \\[0.3cm] 
+%  & = \frac{P(\text{ ds } | \text{ hv })P(\text{ hv })}{P(\text{ ds } | \text{ hv })P(\text{ hv })+P(\text{ ds } | \text{ $\neg$hv })P(\text{$\neg$hv})}  \approx \bm{0.5}
+% \end{split}
+%  \end{equation*}
+%  \end{textblock}
+%  }
+% 
+%  \only<14>{
+%  \begin{textblock}{112}(8,82)
+%  \begin{mdframed}[backgroundcolor=black!30]
+%  \centering \footnotesize
+%   Aquí todas las probabilidades son ``observables'', no hay incertidumbre
+%  \end{mdframed}
+%  \end{textblock}
+% }
+% 
+%  
+% \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 
+% \subsection{El filtro de las creencias}
+% \begin{frame}
+% \only<1-6>{
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+% \Large  \color{white}{La sorpresa:}
+% \\
+% \large \color{black} El filtro de las creencias 
+% \end{center}
+% \end{textblock}
+% }
+% 
+% \only<7->{
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+% \Large  La sorpresa: \\
+%  \large El filtro de las creencias 
+% \end{center}
+% \end{textblock}
+% }
+% 
+%   \footnotesize
+% 
+% \only<1-4>{
+% \begin{textblock}{128}(0,24)
+% \begin{equation*}
+%  \overbrace{P(C|D,M)}^{\text{Posteriori}} = \frac{\overbrace{P(D|C,M)}^{\text{Verosimilitud}} \overbrace{P(C,M)}^{\text{Priori }}}{ \underbrace{P(D|M)}_{\text{Evidencia}} }
+% \end{equation*}
+% \end{textblock}
+% }
+% 
+% \only<5->{
+% \begin{textblock}{128}(0,24)
+% \begin{equation*}
+%  \overbrace{P(C|D,M)}^{\text{Posteriori}} \propto \overbrace{P(D|C,M)}^{\text{Verosimilitud}} \overbrace{P(C,M)}^{\text{Priori }}
+% \end{equation*}
+% \end{textblock}
+% }
+% 
+% 
+% \only<2>{
+%  \begin{textblock}{128}(0,38)  
+%  \begin{align*}
+%  \bullet \ &  P(C|M) = \frac{\scriptsize 1}{\scriptsize |\text{Creencias}|}  \ \ \ \ \  \forall C \in \text{Creencias} \\[0.25cm] 
+%  \color{white} \bullet \ & \color{white} P(D|C,M) =  \frac{\text{\scriptsize Caminos que conducen a $D$ dado $C$ y $M$}}{\text{\scriptsize Caminos totales dado $C$ and $M$}} \ \ \ \ \  \forall  C \in \text{Creencias}  \\[0.25cm]
+%  \color{white} \bullet \ & \color{white} P(D|M) = \sum_{C \in \text{Creencias}} \underbrace{P(D|C,M)}_{\text{likelihood}} \underbrace{P(C|M)}_{\text{prior}} 
+%  \end{align*}
+% \end{textblock}
+% }
+% \only<3>{
+%  \begin{textblock}{128}(0,38)  
+%  \begin{align*}
+%  \bullet \ &  P(C|M) = \frac{\scriptsize 1}{\scriptsize |\text{Creencias}|}  \ \ \ \ \  \forall C \in \text{Creencias} \\[0.25cm] 
+%   \bullet \ & P(D|C,M) =  \frac{\text{\scriptsize Caminos que conducen a $D$ dado $C$ y $M$}}{\text{\scriptsize Caminos totales dado $C$ and $M$}} \ \ \ \ \  \forall  C \in \text{Creencias}  \\[0.25cm]
+%  \color{white} \bullet \ & \color{white} P(D|M) = \sum_{C \in \text{Creencias}} \underbrace{P(D|C,M)}_{\text{likelihood}} \underbrace{P(C|M)}_{\text{prior}} 
+%  \end{align*}
+% \end{textblock}
+% }
+% \only<4->{
+%  \begin{textblock}{128}(0,38)  
+%  \begin{align*}
+%  \bullet \ &  P(C|M) = \frac{\scriptsize 1}{\scriptsize |\text{Creencias}|}  \ \ \ \ \  \forall C \in \text{Creencias} \\[0.25cm] 
+%   \bullet \ &  P(D|C,M) =  \frac{\text{\scriptsize Caminos que conducen a $D$ dado $C$ y $M$}}{\text{\scriptsize Caminos totales dado $C$ and $M$}} \ \ \ \ \  \forall  C \in \text{Creencias}  \\[0.3cm]
+%   \bullet \ &  P(D|M) = \sum_{C \in \text{Creencias}} \underbrace{P(D|C,M)}_{\text{Verosimilitud}} \underbrace{P(C|M)}_{\text{Priori}} 
+%  \end{align*}
+% \end{textblock}
+% }
+% 
+% \small
+% 
+% \only<6->{
+% \begin{textblock}{128}(0,78)
+% 
+% \Wider[-4cm]{
+%  \begin{mdframed}[backgroundcolor=black!15] 
+%  \centering Las creencias inverosímiles, se anula.
+%  
+%  Las creencias verosímiles, resisten.
+%  \end{mdframed}
+%  }
+% \end{textblock}
+% 
+%  
+% }
+% \end{frame}
+
+% \subsection{Verosimilitud: el jard\'in de los caminos que se bifurcan}
+% \begin{frame}
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+%  \large Verosimilitud: el jard\'in de los caminos que se bifurcan
+% \end{center}
+% \end{textblock}
+% 
+% \begin{textblock}{128}(0,19)
+% \centering
+%  Datos: \includegraphics[page=1,width=0.065\textwidth]{imagenes/forkingPath} \hspace{0.3cm}
+%  Creencias: \includegraphics[page=2,width=0.075\textwidth]{imagenes/forkingPath}, \includegraphics[page=3,width=0.075\textwidth]{imagenes/forkingPath}, \includegraphics[page=4,width=0.075\textwidth]{imagenes/forkingPath}, \includegraphics[page=5,width=0.075\textwidth]{imagenes/forkingPath}, \includegraphics[page=6,width=0.075\textwidth]{imagenes/forkingPath} 
+% 
+%  \vspace{0.2cm}
+% 
+%   Modelo: Data $\sim \text{Binomial}(n,p)$\vspace{0.1cm}
+%  
+% \end{textblock}
+% 
+% \only<2>{
+% \begin{textblock}{128}(90,66)
+%  \scriptsize (Primer marcador)
+% \end{textblock}
+% \begin{textblock}{128}(0,30)
+% \end{textblock}
+% 
+%  \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=12,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath}
+% 
+% \end{textblock}
+% }
+% 
+% \only<3>{
+% \begin{textblock}{128}(90,66)
+%  \scriptsize (Segundo marcador)
+% \end{textblock}
+% 
+% \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=13,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath}
+% 
+% \end{textblock}
+% }
+% 
+% \only<4>{
+% \begin{textblock}{128}(90,66)
+%  \scriptsize (Segundo marcador)
+% \end{textblock}
+% \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=14,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath}
+% 
+% \end{textblock}
+% }
+% 
+% \only<5>{
+% \begin{textblock}{128}(90,66)
+%  \scriptsize (Tercer marcador)
+% \end{textblock}
+% \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=15,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath}
+% 
+% \end{textblock}
+% }
+% 
+% \only<6>{
+% \begin{textblock}{128}(90,66)
+%  \scriptsize (Tercer marcador)
+% \end{textblock}
+%  \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=16,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath}
+% 
+% \end{textblock}
+% }
+% 
+% \only<7>{
+% \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=16,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath}
+% 
+% \end{textblock}
+% }
+% 
+% 
+% \only<8-9>{
+%  \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=7,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath}
+% \end{textblock}
+% }
+% 
+% 
+% \only<10>{
+%  \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=8,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=3,width=0.05\textwidth]{imagenes/forkingPath}
+% \end{textblock}
+% }
+% 
+% \only<11>{
+%  \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=9,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=4,width=0.05\textwidth]{imagenes/forkingPath}
+% \end{textblock}
+% }
+% 
+% \only<12>{
+%  \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=10,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=5,width=0.05\textwidth]{imagenes/forkingPath}
+% \end{textblock}
+% }
+% 
+% \only<13->{
+%  \begin{textblock}{128}(0,30)
+% \centering
+%  
+% 
+% \includegraphics[page=11,width=0.6\textwidth]{imagenes/forkingPath}
+% 
+% \scriptsize Caminos dado $M$ y $C=$ \includegraphics[page=6,width=0.05\textwidth]{imagenes/forkingPath}
+% \end{textblock}
+% }
+% 
+% 
+% 
+% 
+% 
+% \only<7>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+%  \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & \textcolor{white}{Verosimilitud} & \textcolor{white}{Priori} & \textcolor{white}{Posteriori $\propto$} & \textcolor{white}{Posteriori}
+% \\ \cline{1-2} \\[-0.2cm]
+% 
+% \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &   & \textcolor{white}{$\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $} &  &  & \textcolor{white}{$\frac{0}{3+8+9} =  0.00 $}
+%  \\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & & \\[2pt]  \\[-0.2cm]
+%  & & & & &
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% 
+% 
+% \only<8>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & \textcolor{white}{Verosimilitud} & \textcolor{white}{Priori} & \textcolor{white}{Posteriori $\propto$} & \textcolor{white}{Posteriori}
+% \\ \cline{1-2} \\[-0.2cm]
+% 
+% \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} & $0 \times 4 \times 0 = 0$  & \textcolor{white}{$\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $} &  &  & \textcolor{white}{$\frac{0}{3+8+9} =  0.00 $}
+%  \\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & & \\[2pt]  \\[-0.2cm]
+%  & & & & &
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% \only<9>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen  \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% &Verosimilitud&Priori&Posteriori $\propto$& \textcolor{white}{Posteriori}
+% \\ \cline{1-5} \\[-0.2cm]
+% 
+%   \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &  $0 \times 4 \times 0 = 0$ 
+%  & $\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $  & $1/5$ & $\frac{0}{64}\frac{1}{5}$ & \textcolor{white}{$\frac{0}{3+8+9} =  0.00 $}
+%  \\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & & \\[2pt]  \\[-0.2cm]
+%  & & & & &
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% \only<10>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & Verosimilitud & Priori & Posteriori $\propto$ & \textcolor{white}{Posteriori}
+% \\ \cline{1-5} \\[-0.2cm]
+% 
+%   \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &  $0 \times 4 \times 0 = 0$ 
+%  & $\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $  & $1/5$ & $\frac{0}{64}\frac{1}{5}$ & \textcolor{white}{$\frac{0}{3+8+9} =  0.00 $}
+%  \\[2pt]
+%   \includegraphics[page=3,width=0.05\textwidth]{imagenes/forkingPath} &  $1 \times 3 \times 1 = 3$ 
+%  &$ 3/64 $ & $1/5$ & $\frac{3}{64}\frac{1}{5}$&\\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & & \\[2pt]  \\[-0.2cm]
+%  & & & & &
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% \only<11>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & Verosimilitud & Priori & Posteriori $\propto$ & \textcolor{white}{Posteriori}
+% \\ \cline{1-5} \\[-0.2cm]
+% 
+%   \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &  $0 \times 4 \times 0 = 0$ 
+%  & $\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $  & $1/5$ & $\frac{0}{64}\frac{1}{5}$ & \textcolor{white}{$\frac{0}{3+8+9} =  0.00 $}
+%  \\[2pt]
+%   \includegraphics[page=3,width=0.05\textwidth]{imagenes/forkingPath} &  $1 \times 3 \times 1 = 3$ 
+%  &$ 3/64 $ & $1/5$ & $\frac{3}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=4,width=0.05\textwidth]{imagenes/forkingPath} &  $2 \times 2 \times 2 = 8$ &$8/64$&$1/5$ &$\frac{8}{64}\frac{1}{5}$ &\\[2pt]
+%   & & & & &\\[2pt]
+%   & & & & & \\[2pt]  \\[-0.2cm]
+%  & & & & &
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% \only<12>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & Verosimilitud & Priori & Posteriori $\propto$ & \textcolor{white}{Posteriori}
+% \\ \cline{1-5} \\[-0.2cm]
+% 
+%   \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &  $0 \times 4 \times 0 = 0$ 
+%  & $\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $  & $1/5$ & $\frac{0}{64}\frac{1}{5}$ & \textcolor{white}{$\frac{0}{3+8+9} =  0.00 $}
+%  \\[2pt]
+%   \includegraphics[page=3,width=0.05\textwidth]{imagenes/forkingPath} &  $1 \times 3 \times 1 = 3$ 
+%  &$ 3/64 $ & $1/5$ & $\frac{3}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=4,width=0.05\textwidth]{imagenes/forkingPath} &  $2 \times 2 \times 2 = 8$ &$8/64$&$1/5$ &$\frac{8}{64}\frac{1}{5}$ &\\[2pt]
+%   \includegraphics[page=5,width=0.05\textwidth]{imagenes/forkingPath} &  $3 \times 1 \times 3 = 9$ &$9/64$&$1/5$ &$\frac{9}{64}\frac{1}{5}$&\\[2pt]
+%   & & & & & \\[2pt]  \\[-0.2cm]
+%  & & & & &
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% 
+% \only<13>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & Verosimilitud & Priori & Posteriori $\propto$ & \textcolor{white}{Posteriori}
+% \\ \cline{1-5} \\[-0.2cm]
+% 
+%   \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &  $0 \times 4 \times 0 = 0$ 
+%  & $\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $  & $1/5$ & $\frac{0}{64}\frac{1}{5}$ & \textcolor{white}{$\frac{0}{3+8+9} =  0.00 $}
+%  \\[2pt]
+%   \includegraphics[page=3,width=0.05\textwidth]{imagenes/forkingPath} &  $1 \times 3 \times 1 = 3$ 
+%  &$ 3/64 $ & $1/5$ & $\frac{3}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=4,width=0.05\textwidth]{imagenes/forkingPath} &  $2 \times 2 \times 2 = 8$ &$8/64$&$1/5$ &$\frac{8}{64}\frac{1}{5}$ &\\[2pt]
+%   \includegraphics[page=5,width=0.05\textwidth]{imagenes/forkingPath} &  $3 \times 1 \times 3 = 9$ &$9/64$&$1/5$ &$\frac{9}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=6,width=0.05\textwidth]{imagenes/forkingPath} &  $4 \times 0 \times 4 = 0$ &$0/64$&$1/5$ &$\frac{0}{64}\frac{1}{5}$&\\[2pt]  \\[-0.2cm]
+%  & & & & &
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% 
+% \only<14>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & Verosimilitud & Priori & Posteriori $\propto$ & \textcolor{white}{Posteriori}
+% \\ \cline{1-5} \\[-0.2cm]
+% 
+%   \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &  $0 \times 4 \times 0 = 0$ 
+%  & $\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $  & $1/5$ & $\frac{0}{64}\frac{1}{5}$ & \textcolor{white}{$\frac{0}{3+8+9} =  0.00 $}
+%  \\[2pt]
+%   \includegraphics[page=3,width=0.05\textwidth]{imagenes/forkingPath} &  $1 \times 3 \times 1 = 3$ 
+%  &$ 3/64 $ & $1/5$ & $\frac{3}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=4,width=0.05\textwidth]{imagenes/forkingPath} &  $2 \times 2 \times 2 = 8$ &$8/64$&$1/5$ &$\frac{8}{64}\frac{1}{5}$ &\\[2pt]
+%   \includegraphics[page=5,width=0.05\textwidth]{imagenes/forkingPath} &  $3 \times 1 \times 3 = 9$ &$9/64$&$1/5$ &$\frac{9}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=6,width=0.05\textwidth]{imagenes/forkingPath} &  $4 \times 0 \times 4 = 0$ &$0/64$&$1/5$ &$\frac{0}{64}\frac{1}{5}$&\\[2pt]  \cline{5-5} \\[-0.2cm]
+%  & & & & $P(D|M)$ &
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% 
+% 
+% \only<15>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & Verosimilitud & Priori & Posteriori $\propto$ & \textcolor{white}{Posteriori}
+% \\ \cline{1-5} \\[-0.2cm]
+% 
+%   \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &  $0 \times 4 \times 0 = 0$ 
+%  & $\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $  & $1/5$ & $\frac{0}{64}\frac{1}{5}$ & \textcolor{white}{$\frac{0}{3+8+9} =  0.00 $}
+%  \\[2pt]
+%   \includegraphics[page=3,width=0.05\textwidth]{imagenes/forkingPath} &  $1 \times 3 \times 1 = 3$ 
+%  &$ 3/64 $ & $1/5$ & $\frac{3}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=4,width=0.05\textwidth]{imagenes/forkingPath} &  $2 \times 2 \times 2 = 8$ &$8/64$&$1/5$ &$\frac{8}{64}\frac{1}{5}$ &\\[2pt]
+%   \includegraphics[page=5,width=0.05\textwidth]{imagenes/forkingPath} &  $3 \times 1 \times 3 = 9$ &$9/64$&$1/5$ &$\frac{9}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=6,width=0.05\textwidth]{imagenes/forkingPath} &  $4 \times 0 \times 4 = 0$ &$0/64$&$1/5$ &$\frac{0}{64}\frac{1}{5}$&\\[2pt] \cline{5-5} \\[-0.2cm]
+%  & & & & $\frac{3 + 8 + 9 }{64 \cdot 5} $&
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% 
+% \only<16>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & Verosimilitud & Priori & Posteriori $\propto$ & Posteriori
+% \\ \cline{1-6} \\[-0.2cm]
+% 
+%   \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &  $0 \times 4 \times 0 = 0$ 
+%  & $\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $  & $1/5$ & $\frac{0}{64}\frac{1}{5}$ & $ \frac{0}{64}\frac{1}{5}  \frac{64\cdot 5}{3+8+9}$
+%  \\[2pt]
+%   \includegraphics[page=3,width=0.05\textwidth]{imagenes/forkingPath} &  $1 \times 3 \times 1 = 3$ 
+%  &$ 3/64 $ & $1/5$ & $\frac{3}{64}\frac{1}{5}$&\textcolor{white}{$\frac{3}{3+8+9} =  0.00 $}\\[2pt]
+%   \includegraphics[page=4,width=0.05\textwidth]{imagenes/forkingPath} &  $2 \times 2 \times 2 = 8$ &$8/64$&$1/5$ &$\frac{8}{64}\frac{1}{5}$ &\\[2pt]
+%   \includegraphics[page=5,width=0.05\textwidth]{imagenes/forkingPath} &  $3 \times 1 \times 3 = 9$ &$9/64$&$1/5$ &$\frac{9}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=6,width=0.05\textwidth]{imagenes/forkingPath} &  $4 \times 0 \times 4 = 0$ &$0/64$&$1/5$ &$\frac{0}{64}\frac{1}{5}$&\\[2pt] \cline{5-5} \\[-0.2cm]
+%  & & & & $\frac{3 + 8 + 9 }{64 \cdot 5} $&
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% 
+% \only<17>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & Verosimilitud & Priori & Posteriori $\propto$ & Posteriori
+% \\ \cline{1-6} \\[-0.2cm]
+% 
+%   \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &  $0 \times 4 \times 0 = 0$ 
+%  & $\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $  & $1/5$ & $\frac{0}{64}\frac{1}{5}$ & $\frac{0}{3+8+9} =  0.00 $
+%  \\[2pt]
+%   \includegraphics[page=3,width=0.05\textwidth]{imagenes/forkingPath} &  $1 \times 3 \times 1 = 3$ 
+%  &$ 3/64 $ & $1/5$ & $\frac{3}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=4,width=0.05\textwidth]{imagenes/forkingPath} &  $2 \times 2 \times 2 = 8$ &$8/64$&$1/5$ &$\frac{8}{64}\frac{1}{5}$ &\\[2pt]
+%   \includegraphics[page=5,width=0.05\textwidth]{imagenes/forkingPath} &  $3 \times 1 \times 3 = 9$ &$9/64$&$1/5$ &$\frac{9}{64}\frac{1}{5}$&\\[2pt]
+%   \includegraphics[page=6,width=0.05\textwidth]{imagenes/forkingPath} &  $4 \times 0 \times 4 = 0$ &$0/64$&$1/5$ &$\frac{0}{64}\frac{1}{5}$&\\[2pt] \cline{5-5} \\[-0.2cm]
+%  & & & & $\frac{3 + 8 + 9 }{64 \cdot 5} $&
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% 
+% \only<18>{
+% \begin{textblock}{128}(0,67)
+%  \centering \scriptsize
+%  
+%  \begin{table}[H]
+%  \tiny 
+% \begin{tabular}{cccccc}
+% \ \ \ Creencia \ \ \ & Caminos que conducen   \includegraphics[page=1,width=0.045\textwidth]{imagenes/forkingPath}  
+% & Verosimilitud & Priori & Posteriori $\propto$ & Posteriori
+% \\ \cline{1-6} \\[-0.2cm]
+% 
+%   \includegraphics[page=2,width=0.05\textwidth]{imagenes/forkingPath} &  $0 \times 4 \times 0 = 0$ 
+%  & $\frac{0 \times 4 \times 0 }{4 \times 4 \times 4 } = \frac{0}{64} $  & $1/5$ & $\frac{0}{64}\frac{1}{5}$ & $\frac{0}{3+8+9} =  0.00 $ 
+%  \\[2pt]
+%   \includegraphics[page=3,width=0.05\textwidth]{imagenes/forkingPath} &  $1 \times 3 \times 1 = 3$ 
+%  &$ 3/64 $ & $1/5$ & $\frac{3}{64}\frac{1}{5}$&$\frac{3}{3+8+9} = 0.15$\\[2pt]
+%   \includegraphics[page=4,width=0.05\textwidth]{imagenes/forkingPath} &  $2 \times 2 \times 2 = 8$ &$8/64$&$1/5$ &$\frac{8}{64}\frac{1}{5}$ & $\frac{8}{3+8+9}=0.40$\\[2pt]
+%   \includegraphics[page=5,width=0.05\textwidth]{imagenes/forkingPath} &  $3 \times 1 \times 3 = 9$ &$9/64$&$1/5$ &$\frac{9}{64}\frac{1}{5}$&$\frac{9}{3+8+9}=0.45$\\[2pt]
+%   \includegraphics[page=6,width=0.05\textwidth]{imagenes/forkingPath} &  $4 \times 0 \times 4 = 0$ &$0/64$&$1/5$ &$\frac{0}{64}\frac{1}{5}$&$\frac{0}{3+8+9}=0.00$\\[2pt] \cline{5-5} \\[-0.2cm]
+%  & & & & $\frac{3 + 8 + 9 }{64 \cdot 5} $ & 
+% \end{tabular}
+% \end{table}
+% \end{textblock}
+% 
+% }
+% 
+% \end{frame}
+% 
+% \begin{frame}[plain]
+%   
+%  \begin{textblock}{128}(0,0)
+%   \includegraphics[width=1\textwidth]{../../Imagenes/laberintoPorArriba.jpg}
+%  \end{textblock}
+%  
+%   
+% \end{frame}
+
+
+\section{Modelos gráficos}
+\begin{frame}
+
+\centering
+
+ \Large Modelos gr\'aficos
+ 
+\end{frame}
+
+
+
+\begin{frame}
+ \only<1->{
+ \begin{textblock}{128}(0,8)
+  \begin{center}
+   \Large Modelos gr\'aficos
+  \end{center}
+ \end{textblock}
+}
+
+ \only<1>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_0.pdf}
+ \end{textblock}
+ }
+ 
+ \only<2>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_01.pdf}
+ \end{textblock}
+ }
+
+  \only<3>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_02.pdf}
+ \end{textblock}
+ }
+ 
+ \only<4>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_02bis.pdf}
+ \end{textblock}
+ }
+ 
+ \only<5>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_03.pdf}
+ \end{textblock}
+ }
+ 
+ \only<6>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_04.pdf}
+ \end{textblock}
+ }
+ 
+ \only<7>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_05.pdf}
+ \end{textblock}
+ }
+ \only<8>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_06.pdf}
+ \end{textblock}
+ }
+ \only<9>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_07.pdf}
+ \end{textblock}
+ }
+ \only<10>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_08.pdf}
+ \end{textblock}
+ }
+ \only<11>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_09.pdf}
+ \end{textblock}
+ }
+ \only<12-30>{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_10.pdf}
+ \end{textblock}
+}
+ \only<31->{
+ \begin{textblock}{128}(0,22)
+ \centering
+  \includegraphics[width=1\textwidth]{imagenes/modelo_grafico_11.pdf}
+ \end{textblock}
+}
+
+
+\only<13>{
+\begin{textblock}{108}(10,76)
+\begin{mdframed}[backgroundcolor=black!20]
+ \centering 
+  Los factores son \'utiles para definir distribuciones 
+  
+  de probabilidad en espacios de alta dimensión.
+\end{mdframed}
+\end{textblock}
+}
+
+\only<14>{
+\begin{textblock}{98}(15,73)
+\begin{flalign*}
+ & P(d,p,r,c,a) = \color{white} P(d)P(p)P(r|d,p)P(a|r)P(c|p) && 
+\end{flalign*}
+\end{textblock}
+
+}
+
+\only<15>{
+\begin{textblock}{98}(15,73)
+\begin{flalign*}
+ & P(d,p,r,c,a) = P(d)P(p|d)P(r|d,p)P(c|d,p,r)P(a|d,p,r,c) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<16>{
+\begin{textblock}{98}(15,73)
+\begin{flalign*}
+ & P(d,p,r,c,a) = P(d)P(p|\cancel{d})P(r|d,p)P(c|\cancel{d},p,\cancel{r})P(a|\cancel{d},\cancel{p},r,\cancel{c}) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<17>{
+\begin{textblock}{98}(15,73)
+\begin{flalign*}
+ & P(d,p,r,c,a) = P(d)P(p)P(r|d,p)P(a|r)P(c|p) && 
+\end{flalign*}
+\end{textblock}
+
+}
+
+\only<18>{
+\begin{textblock}{98}(15,73)
+\begin{flalign*}
+ & P(d^1,p^1,r^1,c^1,a^1) = P(d^1)P(p^1)P(r^1|d^1,p^1)P(a^1|r^1)P(c^1|p^1) && 
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<19>{
+\begin{textblock}{98}(15,73)
+ \begin{flalign*}
+  & P(d^1,p^1,r^1,c^1,a^1) =  0.85 \cdot P(p^1)P(r^1|d^1,p^1)P(a^1|r^1)P(c^1|p^1) &&
+ \end{flalign*}
+\end{textblock}
+
+
+}
+
+\only<20>{
+\begin{textblock}{98}(15,73)
+ \begin{flalign*}
+  & P(d^1,p^1,r^1,c^1,a^1) = 0.85 \cdot 0.30 \cdot 0.50 \cdot 0.80 \cdot 0.90 \color{white} \approx 0.09 &&
+ \end{flalign*}
+\end{textblock}
+}
+
+
+\only<21>{
+\begin{textblock}{98}(15,73)
+ \begin{flalign*}
+  & P(d^1,p^1,r^1,c^1,a^1) = 0.85 \cdot 0.30 \cdot 0.50 \cdot 0.80 \cdot 0.90 \approx 0.09 &&
+ \end{flalign*}
+\end{textblock}
+
+}
+
+
+\only<22>{
+ \begin{textblock}{108}(10,70)
+ \begin{flalign*}
+  & P(r^1) =  \color{white}  \sum_{i,j,l,m} P(d^i,p^j,r^1,c^l,a^m) \color{white} \left(\sum_i P(d^i)\right) &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+
+\only<23>{
+ \begin{textblock}{108}(10,70)
+ \begin{flalign*}
+  & P(r^1) = \sum_i \sum_j \sum_l \sum_m P(d^i,p^j,r^1,c^l,a^m)  \color{white} \left(\sum_i P(d^i)\right) &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<24>{
+ \begin{textblock}{108}(10,70)
+ \begin{flalign*}
+  & P(r^1) = \sum_{i,j,l,m} P(d^i,p^j,r^1,c^l,a^m)  \color{white} \left(\sum_i P(d^i)\right) &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+
+\only<25>{
+ \begin{textblock}{108}(10,70)
+ \begin{flalign*}
+  & P(r^1) = \sum_{i,j,l,m} P(d^i) P(p^j) P(r^1|d^i,p^j) P(c^l|p^j)P(a^m|r^1)  \color{white} \left(\sum_i P(d^i)\right) &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<26>{
+ \begin{textblock}{108}(10,70)
+ \begin{flalign*}
+  & P(r^1) = \left(\sum_m P(a^m|r^1) \right) \Bigg( \sum_{i,j,l} P(d^i) P(p^j) P(r^1|d^i,p^j) P(c^l|p^j) \Bigg)  &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<27>{
+ \begin{textblock}{108}(10,70)
+ \begin{flalign*}
+  & P(r^1) = \left(\sum_m P(a^m|r^1) \right) \Bigg( \sum_{i,j} P(d^i) P(p^j) P(r^1|d^i,p^j) \Big( \sum_l P(c^l|p^j) \Big) \Bigg)  &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+
+\only<28>{
+ \begin{textblock}{108}(10,70)
+ \begin{flalign*}
+  & P(r^1) = \left( \cancel{\sum_m P(a^m|r^1)} \right) \Bigg( \sum_{i,j} P(d^i) P(p^j) P(r^1|d^i,p^j) \Big( \sum_l P(c^l|p^j) \Big) \Bigg)   &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<29>{
+ \begin{textblock}{108}(10,70)
+ \begin{flalign*}
+  & P(r^1) = \left( \cancel{\sum_m P(a^m|r^1)} \right) \Bigg( \sum_{i,j} P(d^i) P(p^j) P(r^1|d^i,p^j) \Big( \cancel{\sum_l P(c^l|p^j)} \Big) \Bigg) &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<30>{
+ \begin{textblock}{108}(10,70)
+ \begin{flalign*}
+  & P(r^1) = \sum_{i,j} P(d^i) P(p^j) P(r^1|d^i,p^j)   \color{white} \left(\sum_i P(d^i)\right) &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<31->{
+ \begin{textblock}{108}(10,70)
+ \begin{flalign*}
+  &P(r^1) = \sum_{i,j} P(d^i) P(p^j) P(r^1|d^i,p^j) \approx 0.23 \color{white} \left(\sum_i P(d^i)\right) &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+
+\only<32>{
+ \begin{textblock}{108}(10,80)
+ \begin{flalign*}
+  &P(r^1|p^0) = \color{white}  \Bigg(\sum_i P(d^i)\Bigg)  &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<33>{
+ \begin{textblock}{108}(10,80)
+ \begin{flalign*}
+  &P(r^1|p^0) = \frac{P(r^1,p^0)}{P(p^0)} \color{white}  \Bigg(\sum_i P(d^i)\Bigg)  &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+
+\only<34>{
+ \begin{textblock}{108}(10,80)
+ \begin{flalign*}
+  &P(r^1|p^0) = \frac{1}{P(p^0)} \sum_{i,l,m} P(d^i) P(p^0) P(r^1|d^i,p^0) P(c^l|p^0)P(a^m|r^k)  \color{white}  \Bigg(\sum_i P(d^i)\Bigg)  &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<35>{
+ \begin{textblock}{108}(10,80)
+ \begin{flalign*}
+  &P(r^1|p^0) = \frac{1}{P(p^0)} \sum_{i} P(d^i) P(p^0) P(r^1|d^i,p^0) \color{white}  \Bigg(\sum_i P(d^i)\Bigg)  &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<36>{
+ \begin{textblock}{108}(10,80)
+ \begin{flalign*}
+  &P(r^1|p^0) = \frac{1}{P(p^0)} \sum_{i} P(d^i) P(p^0) P(r^1|d^i,p^0) \approx 0.09 \color{white}  \Bigg(\sum_i P(d^i)\Bigg)  &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+
+
+\end{frame}
+
+\subsection{Flujos de inferencia}
+\begin{frame}
+\begin{textblock}{128}(0,8)
+ \begin{center}
+  \large Flujos de inferencia
+ \end{center}
+\end{textblock}
+
+\only<2>{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    & \color{white}  S\'i & \color{white} No \\ 
+ $X \leftarrow V \leftarrow Y $      & \color{white} S\'i & \color{white} No \\ 
+ $X \leftarrow V \rightarrow Y $     & \color{white} S\'i & \color{white} No \\
+ $X \rightarrow V \leftarrow Y $     & \color{white} $\underbrace{\text{No}}_{\hfrac{\text{\tiny Y ning\'un descendiente}}{ \text{\tiny observable}}}$ & \color{white} $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+ 
+ 
+\only<3>{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i & \color{white} No \\ 
+ $X \leftarrow V \leftarrow Y $      & \color{white} S\'i & \color{white} No \\ 
+ $X \leftarrow V \rightarrow Y $     & \color{white} S\'i & \color{white} No \\
+ $X \rightarrow V \leftarrow Y $     & \color{white} $\underbrace{\text{No}}_{\hfrac{\text{\tiny Y ning\'un descendiente}}{ \text{\tiny observable}}}$ & \color{white} $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+ 
+ \only<4>{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i & \color{white} No \\ 
+ $X \leftarrow V \leftarrow Y $      &  S\'i & \color{white} No \\ 
+ $X \leftarrow V \rightarrow Y $     & \color{white} S\'i & \color{white} No \\
+ $X \rightarrow V \leftarrow Y $     & \color{white} $\underbrace{\text{No}}_{\hfrac{\text{\tiny Y ning\'un descendiente}}{ \text{\tiny observable}}}$ & \color{white} $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+ 
+ \only<5>{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i & \color{white} No \\ 
+ $X \leftarrow V \leftarrow Y $      &  S\'i & \color{white} No \\ 
+ $X \leftarrow V \rightarrow Y $     &  S\'i & \color{white} No \\
+ $X \rightarrow V \leftarrow Y $     & \color{white} $\underbrace{\text{No}}_{\hfrac{\text{\tiny Y ning\'un descendiente}}{ \text{\tiny observable}}}$ & \color{white} $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+ 
+ \only<6>{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i &  No \\ 
+ $X \leftarrow V \leftarrow Y $      &  S\'i & \color{white} No \\ 
+ $X \leftarrow V \rightarrow Y $     &  S\'i & \color{white} No \\
+ $X \rightarrow V \leftarrow Y $     & \color{white} No & \color{white} $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+
+  
+ \only<7>{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i &  No \\ 
+ $X \leftarrow V \leftarrow Y $      &  S\'i & No \\ 
+ $X \leftarrow V \rightarrow Y $     &  S\'i & \color{white} No \\
+ $X \rightarrow V \leftarrow Y $     & \color{white} No & \color{white} $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+
+ 
+ \only<8>{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i & No \\ 
+ $X \leftarrow V \leftarrow Y $      &  S\'i & No \\ 
+ $X \leftarrow V \rightarrow Y $     &  S\'i & No \\
+ $X \rightarrow V \leftarrow Y $     & \color{white} No & \color{white} $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+
+ \only<9>{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i & No \\ 
+ $X \leftarrow V \leftarrow Y $      &  S\'i & No \\ 
+ $X \leftarrow V \rightarrow Y $     &  S\'i & No \\
+ $X \rightarrow V \leftarrow Y $     & No & \color{white} $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+
+\only<10>{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i & No \\ 
+ $X \leftarrow V \leftarrow Y $      &  S\'i & No \\ 
+ $X \leftarrow V \rightarrow Y $     &  S\'i & No \\
+ $X \rightarrow V \leftarrow Y $     & No &  $\color{white} \underbrace{\color{black}\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+
+ \only<11>{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i & No \\ 
+ $X \leftarrow V \leftarrow Y $      &  S\'i & No \\ 
+ $X \leftarrow V \rightarrow Y $     &  S\'i & No \\
+ $X \rightarrow V \leftarrow Y $     & No &  $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+ 
+ \only<12->{
+\begin{textblock}{118}(0,28)
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i & No \\ 
+ $X \leftarrow V \leftarrow Y $      &  S\'i & No \\ 
+ $X \leftarrow V \rightarrow Y $     &  S\'i & No \\
+ $X \rightarrow V \leftarrow Y $     & $\underbrace{\text{No}}_{\hfrac{\text{\tiny Y ning\'un descendiente}}{ \text{\tiny observable}}}$ &  $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+ \end{textblock}
+ }
+ 
+ 
+\only<13->{
+\footnotesize
+\begin{textblock}{118}(5,60)
+
+\begin{framed}
+
+ Un flujo de inferencia permenece abierto si:
+ \begin{itemize}
+  \item[$\bullet$] Toda consecuencia com\'un (o alguno de sus descendientes) es observable
+  \item[$\bullet$] Ning\'una otra variable es observable
+ \end{itemize}
+ \end{framed}
+
+\end{textblock}
+
+}
+
+\only<14>{
+\begin{textblock}{128}(0,92)
+\tiny \centering
+\href{http://93.174.95.29/_ads/6B4DC58C0028F2BBEAA2CC9204F01845}{Pearl, J. 2018. The Book of Why: The New Science of Cause and Effect}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\section{TrueSkill}
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+ \begin{center}
+  \large TrueSkill
+ \end{center}
+\end{textblock}
+
+\only<1>{
+
+\begin{textblock}{118}(5,30)
+  \begin{figure}[H]     
+     \centering \normalsize
+     \begin{subfigure}[b]{1\textwidth}
+       \includegraphics[width=1\textwidth]{../../Imagenes/messi_datos.jpeg} 
+     \end{subfigure}
+\end{figure}
+\end{textblock}
+
+}
+
+\only<2>{
+
+\begin{textblock}{128}(0,33)
+\includegraphics[width=1\textwidth]{imagenes/elo_for_trueskill}    
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{128}(0,33)
+\includegraphics[width=1\textwidth]{imagenes/trueskill_from_elo}    
+\end{textblock}
+}
+
+
+\end{frame}
+
+\begin{frame}
+
+\begin{textblock}{108}(10,11)
+\includegraphics[width=1\textwidth]{imagenes/elo-factor-es}    
+\end{textblock}
+
+\end{frame}
+
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{128}(0,0)
+% \includegraphics[width=1\textwidth]{../../Imagenes/mujerDC}   
+% \end{textblock}
+% \end{frame}
+
+
+% 
+% 
+% \subsection{Factor graph}
+% 
+% \begin{frame}
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+%  \large Factor graph
+% \end{center}
+% \end{textblock}
+% \vspace{1cm}
+% 
+% \only<1>{
+%  \begin{textblock}{128}(0,24)
+% \begin{equation*}
+% g(x_1,\dots,x_n) = \prod f_j(X) 
+% \end{equation*}
+% \end{textblock}
+% }
+% \only<2->{
+% \begin{textblock}{128}(0,24)
+% \begin{equation*}
+% g(x_1,x_2,x_3,x_4,x_5) = f_A(x_1)f_B(x_2)f_C(x_1,x_2,x_3)f_D(x_3,x_4)f_E(x_3,x_5)
+% \end{equation*}
+% \end{textblock}
+% 
+% }
+% 
+% \only<3->{
+% \begin{textblock}{128}(0,36)
+% \begin{figure}[H]
+%  \centering
+%   \includegraphics[width=0.6\textwidth]{imagenes/factorGraph} 
+% \end{figure}
+% \end{textblock}
+% }
+% 
+% \vspace{0.2cm}
+% 
+% \only<4>{
+% \begin{textblock}{108}(10,68)
+% 
+% Un factor graph sin ciclos codifica:
+% \begin{itemize}
+%  \item[$\bullet$] La factorizaci\'on de una funci\'on $g(x_1,\dots,x_n)$ \color{white}
+%  \item[$\bullet$] \textbf{Las operaciones para computar sus marginales} $g_i(x_i)$
+% \end{itemize}  
+% \end{textblock}
+% }
+% 
+% 
+% \only<5>{
+% \begin{textblock}{108}(10,68)
+% 
+% Un factor graph sin ciclos codifica:
+% \begin{itemize}
+%  \item[$\bullet$] La factorizaci\'on de una funci\'on $g(x_1,\dots,x_n)$ 
+%  \item[$\bullet$] \textbf{Las operaciones para computar sus marginales} $g_i(x_i)$
+% \end{itemize}  
+% \end{textblock}
+% }
+% 
+% \end{frame}
+% 
+
+
+
+% 
+% 
+% 
+% \section{TrueSkill}
+% \begin{frame}
+%  \begin{textblock}{128}(0,8)
+% \begin{center}
+%  \normalsize Bayesian Elo factor graph
+% \end{center}
+% \end{textblock}
+% \vspace{0.6cm}
+% 
+% \centering
+% \includegraphics[width=0.85\textwidth]{imagenes/elo-factor-en}   
+% 
+% \pause
+% \vspace{0.3cm}
+% 
+% \tiny
+% The factor graphs specifies the way to compute the posterior, likelihood, and evidence.
+% 
+% \href{https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=910572}{Kschischang FR, Frey BJ, Loeliger HA. Factor graphs and the sum-product algorithm. 2001}
+% 
+% \end{frame}
+% 
+% 
+% \subsection{Regresón lineal}
+% 
+% \begin{frame}
+%  
+% \end{frame}
+% 
+% \begin{frame}
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+%   Ejemplo
+% \end{center}
+% \end{textblock}
+% \vspace{1cm}
+% 
+% 
+% \only<1-3>{
+% \begin{textblock}{128}(0,20)
+% \footnotesize
+% \begin{equation*}
+%  g_1(x_1) = \sum_{x_2}\sum_{x_3}\sum_{x_4}\sum_{x_5} f_A(x_1)f_B(x_2)f_C(x_1,x_2,x_3)  f_D(x_3,x_4) f_E(x_3,x_5) 
+% \end{equation*}
+% 
+% \end{textblock}
+% 
+% }
+% 
+% \only<2-3>{
+% \begin{textblock}{128}(0,27)
+% \begin{figure}[H]
+% \centering
+%   \begin{subfigure}[b]{0.42\textwidth} 
+%   \centering
+%     \includegraphics[width=0.75\textwidth]{imagenes/factorGraph_margin1} 
+%     %\caption*{$g_1(x_1)$}
+%   \end{subfigure} 
+% % \ \ \
+% %   \begin{subfigure}[b]{0.45\textwidth} 
+% %   \centering
+% %     \includegraphics[width=1\textwidth]{imagenes/factorGraph_margin3} 
+% %    %\caption*{$g_3(x_3)$}
+% %   \end{subfigure} 
+% \end{figure}
+% \end{textblock}
+% }
+% 
+% 
+% \only<3>{
+% \begin{textblock}{128}(0,78)
+% \footnotesize
+% \begin{equation*}
+%  g_1(x_1) = f_A(x_1) \left(\sum_{x_2, x_3} f_B(x_2) f_C(x_1,x_2,x_3) \left( \sum_{x_4} f_D(x_3,x_4) \right) \left( \sum_{x_5} f_E(x_3,x_5) \right) \right)
+% \end{equation*}
+% % 
+% % \begin{equation*}
+% %  g_3(x_3) =  \left( \sum_{\setminus x_3} f_A(x_1)f_B(x_2)f_C(x_1,x_2,x_3)  \right) \left( \sum_{\setminus x_3} f_D(x_3,x_4) \right) \left( \sum_{\setminus x_3} f_E(x_3,x_5) \right) 
+% % \end{equation*}
+% \end{textblock}
+% 
+% }
+% 
+% \only<4->{
+% \begin{textblock}{128}(0,20)
+% \footnotesize
+% \begin{equation*}
+%  g_3(x_3) = \sum_{x_1}\sum_{x_2}\sum_{x_4}\sum_{x_5} f_A(x_1)f_B(x_2)f_C(x_1,x_2,x_3)  f_D(x_3,x_4) f_E(x_3,x_5) 
+% \end{equation*}
+% 
+% \end{textblock}
+% 
+% }
+% 
+% \only<4->{
+% \begin{textblock}{128}(0,30)
+% \begin{figure}[H]
+% \centering
+% %   \begin{subfigure}[b]{0.42\textwidth} 
+% %   \centering
+% %     \includegraphics[width=0.75\textwidth]{imagenes/factorGraph_margin1} 
+% %     %\caption*{$g_1(x_1)$}
+% %   \end{subfigure} 
+% % \ \ \
+%   \begin{subfigure}[b]{0.45\textwidth} 
+%   \centering
+%     \includegraphics[width=0.85\textwidth]{imagenes/factorGraph_margin3} 
+%    %\caption*{$g_3(x_3)$}
+%   \end{subfigure} 
+% \end{figure}
+% \end{textblock}
+% }
+% 
+% \only<5>{
+% \begin{textblock}{128}(0,78)
+% \footnotesize
+% % \begin{equation*}
+% %  g_1(x_1) = f_A(x_1) \left(\sum_{x_2, x_3} f_B(x_2) f_C(x_1,x_2,x_3) \left( \sum_{x_4} f_D(x_3,x_4) \right) \left( \sum_{x_5} f_E(x_3,x_5) \right) \right)
+% % \end{equation*}
+% % 
+% \begin{equation*}
+%  g_3(x_3) =  \left( \sum_{x_1,x_2} f_A(x_1)f_B(x_2)f_C(x_1,x_2,x_3)  \right) \left( \sum_{x_4} f_D(x_3,x_4) \right) \left( \sum_{x_5} f_E(x_3,x_5) \right) 
+% \end{equation*}
+% \end{textblock}
+% 
+% }
+% 
+% 
+% \end{frame}
+
+\subsection{Sum-product algorithm}
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Sum-product algorithm
+\end{center}
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{74}(45,35)
+\begin{description}
+ \item[$m_{x \rightarrow f}(x)$ :] Mensaje de variable $x$ a factor $f$ 
+ \item[$m_{f \rightarrow x}(x)$ :] Mensaje factor $f$ a variable $x$
+ \item[$n(v)$ :] Conjunto de nodos vecinos del nodo $v$
+\end{description}
+\end{textblock}
+}
+
+\only<1->{
+\begin{textblock}{74}(45,22)
+\begin{equation*}
+P(x) = \prod_{h \in n(x)} m_{h \rightarrow x} 
+\end{equation*} 
+\end{textblock}
+}
+
+\only<2->{
+\begin{textblock}{78}(40,63)
+\begin{equation*}\label{eq:m_v_f}
+m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}(x) 
+\end{equation*}
+\end{textblock}
+}
+
+\only<3->{
+\begin{textblock}{78}(40,76)
+\begin{equation*}\label{eq:m_f_v}
+ m_{f \rightarrow x}(x) = \sum_{X\setminus \{x\} } \Big( f(X) \prod_{h \in n(f) \setminus \{x\} } m_{h \rightarrow f}(h) \Big) 
+\end{equation*}
+\end{textblock}
+}
+
+\only<1->{
+\begin{textblock}{40}(0,16)
+\begin{figure}[H]
+\centering
+  \begin{subfigure}[b]{0.8\textwidth} 
+  \centering
+    \includegraphics[width=1\textwidth]{imagenes/elo-factor-es_0} 
+   %\caption*{$g_3(x_3)$}
+  \end{subfigure} 
+\end{figure}
+\end{textblock}
+}
+
+% % 
+\only<4>{
+\begin{textblock}{120}(0,93)
+\centering \tiny
+\href{https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=910572}{Kschischang FR, Frey BJ, Loeliger HA. Factor graphs and the sum-product algorithm. 2001}
+\end{textblock}
+}
+
+
+\end{frame}
+% 
+% \section{TrueSkill}
+% 
+% \begin{frame}
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+%  \Large TrueSkill
+% \end{center}
+% \end{textblock}
+% 
+% \vspace{1cm}
+% 
+% \Wider[2cm]{
+% \begin{figure}[H]
+%  \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_versionGeneral} 
+% \end{figure} 
+% }
+% 
+% 
+% \pause
+% \vspace{0.5cm}
+% 
+% 
+% \Wider[1cm]{
+% \begin{figure}[H]
+%  \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops} 
+% \end{figure} 
+% }
+% 
+% \end{frame}
+
+
+% \subsection{Propiedades de la distribuci\'on normal}
+% \begin{frame}
+% \begin{textblock}{128}(0,8)
+%  \begin{center}
+%   \large Propiedades
+%  \end{center}
+% \end{textblock}
+% 
+% \footnotesize
+% 
+% \only<1->{
+% \begin{textblock}{124}(2,20)
+% \begin{equation}\label{eq:simetria}
+%  N(x|\mu,\sigma^2) = N(\mu|x,\sigma^2) = N(-\mu|-x,\sigma^2) = N(-x|-\mu,\sigma^2) 
+% \end{equation}
+% \end{textblock}
+% }
+% 
+% \only<2->{
+% \begin{textblock}{124}(2,33)
+% \begin{equation}\label{eq:estandarizar}
+%  N(x|\mu,\sigma^2) = N( \frac{X-\mu}{\sigma} | 0,1)
+% \end{equation}
+% \end{textblock}
+% }
+% 
+% \only<3->{
+% \begin{textblock}{124}(2,48)
+% \begin{equation}\label{eq:phi_norm}
+%  \frac{\partial}{\partial x} \Phi(x|\mu,\sigma^2) = N(x|\mu,\sigma^2)
+% \end{equation}
+% \end{textblock}
+% }
+% 
+% \only<4->{
+% \begin{textblock}{124}(2,63)
+% \begin{equation}\label{eq:integral_con_indicadora}
+%   \iint_{-\infty}^{\infty}  \mathbb{I}(x=h(y,z)) \, f(x) \,  g(y)\, dx\, dy 
+%  = \int_{-\infty}^{\infty} f(h(y,z)) \, g(y) \, dy 
+% \end{equation}
+% 
+% \end{textblock}
+% }
+% 
+% 
+% \only<5>{
+% \begin{textblock}{124}(2,78)
+% \begin{equation}\label{eq:multiplicacion_normales}
+%  \int_{-\infty}^{\infty} N(x|\mu_x,\sigma_x^2)N(x|\mu_y,\sigma_y^2) \, dx  \overset{*}{=} \int_{-\infty}^{\infty}  \underbrace{N(\mu_x|\mu_y,\sigma_x^2+\sigma_y^2)}_{\text{constante}} \underbrace{ N(x|\mu_{*},\sigma_{*}^2) dx}_{\text{integra } 1} 
+% \end{equation}
+% \end{textblock}
+% }
+% 
+% 
+% \end{frame}
+% 
+% 
+% \subsection{Mensajes descendentes}
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{f_{s} \rightarrow s}(s)$
+% \end{center}
+% \end{textblock}
+% 
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% 
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_fs_s} 
+% \end{textblock}
+% 
+% }
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_{s_i} \rightarrow s_i}(s_i) & = \onslide<2>{\int f_{s_i}(\bm{x}) \prod_{h \in n(f_{s_i}) \setminus \{s_i\} } m_{h \rightarrow f_{s_i}}(h) d\bm{x}_{\setminus \{s_i\}} }&&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<3-4>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+% m_{f_{s_i} \rightarrow s_i}(s_i)  & = \int N(s_i| \mu_i, \sigma_i^2) d\bm{x}_{\setminus \{s_i\} }  \onslide<4>{ = N(s_i| \mu_i, \sigma_i^2)} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% 
+% 
+% \end{frame}
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{s \rightarrow f_p}(s)$
+% \end{center}
+% \end{textblock}
+% 
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% 
+% 
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_s_fp} 
+%   
+% \end{textblock}
+% 
+% }
+% 
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{s_i \rightarrow f_{p_i}}(s_i) & = \onslide<2>{\prod_{h \in n(s_i) \setminus \{f_{p_i}\} } m_{h \rightarrow s_i}(s_i)} \color{white}\int  &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<3>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{s_i \rightarrow f_{p_i}}(s_i) & =  N(s_i| \mu_i, \sigma_i^2) \color{white}\int  &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{f_p \rightarrow p}(p)$
+% \end{center}
+% \end{textblock}
+% 
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% 
+% 
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_fp_p} 
+%   
+% \end{textblock}
+% 
+% }
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_{p_i} \rightarrow p_i}(p_i) & = \onslide<2>{ \int f_{p_i}(\bm{x}) \Big( \prod_{h \in n(f_{p_i}) \setminus \{p_i\} } m_{h \rightarrow f_{p_i}}(h) \Big) d\bm{x}_{\setminus \{p_i\}}} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<3->{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_{p_i} \rightarrow p_i}(p_i) & = \int N(p_i|s_i,\beta^2)\, N(s_i|\mu_i, \sigma_i^2) \, ds_i \onslide<4->{ = \int N(s_i|p_i,\beta^2)\, N(s_i|\mu_i, \sigma_i^2) \, ds_i } \\
+%   \onslide<5->{ & =\int  \underbrace{N(p_i|\mu_i,\beta^2+\sigma_i^2)}_{\text{const.}} \underbrace{ N(s_i|\mu_{*},\sigma_{*}^2) \, ds_i}_{1} } \\[0.3cm]
+%   \onslide<6>{ & =N(p_i|\mu_i,\beta^2+\sigma_i^2)} &&
+% \end{flalign*}
+% \end{textblock}
+% 
+% }
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{p \rightarrow f_t}(p)$
+% \end{center}
+% \end{textblock}
+% 
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% 
+% 
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_p_ft} 
+%   
+% \end{textblock}
+% 
+% }
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{p_i \rightarrow f_{t_e}}(p_i) & = \onslide<2>{\prod_{h \in n(p_i) \setminus \{f_{t_e}\} } m_{h \rightarrow p_i}(p_i)} \color{white}\int  &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<3>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{p_i \rightarrow f_{t_e}}(p_i) & = \prod_{i \in e} N(p_i|\mu_i, \beta^2 + \sigma_i^2) \color{white}\int  &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{f_t \rightarrow t}(t)$
+% \end{center}
+% \end{textblock}
+% 
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% 
+% 
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_ft_t} 
+%   
+% \end{textblock}
+% 
+% }
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_{t_e} \rightarrow t_e}(t_e) & = \onslide<2>{ \int f_{t_e}(\bm{x}) \Big( \prod_{h \in n(f_{t_e}) \setminus \{t_e\} } m_{h \rightarrow f_{t_e}}(h) \Big) d\bm{x}_{\setminus \{t_e\}}} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<3-4>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_{t_e} \rightarrow t_e}(t_e) \onslide<3->{& = \iint \mathbb{I}(t_e = p_i + p_j) N(p_i|\mu_i,\beta^2 + \sigma_i^2)N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\}
+%   \onslide<4->{& = \int N(p_i|\mu_i,\beta^2 + \sigma_i^2) N(t_e - p_i|\mu_j,\beta^2 + \sigma_j^2) dp_i   \\}
+%     &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% % 
+% \only<5-6>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_{t_e} \rightarrow t_e}(t_e) & = \iint \mathbb{I}(t_e = p_i + p_j) N(p_i|\mu_i,\beta^2 + \sigma_i^2)N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\
+%   & = \int N(p_i|\mu_i,\beta^2 + \sigma_i^2) N(p_i|t_e - \mu_j,\beta^2 + \sigma_j^2) dp_i   \\
+%   \onslide<6->{& = \int \underbrace{N(t_e|\mu_i+\mu_j,2\beta^2 + \sigma_i^2 + \sigma_j^2)}_{\text{const.}} \underbrace{N(p_i|\mu_{*},\sigma_{*}^2) dp_i}_{1} \\ }
+%     &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<7>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_{t_e} \rightarrow t_e}(t_e) & = \iint \mathbb{I}(t_e = p_i + p_j) N(p_i|\mu_i,\beta^2 + \sigma_i^2)N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\
+%   & = \int N(p_i|\mu_i,\beta^2 + \sigma_i^2) N(p_i|t_e - \mu_j,\beta^2 + \sigma_j^2) dp_i   \\[0.15cm]
+%   & = N(t_e|\mu_i+\mu_j,2\beta^2 + \sigma_i^2 + \sigma_j^2) \color{white} \sum_{i \in A_e} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<8->{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_{t_e} \rightarrow t_e}(t_e) & = \iint \mathbb{I}(t_e = p_i + p_j) N(p_i|\mu_i,\beta^2 + \sigma_i^2)N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\
+%   & = \int N(p_i|\mu_i,\beta^2 + \sigma_i^2) N(p_i|t_e - \mu_j,\beta^2 + \sigma_j^2) dp_i   \\[0.15cm]
+%   & = N(t_e|\sum_{i \in A_e} \mu_i,\sum_{i \in A_e} \beta^2 + \sigma_i^2) \onslide<9>{= N(t_e| \mu_e, \sigma_e^2)} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{t \rightarrow f_d}(t)$
+% \end{center}
+% \end{textblock}
+% 
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% 
+% 
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_t_fd} 
+%   
+% \end{textblock}
+% 
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{t_e \rightarrow f_{d}}(t_e) & = \onslide<2>{\prod_{h \in n(t_e) \setminus \{f_{d}\} } m_{h \rightarrow t_e}(t_e)} \color{white}\int  &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<3>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{t_e \rightarrow f_{d}}(t_e) & =  N(t_e| \mu_e, \sigma_e^2) \color{white}\int  &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% }
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{f_d\rightarrow d}(d)$
+% \end{center}
+% \end{textblock}
+% 
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% 
+% 
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_fd_d} 
+%   
+% \end{textblock}
+% 
+% }
+% 
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_d \rightarrow d}(d) & = \onslide<2>{ \int f_d(\bm{x}) \Big( \prod_{h \in n(f_d) \setminus \{d\} } m_{h \rightarrow f_d}(h) \Big) d\bm{x}_{\setminus \{d\}}} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<3-4>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_d \rightarrow d}(d) & = \iint \mathbb{I}(d= t_a - t_b) N(t_a | \mu_a, \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
+%  & \onslide<4>{ = \int N(d + t_b | \mu_a, \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_b }&&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<5-6>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_d \rightarrow d}(d) & = \iint \mathbb{I}(d= t_a - t_b) N(t_a | \mu_a, \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
+%  &  = \int N( t_b | \mu_a - d , \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_b \\
+%  & \onslide<6>{= \int \underbrace{N(d|\mu_a -\mu_b, \sigma_a^2 + \sigma_b^2)}_{\text{const.}} \, \underbrace{N(t_b|\mu_{*},\sigma_{*}^2) \, dt_b}_{1} } &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<7>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_d \rightarrow d}(d) & = \iint \mathbb{I}(d= t_a - t_b) N(t_a | \mu_a, \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
+%  &  = \int N( t_b | \mu_a - d , \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_b \\[0.12cm]
+%  & = N(d|\, \mu_a -\mu_b, \sigma_a^2 + \sigma_b^2)  &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% 
+% \only<8->{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_d \rightarrow d}(d) & = \iint \mathbb{I}(d= t_a - t_b) N(t_a | \mu_a, \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
+%  &  = \int N( t_b | \mu_a - d , \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_b \\[0.12cm]
+%  & = N(d|\underbrace{\mu_a -\mu_b}_{\hfrac{\text{Diferencia}}{\text{esperada}} \delta }, \underbrace{\sigma_a^2 + \sigma_b^2}_{\hfrac{\text{Varianza}}{\text{total}} \, \vartheta } ) \onslide<9>{ = N(d| \delta, \vartheta^2)} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% 
+% \end{frame}
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{d\rightarrow f_r}(d)$
+% \end{center}
+% \end{textblock}
+% 
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_d_fr} 
+% \end{textblock}
+% }
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{t_e \rightarrow f_{d}}(t_e) & = \onslide<2>{N(d|\delta,\vartheta^2)} \color{white}\int  &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% 
+% 
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{f_r\rightarrow r}(r)$
+% \end{center}
+% \end{textblock}
+% 
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_fr_r} 
+% \end{textblock}
+% }
+% 
+% \only<1->{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%  m_{f_r \rightarrow r}(r) & = \onslide<2->{ \int \mathbb{I}(d>0) N(d|\delta,\vartheta^2) \, dd} \\
+%  \onslide<3->{& = \int_0^\infty N(d|\delta,\vartheta^2) \, dd } \\
+%  \onslide<5->{& = 1 - \Phi(0 | \delta, \vartheta^2)} \onslide<6->{ = \Phi\Big(\frac{\delta}{\vartheta}\Big)} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \only<4->{
+% \begin{textblock}{48}(73,50)
+%  \includegraphics[width=1\textwidth]{imagenes/evidence} 
+% \end{textblock}
+% 
+% }
+% 
+% \end{frame}
+% 
+% \subsection{Evidencia}
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large Evidencia
+% \end{center}
+% \end{textblock}
+% 
+% \begin{equation}
+% P(r| s, A) = \Phi \Big(\frac{\delta}{\vartheta} \Big)
+% \end{equation}
+% 
+% 
+% \end{frame}
+% 
+% 
+% \subsection{Mensaje ascendete}
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{f_r\rightarrow d}(d)$
+% \end{center}
+% \end{textblock}
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_fr_d} 
+% \end{textblock}
+% }
+% 
+% \only<1->{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%    & m_{f_r\rightarrow d}(d) = \onslide<2>{\mathbb{I}(d>0)}  \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% \end{frame}
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{f_d\rightarrow t_a}(t_a)$
+% \end{center}
+% \end{textblock}
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_fd_ta} 
+% \end{textblock}
+% }
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%     m_{f_d\rightarrow t_a}(t_a) &= \onslide<2->{\iint \mathbb{I}(d=t_a-t_b) \mathbb{I}(d>0) N(t_b|\mu_b,\sigma_b^2) \, dt_b  \, dd } \\
+%    \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<3->{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%     m_{f_d\rightarrow t_a}(t_a) &= \int \mathbb{I}(t_a>t_b) N(t_b|\mu_b,\sigma_b^2) \, dt_b  \, dd  \\
+%     \onslide<5->{&= \Phi(t_a| \mu_b, \sigma_b^2)}
+%     \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% 
+% \only<4->{
+% \begin{textblock}{48}(80,46)
+%  \includegraphics[width=0.9\textwidth]{imagenes/m_d_ta} 
+% \end{textblock}
+% }
+% 
+% 
+% 
+% 
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{f_t \rightarrow p}(p)$
+% \end{center}
+% \end{textblock}
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_ft_p} 
+% \end{textblock}
+% }
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%     m_{f_{t_a}\rightarrow p_1}(p_1) &= \onslide<2->{\iint \mathbb{I}(t_a=p_1+p_2) N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(t_a|\mu_b,\sigma_b^2)  \, dt_a  \, dp_2 } \\
+%    \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<3>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%    m_{f_{t_a}\rightarrow p_1}(p_1) &=\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(p_1+p_2|\mu_b,\sigma_b^2)  \, dp_2  \\
+%    \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<4-5>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+%    \onslide<5>{&\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \frac{\partial}{\partial p_1} \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2 } \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<6>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+%    &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \frac{\partial}{\partial p_1} \Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<7>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+%    &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, N(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% 
+% \only<8>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+%    &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, N(p_2|\mu_b-p_1,\sigma_b^2)  \, dp_2  \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<9>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+%    &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) =  \int \underbrace{N(\mu_2| \mu_b - p_1, \sigma_b^2 + \sigma_2^2 + \beta^2)}_{\text{const.}} \underbrace{N(p_2 | \mu_*, \sigma_*^2) dp_2}_{1} \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<10->{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+%    &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) =  N(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \\
+%    & \onslide<11->{ m_{f_{t_a}\rightarrow p_1}(p_1) = } \onslide<12>{\Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) } \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% 
+% 
+% 
+% 
+% \end{frame}
+% 
+% \begin{frame}
+% \begin{textblock}{108}(10,8)
+% \begin{center}
+%  \large $m_{f_p \rightarrow s}(s)$
+% \end{center}
+% \end{textblock}
+% \only<1->{
+% \begin{textblock}{108}(10,18)
+% \centering
+%   \includegraphics[width=1\textwidth]{imagenes/trueskill_factorGraph_2equiops_m_fp_s} 
+% \end{textblock}
+% }
+% 
+% \only<1-2>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%     m_{f_{p_1}\rightarrow s_1}(s_1) &= \onslide<2->{\int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1 } \\
+%    \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<3-4>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%     & m_{f_{p_1}\rightarrow s_1}(s_1) = \int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1  \\
+%   & \frac{\partial}{\partial \mu_2} m_{f_{s_1}\rightarrow s_1}(s_1) = \onslide<4>{\int N(p_1|s_1, \beta^2) \, N(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1}
+%    \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<5-6>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%     & m_{f_{p_1}\rightarrow s_1}(s_1) = \int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1  \\
+%   & \frac{\partial}{\partial \mu_2} m_{f_{s_1}\rightarrow s_1}(s_1) =  N(s_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + 2\beta^2) \\
+%   & \onslide<6>{ m_{f_{p_1}\rightarrow s_1}(s_1) = \Phi(s_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + 2\beta^2) }
+%    \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<7>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2) \color{white}\int &&
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<8>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \underbrace{\mu_2}_{\mu_a-\mu_1} , \sigma_b^2 + \underbrace{\sigma_2^2 + 2\beta^2}_{\sigma_a^2 - \sigma_1^2}) \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<9>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \mu_a + \mu_1 , \sigma_b^2 + \sigma_a^2 - \sigma_1^2) \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<10>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1|  \underbrace{\mu_b - \mu_a}_{-\delta} + \mu_1 , \underbrace{\sigma_b^2 + \sigma_a^2}_{\vartheta^2} - \sigma_1^2) \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<11>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1|  -\delta + \mu_1 ,\vartheta^2 - \sigma_1^2)   \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<12-13>{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(0|  -\delta + \mu_1 - s_1,\vartheta^2 - \sigma_1^2) \\ 
+%      \onslide<13>{& = 1 - \Phi(0| \,  \delta - \mu_1 + s_1 \, ,\vartheta^2 - \sigma_1^2)} & \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<14->{
+% \begin{textblock}{118}(5,60)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(0|  -\delta + \mu_1 - s_1,\vartheta^2 - \sigma_1^2) \\[0.2cm] 
+%      & = 1 - \Phi(0| \,  \underbrace{\delta - \mu_1 + s_1}_{\hfrac{\text{\tiny Diferencia esperada}}{\text{\tiny parametrizada en $s$}}} \, ,  \underbrace{\vartheta^2 - \sigma_1^2}_{\hfrac{\text{\tiny Sin incertidumbre}}{\text{\tiny respecto de $s$}}}) \\
+%      & \onslide<15->{= \text{Probabilidad de ganar si la verdadera habilidad fuera $s_1$}}   \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% 
+% 
+% \end{frame}
+
+
+\subsection{Posteriori}
+
+
+\begin{frame}
+%  \begin{textblock}{128}(0,8)
+% \begin{center}
+%  \normalsize Posteriori
+% \end{center}
+% \end{textblock}
+% \vspace{0.5cm}
+
+
+
+\only<-7>{
+\begin{textblock}{128}(0,11)
+\begin{equation*}
+\overbrace{P(s_1 \mid r, \text{Modelo})}^{\text{Posteriori}} \propto \overbrace{N(s_1 \, | \, \mu_1, \sigma_1^2) }^{\text{Priori}} \, \overbrace{1-\Phi(0 \, | s_1 - \mu_2 , \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso ganador} 
+\end{equation*}
+\end{textblock}
+}
+
+\begin{textblock}{128}(0,11)
+\only<8->{
+\begin{equation*}
+\overbrace{P(s_2 \mid r, \text{Modelo})}^{\text{Posteriori}} \propto \overbrace{N(s_2 \, | \,\mu_2, \sigma_2^2) }^{\text{Priori}} \, \overbrace{\Phi(0  \, | \mu_1 - s_2, \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso perdedor} 
+\end{equation*}
+}
+\end{textblock}
+
+
+
+\begin{textblock}{128}(0,26)
+\centering
+\only<2>{\includegraphics[width=0.49\textwidth]{imagenes/posterior_win} 
+}
+\end{textblock}
+
+\begin{textblock}{128}(0,26)
+\centering
+\only<3>{\includegraphics[page=2,width=0.49\textwidth]{imagenes/posterior_win} 
+}
+\end{textblock}
+
+\begin{textblock}{128}(0,26)
+\centering
+\only<4>{\includegraphics[page=3,width=0.49\textwidth]{imagenes/posterior_win} 
+}
+\end{textblock}
+
+\begin{textblock}{128}(0,26)
+\centering
+\only<5>{\includegraphics[page=4,width=0.49\textwidth]{imagenes/posterior_win} 
+}
+\end{textblock}
+
+
+\begin{textblock}{128}(0,26)
+\centering
+\only<6>{\includegraphics[page=5,width=0.49\textwidth]{imagenes/posterior_win} 
+}
+\end{textblock}
+
+\begin{textblock}{128}(0,26)
+\centering
+\only<7>{\includegraphics[page=6,width=0.49\textwidth]{imagenes/posterior_win} 
+}
+\end{textblock}
+
+\begin{textblock}{128}(0,26)
+\centering
+\only<8->{\includegraphics[width=0.49\textwidth]{imagenes/posterior_loose} 
+}
+\end{textblock}
+
+\begin{textblock}{128}(0,93)
+\centering
+\only<9>{\tiny Todos los detalles en: \href{https://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0211014.s002}{Landfried. TrueSkill: Technical Report. 2019} }
+\end{textblock}
+%\includegraphics[width=0.49\textwidth]{imagenes/posterior_loose}   
+\end{frame}
+
+
+
+
+\section{Selecci\'on de modelo}
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+ \begin{center}
+  \Large Selecci\'on de modelo
+ \end{center}
+\end{textblock}
+
+ \begin{center}
+ \large ¿Y nuestras creencias respecto de modelos alternativos?  
+ \end{center}
+ 
+ 
+\end{frame}
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+ \begin{center}
+  \Large Selecci\'on de modelo
+ \end{center}
+\end{textblock}
+\pause
+
+\only<1->{
+\begin{textblock}{128}(0,28) 
+\begin{equation*}
+ P(\text{M}|\text{D}) = \frac{P(\text{D}|\text{M})P(\text{M})}{ P(\text{D})}
+\end{equation*}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{108}(42,42)
+\begin{flalign*}
+  \frac{P(\text{M}_i|\text{D})}{P(\text{M}_j|\text{D})} & = \frac{P(\text{D}|\text{M}_i)\,\,P(\text{M}_i)}{P(\text{D}|\text{M}_j)\,\,P(\text{M}_j)} &&
+\end{flalign*}
+\end{textblock}
+}
+\only<3>{
+\begin{textblock}{108}(42,42)
+\begin{flalign*}
+ \frac{P(\text{M}_i|\text{D})}{P(\text{M}_j|\text{D})} & = \frac{P(\text{D}|\text{M}_i)\,\,P(\text{M}_i)}{ \underbrace{P(\text{D}|\text{M}_j)}_{\text{Evidencia!}}\,P(\text{M}_j)} &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{108}(42,42)
+\begin{flalign*}
+  \frac{P(\text{M}_i|\text{D})}{P(\text{M}_j|\text{D})} & = \frac{P(\text{D}|\text{M}_i)\,\cancel{P(\text{M}_i)}}{ \underbrace{P(\text{D}|\text{M}_j)}_{\text{Evidencia!}}\cancel{P(\text{M}_j)} } &&
+\end{flalign*}
+\end{textblock}
+}
+% 
+% \only<5->{
+% \begin{textblock}{128}(0,68) 
+%  \centering \normalsize Lo \'unico que necesitamos es la \textbf{evidencia}!
+% \end{textblock}
+% }
+
+\only<5->{
+\begin{textblock}{108}(10,68)
+\normalsize \centering Preferimos modelos con la menor \textbf{sorpresa} en la evidencia!
+\vspace{-0.25cm}
+\onslide<5->{
+\begin{mdframed}[backgroundcolor=black!15]
+\centering
+$P(M_q|D) > P(M_r|D) \Longleftrightarrow P(D|M_q) > P(D|M_r)$ 
+\end{mdframed}}
+\end{textblock}
+
+}
+
+
+\only<6>{
+\begin{textblock}{128}(0,92)
+\centering \tiny Sobre comparaci\'on de modelos ver: \href{http://xyala.cap.ed.ac.uk/teaching/tutorials/phylogenetics/Bayesian_Workshop/PDFs/Kass\%20and\%20Raftery\%201995.pdf}{Kass \& Raftery. Bayes factors. 1995.}
+\end{textblock}
+}
+
+\end{frame}
+
+\subsection{Evidencia}
+
+% \begin{frame}
+%  \begin{textblock}{108}(10,08)
+%  \begin{center}
+%   \large Evidencia
+%  \end{center}
+% \end{textblock}
+% 
+% \begin{textblock}{108}(10,22)
+% \begin{align*}
+%  P(\text{C}|\text{D},\text{M}) = \frac{P(\text{D}|\text{C},\text{M})P(\text{C}|\text{M})}{\underbrace{P(\text{D}|\text{M})}_{\text{Evidencia}}}
+% \end{align*}
+% \end{textblock}
+% 
+% 
+% 
+% \only<2>{
+% \begin{textblock}{108}(10,44)
+% \begin{align*}
+%  P(\text{D}|\text{M}) = \sum_C P(\text{D}|\text{C},\text{M})\, P(\text{C}|\text{M})
+% \end{align*}
+% \end{textblock}
+% 
+% }
+% 
+% 
+% \only<3>{
+% \begin{textblock}{108}(10,44)
+% \begin{align*}
+%  P(\text{D}|\text{M}) = \sum_C \underbrace{P(\text{D}|\text{C},\text{M})}_{\hfrac{\text{\tiny Predicci\'on}}{\text{\tiny de D dado C}}}\underbrace{P(\text{C}|\text{M})}_{\hfrac{\text{\tiny Creencia de}}{\text{\tiny C a Priori}}} %\text{La predicci\'on de los datos observados a partir de las creencias a priori}
+% \end{align*}
+% \end{textblock}
+% 
+% }
+% 
+% \only<4->{
+% \begin{textblock}{108}(10,44)
+% \begin{align*}
+%  P(\text{D}|\text{M}) = \underbrace{ \sum_C \underbrace{P(\text{D}|\text{C},\text{M})}_{\hfrac{\text{\tiny Predicci\'on}}{\text{\tiny de D dado C}}}\underbrace{P(\text{C}|\text{M})}_{\hfrac{\text{\tiny Creencia de}}{\text{\tiny C a Priori}}}}_{\hfrac{\text{\tiny Predicci\'on de la datos observados}}{\text{\tiny pesando todas las creencias a priori}}}
+% \end{align*}
+% \end{textblock}
+% }
+% 
+% 
+% 
+% 
+% \end{frame}
+
+
+
+\begin{frame}
+\begin{textblock}{108}(10,08)
+ \begin{center}
+  \large  Evidencia
+ \end{center}
+\end{textblock}
+
+
+ \begin{textblock}{102}(10,22)
+  \centering
+  \includegraphics[width=0.9\textwidth]{imagenes/evidencia_de_modelos_alternativos} 
+ \end{textblock} 
+ 
+ 
+ \begin{textblock}{88}(20,80)
+  \begin{mdframed}[backgroundcolor=black!15]
+\centering
+  Balance natural entre complejidad y predicci\'on
+  \end{mdframed}
+ \end{textblock}
+
+   
+  
+
+ 
+\end{frame}
+
+\subsection{Regresion lineal Bayesiana}
+
+\begin{frame}
+\begin{textblock}{108}(10,08)
+ \begin{center}
+  \large Regresi\'on lineal Bayesiana
+ \end{center}
+\end{textblock}
+
+
+
+\begin{textblock}{64}(0,28)
+ \centering
+ \onslide<1->{Funci\'on objetivo}
+\end{textblock}
+
+\begin{textblock}{64}(64,28)
+ \centering
+ \onslide<2>{Modelos polinomiales}
+\end{textblock}
+
+\begin{textblock}{128}(0,32)
+     \centering 
+       \onslide<1->{\includegraphics[width=0.48\textwidth]{imagenes/model_selection_true_and_sample} }
+       \onslide<2>{\includegraphics[width=0.48\textwidth]{imagenes/model_selection_MAP} }
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ Evidencia vs Verosimilitud
+\end{center}
+\end{textblock}
+
+
+
+\begin{textblock}{64}(0,28)
+ \centering
+Evidencia conjunta
+\end{textblock}
+
+\begin{textblock}{64}(64,28)
+ \centering
+ M\'axima verosimilitud
+\end{textblock}
+
+
+\begin{textblock}{128}(0,30)
+     \centering 
+       \begin{figure}[H]     
+     \centering 
+     \begin{subfigure}[b]{0.47\textwidth}
+       \includegraphics[width=1\textwidth]{imagenes/model_selection_evidence}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.49\textwidth}
+       \includegraphics[width=1\textwidth]{imagenes/model_selection_maxLikelihood}
+     \end{subfigure}
+\end{figure}
+\end{textblock}
+
+
+\end{frame}
+
+
+
+% 
+% 
+% \subsection{Regresi\'on lineal}
+% \begin{frame}
+% 
+% \vspace{-1cm}
+%  \begin{figure}
+% 
+% \begin{subfigure}[t]{0.32\textwidth} 
+% \caption*{Verosimilitud} 
+% \end{subfigure}
+% \begin{subfigure}[t]{0.32\textwidth}
+% \caption*{Priori/Posteriori} 
+% \includegraphics[width=\textwidth]{imagenes/linearRegression_posterior_0.pdf} 
+% \end{subfigure}
+% \begin{subfigure}[t]{0.32\textwidth}
+% \caption*{Data space} 
+% \includegraphics[width=\textwidth]{imagenes/linearRegression_dataSpace_0.pdf} 
+% \end{subfigure}
+% 
+% 
+% \begin{subfigure}[c]{0.32\textwidth}
+% \includegraphics[width=\textwidth]{imagenes/linearRegression_likelihood_1.pdf} 
+% \end{subfigure}
+% \begin{subfigure}[c]{0.32\textwidth}
+% \includegraphics[width=\textwidth]{imagenes/linearRegression_posterior_1.pdf} 
+% \end{subfigure}
+% \begin{subfigure}[c]{0.32\textwidth}
+% \includegraphics[width=\textwidth]{imagenes/linearRegression_dataSpace_1.pdf} 
+% \end{subfigure}
+% 
+% \begin{subfigure}[c]{0.32\textwidth}
+% \includegraphics[width=\textwidth]{imagenes/linearRegression_likelihood_2.pdf} 
+% \end{subfigure}
+% \begin{subfigure}[c]{0.32\textwidth}
+% \includegraphics[width=\textwidth]{imagenes/linearRegression_posterior_2.pdf} 
+% \end{subfigure}
+% \begin{subfigure}[c]{0.32\textwidth}
+% \includegraphics[width=\textwidth]{imagenes/linearRegression_dataSpace_2.pdf} 
+% \end{subfigure}
+% 
+% \end{figure}
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+%  \Large Normal
+% \end{center}
+% \end{textblock}
+% \end{frame}
+% 
+% \subsection{seleccion de modelo regresion lineal}
+% \begin{frame}
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+%  \Large seleccion de modelo regresion lineal
+% \end{center}
+% \end{textblock}
+% \end{frame}
+% 
+% \subsection{Selecci\'on de modelo de habilidad}
+% \begin{frame}
+%  
+% \end{frame}
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+
+
+
+
+\begin{frame}[plain]
+
+\centering
+  \includegraphics[width=0.55\textwidth]{../../Imagenes/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
+
+\end{document}
+
+
+

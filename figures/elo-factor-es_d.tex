@@ -1,0 +1,57 @@
+\documentclass[10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\input{../../../aux/tikzlibrarybayesnet.code.tex}
+\input{../../../aux/encabezado.tex}
+\makeatletter
+\newcommand{\vast}{\bBigg@{2.5}}
+\newcommand{\Vast}{\bBigg@{14.5}}
+\makeatother
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+
+\tikz{ %
+        
+        
+        \node[det, fill=black!10] (r) {$r_{ab}$} ; %
+        \node[factor, above=of r] (fr) {} ;
+        \node[const, right=of fr] (dfr) {\large $\mathbb{I}(d_{ab}>0)$}; 
+        
+        \node[latent, above=of fr] (d) {$d_{ab}$};
+        \node[factor, above=of d] (fd) {} ;
+        \node[const, right=of fd] (dfd) {\large $\mathbb{I}(d_{ab}= p_a-p_b)$}; 
+        
+        \node[latent, above=of fd, xshift=-0.8cm] (p1) {$p_a$} ; %
+        \node[latent, above=of fd, xshift=0.8cm] (p2) {$p_b$} ; %       
+        
+        \node[factor, above=of p1] (fp1) {} ;
+        \node[factor, above=of p2] (fp2) {} ;
+        \node[const, right=of fp2] (dp) {\large $p \sim N(s,\beta^2)$};
+        
+        
+        \node[latent, above=of fp1] (s1) {$s_a$} ; %
+        \node[latent, above=of fp2] (s2) {$s_b$} ; %        
+        
+        \node[factor, above=of s1] (fs1) {} ;
+        \node[factor, above=of s2] (fs2) {} ;                        \node[const, right=of fs2] (ds) {\large $s \sim N(\widehat{\mu},\widehat{\sigma}^2)$};
+
+        
+        \node[invisible, right=of s2, xshift=3cm] (s-dist) {};
+        
+        \edge[-] {fr} {r,d};
+        \edge[-] {d} {fd};
+        \edge[-] {p1} {fd};
+        \edge[-] {p2} {fd};
+        \edge[-] {fp1} {p1};
+        \edge[-] {fp2} {p2};
+        \edge[-] {s1} {fp1};
+        \edge[-] {s2} {fp2};
+        \edge[-] {fs1} {s1};
+        \edge[-] {fs2} {s2};
+        } 
+
+
+\end{document}

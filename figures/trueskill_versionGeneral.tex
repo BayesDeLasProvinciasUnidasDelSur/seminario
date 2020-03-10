@@ -1,0 +1,50 @@
+\documentclass[10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\input{../../../aux/tikzlibrarybayesnet.code.tex}
+\input{../../../aux/encabezado.tex}
+\makeatletter
+\newcommand{\vast}{\bBigg@{2.5}}
+\newcommand{\Vast}{\bBigg@{14.5}}
+\makeatother
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+
+\tikz{ %
+        
+        \node[det, fill=black!10] (r) {$r_j$} ; %
+        \node[const, below=of r, yshift=-0.25cm,xshift=-0.8cm] (c_1a) {\footnotesize  $o$:= ordenamiento};
+        \node[latent, left=of r] (d) {$d_j$} ; %
+        \node[latent, left=of d] (t) {$t_e$} ; %
+        \node[latent, left=of t] (p) {$p_i$} ; %
+        \node[latent, left=of p] (s) {$s_i$} ; %
+        \node[latent, fill=black, minimum size = 1pt, above=of p, yshift=-0.4cm] (beta) {} ; %
+        \node[const, left=of beta, yshift=-0.1cm] (n_beta) {$\beta$};
+        
+        
+        \edge {d} {r};
+        \edge {t} {d};
+        \edge {p} {t};
+        \edge {s} {p};
+        \edge {beta} {p};
+	
+        \plate {personas} {(p)(s)(beta)} {$i \in A_e$}; %
+        \plate {equipos} {(personas) (t)} {$  \text{$A$:= partici\'on de jugadores }  \ \ 0 < e \leq |A|$}; %
+	\node[invisible, below=of d, yshift=-0.46cm,xshift=-0.5cm] (inv_below) {};
+	\node[invisible, above=of r, yshift=0.73cm] (inv_above) {};
+	\plate {comparaciones} {(d) (r) (inv_below) (inv_above)} {$0 < j < |A|$}
+	
+	\node[const, right= of r, xshift=0.8cm ,yshift=-1.7cm] (result-dist) {$r_j = d_j > 0$} ; %
+	\node[const, above=of result-dist,yshift=0.3cm] (d-dist) {$d_j = t_{o_j} - t_{o_{j+1}}$};  %
+	\node[const, above=of d-dist,yshift=0.3cm] (t-dist) {$t_e = \sum_{i\in A_e} p_i $} ; %
+	\node[const, above=of t-dist,yshift=0.3cm] (p-dist) {$p_i \sim N(s_i,\beta^2)$} ; %
+	\node[const, above=of p-dist,yshift=0.3cm] (s-dist) {$s_i \sim N(\mu_i,\sigma_i^2)$} ; %
+	
+	\node[invisible, right=of s-dist, xshift=1cm] (s-inv) {};
+              
+        }
+
+\end{document}

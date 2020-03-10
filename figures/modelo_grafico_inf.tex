@@ -1,0 +1,86 @@
+
+\documentclass[10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\input{../../../aux/tikzlibrarybayesnet.code.tex}
+\input{../../../aux/encabezado.tex}
+\makeatletter
+\newcommand{\vast}{\bBigg@{2.5}}
+\newcommand{\Vast}{\bBigg@{14.5}}
+\makeatother
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+ 
+ 
+
+\tikz{
+ \node[invisible, xshift=9cm] () {};
+ \node[invisible, xshift=-6.2cm] () {};
+ \node[invisible, yshift=-5cm] () {};
+ \node[invisible, yshift=0.7cm] () {};
+ 
+ \node[det, fill=black!0, minimum size=25pt] (d) {D} ; %
+ 
+ 
+ 
+ \node[const, left=of d, xshift=-1cm] (cpd_d) {
+ \begin{tabular}{|l|l|}
+ \hline
+ $d^0$ & $d^1$ \\ \hline
+ 0.6 & 0.4  \\ \hline
+ \end{tabular}
+ }; 
+ \node[det, fill=black!0, minimum size=25pt, xshift=2cm] (i) {I};
+ \node[const, right=of i, xshift=1cm] (cpd_i) {
+ \begin{tabular}{|l|l|}
+ \hline
+ $i^0$ & $i^1$ \\ \hline
+ 0.7 & 0.3  \\ \hline
+ \end{tabular}
+ }; 
+ \node[det, fill=black!0, minimum size=25pt, below=of d,xshift=1cm] (r) {R} ;
+ \node[const, left=of r, xshift=-1cm] (cpd_r) {
+ \begin{tabular}{|c|c|c|c|}
+ \hline 
+  & r$^0$ & r$^1$ & r$^2$ \\ \hline 
+ (i$^0$ , d$^0$) & 0.3 & 0.4 & 0.3 \\ \hline
+ (i$^0$ , d$^1$) & 0.05 & 0.25 & 0.7 \\ \hline
+ (i$^1$ , d$^0$) & 0.9 & 0.008 & 0.02 \\ \hline
+ (i$^1$ , d$^1$) & 0.5 & 0.3 & 0.2 \\ \hline
+ \end{tabular}
+ };
+ 
+ 
+ \node[det, fill=black!0, minimum size=25pt, below=of i,xshift=1cm] (t) {T} ;
+ \node[const, right=of t, xshift=1cm] (cpd_t) {
+ \begin{tabular}{|c|c|c|}
+ \hline 
+  & t$^0$ & t$^1$  \\ \hline 
+ i$^0$  & 0.95 & 0.05 \\ \hline
+ i$^1$ & 0.2 & 0.8 \\ \hline
+ \end{tabular}
+ };
+ 
+ 
+ \node[det, fill=black!0, minimum size=25pt, below=of r] (c) {C} ;
+ \node[const, right=of c, xshift=1cm] (cpd_c) {
+ \begin{tabular}{|c|c|c|}
+ \hline 
+  & c$^0$ & c$^1$  \\ \hline 
+ r$^0$  & 0.1 & 0.9 \\ \hline
+ r$^1$ & 0.4 & 0.6 \\ \hline
+ r$^2$ & 0.99 & 0.01 \\ \hline
+ \end{tabular} 
+}; 
+ 
+ \edge {d} {r};
+ \edge {i} {r,t};
+ \edge {r} {c};
+ 
+ }
+ 
+ 
+\end{document}

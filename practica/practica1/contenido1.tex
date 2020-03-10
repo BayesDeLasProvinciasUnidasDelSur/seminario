@@ -1,0 +1,167 @@
+\section{Flujo de inferencia en modelos generativos} \label{sec:flujo}
+
+\subsection{Introducci\'on}
+
+Hemos visto que las reglas \'optimas de razonamiento en contexto de incertidumbre son las llamadas ``reglas de la probabilidad'', la regla de la suma y regla del producto.
+Estas son las \'unicas reglas que necesitamos para actualizar nuestras distribuciones de creencias.
+Pero para eso necesitamos definir nuestro modelo generativo.
+
+Si planteamos un modelo ``causal'' entre las variables para los que tenemos definidas sus distribuciones de creencia a priori, estaremos proponiendo lo que se conoce como modelo generativo.
+El enfoque generativo es el m\'as completo pues permite definir la distribuci\'on de probabilidad conjunta y condicional, generar datos de esa distribuci\'on de probabilidad y separar la etapa de inferencia de la etapa de decisi\'on.
+
+
+
+\tikz{
+    \node[invisible, xshift=8cm] () {};
+    \node[invisible, xshift=-6.5cm] () {};
+    \node[invisible, yshift=-3.5cm] () {};
+    \node[invisible, yshift=2.5cm] () {};
+    
+    
+    \node[det] (r) {$r$} ; %
+    \node[det, above=of r, xshift=-1cm] (d) {$d$} ; %
+    \node[det, above=of r, xshift=1cm] (p) {$p$} ; %
+    \node[det, above=of p] (s) {$s$} ; %
+    \node[det, below=of p, xshift=1cm] (c) {$c$} ; %
+    
+    \node[det, below=of r] (a) {$a$} ; %
+    
+    \node[const, xshift=3.4cm, yshift=1.8cm] (cpd_p) {
+    \begin{tabular}{|l|l|l|}
+        \hline
+            & $p^0$ & $p^1$ \\ \hline
+      $s^0$ & $0.90$ & $0.10$  \\ \hline
+      $s^1$ & $0.50$ & $0.50$ \\ \hline
+    \end{tabular}
+    }; 
+    
+    
+    \node[const, xshift=3cm, yshift=3.4cm] (cpd_s) {
+    \begin{tabular}{|l|l|}
+        \hline
+        $s^0$ & $s^1$ \\ \hline
+        $0.5$ & $0.5$  \\ \hline
+    \end{tabular}
+    }; 
+    
+    
+    \node[const, xshift=-3cm, yshift=1.7cm] (cpd_p) {
+    \begin{tabular}{|l|l|}
+        \hline
+        $d^0$ & $d^1$ \\ \hline
+        $0.15$ & $0.85$  \\ \hline
+    \end{tabular}
+    }; 
+    
+    \node[const, xshift=-3.5cm, yshift=-1cm] (cpd_p) {
+     \begin{tabular}{|c|c|c|c|}
+        \hline 
+        & $r^{-1}$ & $r^0$ & $r^1$ \\ \hline 
+        ($p^0,d^0$) & $0.30$ & $0.40$ & $0.30$ \\ \hline
+        ($p^0,d^1$) & $0.70$ & $0.25$ & $0.05$ \\ \hline
+        ($p^1,d^0$) & $0.02$ & $0.08$ & $0.90$ \\ \hline
+        ($p^1,d^1$) & $0.20$ & $0.30$ & $0.50$ \\ \hline
+    \end{tabular}
+    }; 
+    
+    \node[const, xshift=4.3cm] (cpd_c) {
+    \begin{tabular}{|c|c|c|}
+        \hline 
+              & $c^0$ & $c^1$  \\ \hline 
+        $p^0$ & $0.95$ & $0.05$ \\ \hline
+        $p^1$ & $0.2$ & $0.8$ \\ \hline
+    \end{tabular}
+    }; 
+    
+    
+    \node[const, xshift=2.4cm, yshift=-2cm] (cpd_a) {
+    \begin{tabular}{|c|c|c|}
+        \hline 
+                 & $a^0$ & $a^1$  \\ \hline 
+        $r^{-1}$ & $0.99$ & $0.01$ \\ \hline
+        $r^0$    & $0.40$ & $0.60$ \\ \hline
+        $r^1$    & $0.10$ & $0.90$ \\ \hline
+    \end{tabular} 
+    }; 
+    
+    \edge {d,p} {r};
+    \edge {p} {c};
+    \edge {r} {a};
+    \edge {s} {p};
+ }
+
+\vspace{0.3cm}
+
+Variables del modelo ``entrevista de trabajo'':
+\begin{itemize}
+ \item[$a)$] La \textbf{admisi\'on} al trabajo depende del resultado $r$ de la entrevista
+ \item[$r)$] El \textbf{resultado} depende de la dificultad $d$ de la entrevista y el rendimiento $p$ de la persona
+ \item[$d)$] La \textbf{dificultad} es independiente. La mayor\'ia de las veces es dif\'icil, a veces f\'acil
+ \item[$p)$] El \textbf{rendimiento} depende del nivel socio-econ\'omico $s$
+ \item[$s)$] El \textbf{nivel socio-econ\'omico} de quienes se presentan est\'a dividido en mitades iguales
+ \item[$c)$] \textbf{Informaci\'on externa} que depende del rendimiento, como puede ser la estimaci\'on Elo de habilidad en una p\'agina de juegos en l\'inea
+\end{itemize}
+
+\vspace{0.3cm}
+
+Al definir un modelo gr\'afico estamos definiendo una distribuci\'on de probabilidad conjunta $P(s,d,p,r,c,a)$.
+
+\subsection{Flujos de inferencia} \label{subsec:flujo}
+
+¿Qué pasa con nuestras creencia sobre las diferentes variables ocultas cuando observamos algunas de ellas?
+Si bien podr\'iamos resolver este problema a mano, aplicando las reglas de la suma y del producto, en este primer ejercicio el objetivo es implementar el modelo gr\'afico en alg\'un software que nos permita jugar con los distintos flujos de inferencia y verificar r\'apidamente si la veracidad de la siguiente tabla.
+El objetivo es adquirir intuici\'on respecto de la apertura de los flujos de inferencia en los modelos causales.
+Vamos a decir que existe flujo de inferencia de $X$ hacia $Y$, si $p(Y) \neq p(Y|X)$ o $p(Y) \neq p(Y|X,V)$
+
+\begin{table}[H]
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  S\'i & No \\ 
+ $X \leftarrow V \leftarrow Y $      &  S\'i & No \\ 
+ $X \leftarrow V \rightarrow Y $     &  S\'i & No \\
+ $X \rightarrow V \leftarrow Y $     & $\underbrace{\text{No}}_{\hfrac{\text{\tiny Y ning\'un descendiente}}{ \text{\tiny observable}}}$ &  $\underbrace{\text{S\'i}}_{\hfrac{ \text{\tiny O alg\'un descendiente}}{ \text{\tiny observable}}}$
+ \end{tabular} 
+\end{table}
+
+Pueden utilizar el software de su preferencia.
+Sin embargo, para esta tarea proponemos el software \texttt{samiam} dado que es muy \'util para visualizar el efecto de la evidencia sobre los distribuciones de creencia.
+Lo pueden descargar en \url{http://reasoning.cs.ucla.edu/samiam/} y no requiere permisos especiales.
+
+\vspace{0.3cm}
+
+Si deciden usar el software \texttt{samiam}, en el repositorio hay un archivo con el modelo implementado parcialmente.
+Solamente falta agregar la variable ``nivel socio-econ\'omico'' ($s$), la relaci\'on causal sobre el rendimiento ($p$) y actualizar las distribuci\'on condicionales de ambas variables.
+
+Una vez editado el modelo, pasen a modo ``inferencia'' seleccionando \texttt{Mode>Query Mode}. Abran todas las distribuciones de creencias seleccionando \texttt{Query>Show monitors>Show All} y diviertanse eligiendo observables.
+
+\subsection{Reglas de la suma y el producto} \label{ssec:reglas}
+
+Para entender el motivo por el cual los flujos se abren y se cierran es un buen ejercicio calcular las creencias a priori y a posteriori aplicando a mano las reglas de la suma y el producto.
+La regla de la suma dice que nuestra creencia marginal se puede calcular integrando la distribuci\'on de creencias conjunta.
+
+\begin{equation}
+ P(X) = \sum_Y P(X,Y) 
+\end{equation}
+
+La regla del producto nos dice que la distribuci\'on de creencia conjunta se puede expresar como una multiplicaci\'on de distribuciones creencia unidimensionales.
+
+\begin{equation}
+P(X,Y) = P(Y|X) P(X) 
+\end{equation}
+
+Elija usted las creencia a priori y a posteriori que quiera.
+Si no se le ocurre, le proponemos computar lo siguiente:
+
+\begin{table}[H]
+\centering
+ \begin{tabular}{c c|c}
+          & $V \notin \text{Observable} $ &  $V \in \text{Observable} $ \\
+ $X \rightarrow V \rightarrow Y $    &  $p(a|p)$ & $p(a|p,r)$ \\ 
+ $X \leftarrow V \leftarrow Y $      &  $p(p|a)$ & $p(p|a,r)$ \\ 
+ $X \leftarrow V \rightarrow Y $     &  $p(r|c)$ & $p(r|c,p)$ \\
+ $X \rightarrow V \leftarrow Y $     &  $p(d|p)$ & $p(d|p,a)$
+ \end{tabular} 
+\end{table}
+
+

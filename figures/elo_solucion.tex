@@ -1,0 +1,33 @@
+\documentclass[10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\input{../../../aux/tikzlibrarybayesnet.code.tex}
+\input{../../../aux/encabezado.tex}
+\makeatletter
+\newcommand{\vast}{\bBigg@{2.5}}
+\newcommand{\Vast}{\bBigg@{14.5}}
+\makeatother
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+
+\tikz{ %
+        
+        
+        \node[const] (e) {Estimaci\'on}; 
+
+        \node[const, xshift=3cm] (p) {Predicci\'on}; 
+        
+        \node[const, xshift=1.5cm, yshift=-1cm] (s) {Sorpresa}; 
+        
+         \edge {e} {p};
+         \edge {p} {s};
+         \edge {s} {e};
+         
+         \node[invisible, right=of p, xshift=1.2cm] (s-dist) {};
+} 
+
+
+\end{document}
