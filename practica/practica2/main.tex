@@ -1,0 +1,462 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\input{../../tex/encabezado.tex}
+\input{../../tex/tikzlibrarybayesnet.code.tex}
+
+\usepackage{paracol}
+%opening
+\title{Práctica 1}
+\author{Inferencia}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Modelo lineal Bayesiano} \label{sec:lineal}
+
+\subsection{Introducci\'on}
+
+Cuando hablamos de modelos lineal nos referimos a funciones $\bm{t}= f(\bm{w},\bm{x}) + \epsilon $ que son lineales en sus parámetros $\bm{w}$, no en sus observables $\bm{x}$.
+Utilizando transformaciones no lineales sobre los observables, $\bm{\phi}(\bm{x})$, es posible modelar cualquier tipo de relaci\'on no lineal entre los observables $\bm{x}$ y los no observables $\bm{t}$ mediante funciones lineales en los par\'ametros $\bm{w}$.
+
+\vspace{0.3cm}
+
+El modelo lineal es un modelo generativo. Propone la existencia de una relaci\'on causal $y(\cdot)$ entre una variable de inter\'es (target) $t$ y los vectores de variables observables $\bm{x}$ y no observables $\bm{w}$.
+En t\'erminos generales la relaci\'on causal, $y(\cdot)$ se define como,
+
+\begin{equation}
+y(\bm{x},\bm{w}) = \sum_{i=0}^{M-1} w_i \phi_i(\bm{x}) = \bm{w}^T \bm{\phi}(\bm{x})
+\end{equation}
+ 
+Donde el vector $\bm{\phi}(\vm{x}_1) = ( \phi_0(\bm{x}_1), \, \phi_1(\bm{x}_1) , \, \dots , \, \phi_{M-1}(\bm{x}_1) )^T$ son la $M$ transformaciones no-lineales.
+Notar que cada funci\'on de base $\phi_j(\cdot)$ recibe el vector-input completo $\bm{x}_i$.
+Hoy trabajaremos con una \'unica dimensi\'on, por lo que el vector $\bm{x}_i$ ser\'a simplemente un escalar.
+Aqu\'i usamos la convenci\'on $\phi_0(\bm{x})=1$.
+El modelos lineal m\'as simple es aquel que tambi\'en es lineal en sus variables observables $\bm{x}$.
+En este caso la transformaciones no es m\'as que la identidad $\bm{\phi}(\bm{x})=\bm{x}$.
+
+Adem\'as de la parte estrictamente causal, el modelo lineal considera siempre la existencia de un factor aleatorio $\epsilon$.
+El modelo completo que relaciona la variable de inter\'es $t$ con las variables observables $\bm{x}$ se compone de ambos t\'erminos.
+
+\begin{equation}
+ t = y(\vm{x},\vm{w}) + \epsilon
+\end{equation}
+ 
+El ruido aleatorio $\epsilon$ lo vamos a modelar proviniendo de una distribuci\'on Gaussiana, centrada en cero y precisi\'on (inversa de la varianza) $\beta$, $\epsilon \sim N(0,\beta^{-1})$.
+\footnote{Una pregunta que surge naturalmente es plantearse si las decisiones que tomamos para modelar la relaciones entre variables es la correcta.En este punto no hay que perder de vista que los modelos no son m\'as que representaciones de la realidad, as\'i como los mapas no son el territorio.
+Esto no significa que sean todas igualmente falsas y desechables.
+Hay representaciones mejores que otras.
+Y la inferencia Bayesiana prove\'e una forma de computar la creencias \'optimas sobre los modelos dada la evidencia.
+Entonces terminemos de desarrollar la estructura de la familia de modelos lineales y dejemos la selecci\'on de modelos para despu\'es.}
+
+Dado que tenemos una sola componente determinista $y(\cdot)$ y una sola componente aleatorio $\epsilon$, el modelo generativo de las variables de inter\'es $t$ es,
+\begin{equation}
+P(t | \bm{x}, \bm{w}, \beta) = \N(t | y(\bm{x},\bm{w}), \beta^{-1}) = \N(t | \bm{w}^T \bm{\phi}(\bm{x}) , \beta^{-1})
+\end{equation}
+
+% Planteado en t\'etminos gr\'aficos,
+% 
+% \begin{figure}[H]
+%     \centering
+%     \tikz{
+% 
+%     \node[latent, fill=black!100, minimum size=2pt] (x) {} ; %
+%     \node[const, right=of x] (c_x) {$\vm{x}$};
+%     \node[latent, fill=black!20, yshift=-1.5cm] (t) {$t$} ; %
+%     \node[latent, fill=black!100, yshift=-1.5cm , xshift=-2cm,minimum size=2pt] (beta)
+%     {} ; %
+%     \node[const, above=of beta] (c_beta) {$\beta$};
+%     \node[latent, fill=black!0, yshift=-1.5cm, xshift=2cm] (w) {$\vm{w}$};
+%     \node[latent, fill=black!100, xshift=2cm, minimum size=2pt] (alpha) {} ; %
+%     \node[const, right=of alpha] (c_alpha) {$\alpha$};
+%     
+%     \edge {x,beta,w} {t};
+%     \edge {alpha} {w};
+%     
+%     \node[invisible, fill=black!0, minimum size=0pt, xshift=-0.52cm] (data_inv) {} ; %
+%       
+%     }  
+% \end{figure}
+% 
+
+Generalmente se supone que las variables de inter\'es $t$ son independiente e id\'enticamente distribuida, por lo que la probabilidad conjunta de un vector de variables de inter\'es $\bm{t}$ se obtiene como la multiplicaci\'on de cada uno de los t\'erminos individuales
+
+\begin{equation}
+P(\bm{t} | \bm{x}, \bm{w}, \beta) = \prod_{i=1}^n \N(t_i | \bm{w}^T \bm{\phi}(\bm{x}_i) , \beta^{-1})
+\end{equation}
+
+% En t\'erminos gr\'aficos
+% 
+% 
+% \begin{figure}[H]
+%     \centering
+%     \tikz{
+% 
+%     \node[latent, fill=black!100, minimum size=2pt] (x) {} ; %
+%     \node[const, right=of x] (c_x) {$\vm{x}_n$};
+%     \node[latent, fill=black!20, yshift=-1.5cm] (t) {$t_n$} ; %
+%     \node[latent, fill=black!100, yshift=-1.5cm , xshift=-2cm,minimum size=2pt] (beta)
+%     {} ; %
+%     \node[const, above=of beta] (c_beta) {$\beta$};
+%     \node[latent, fill=black!0, yshift=-1.5cm, xshift=2cm] (w) {$\vm{w}$};
+%     \node[latent, fill=black!100, xshift=2cm, minimum size=2pt] (alpha) {} ; %
+%     \node[const, right=of alpha] (c_alpha) {$\alpha$};
+%     
+%     \edge {x,beta,w} {t};
+%     \edge {alpha} {w};
+%     
+%     \node[invisible, fill=black!0, minimum size=0pt, xshift=-0.52cm] (data_inv) {} ; %
+%     \plate {data} {(t)(x)(c_x)(data_inv)} {$N$}; %
+%       
+%     }  
+% \end{figure}
+
+Tambi\'en podemos representar $N$ distribuciones Gaussianas independientes a trav\'es de una \'unica distribuci\'on Gaussiana multivariada, en la que la matriz de covarianzas solo tiene valores no nulos en la diagonal.
+
+\begin{equation}
+P(\bm{t} | \bm{x}, \bm{w}, \beta) = \prod_{i=1}^n \N(t_i | \bm{w}^T \bm{\phi}(\bm{x}_i) , \beta^{-1}) = \N(\bm{t}|\bm{w}^T \bm{\Phi}, \beta^{-1} \vm{I})
+\end{equation}
+
+Donde $\vm{I}$ es la matriz identidad y $\bm{\Phi}$ se la matriz de diseño
+
+\begin{equation}
+ \bm{\Phi} =
+  \begin{pmatrix}
+    \phi_0(\bm{x}_1) & \phi_1(\bm{x}_1) & \dots & \phi_{M-1}(\bm{x}_1)\\
+    \vdots & \vdots & \ddots & \vdots \\
+    \phi_0(\bm{x}_N) & \phi_1(\bm{x}_N) & \dots & \phi_{M-1}(\bm{x}_N)
+  \end{pmatrix}
+  = 
+  \begin{pmatrix}
+   \bm{\phi}(\vm{x}_1)^T \\
+   \vdots \\
+   \bm{\phi}(\vm{x}_N)^T \\
+  \end{pmatrix}
+\end{equation}
+
+
+\subsubsection{Estimaci\'on cl\'asica}
+
+La soluci\'on cl\'asica, o frecuentista, elige los par\'ametros $\bm{w}$ que tienen máxima verosimilitud.
+
+\begin{equation}
+ \bm{w}_\text{MV} = \underset{\bm{w}}{\text{ max }} p(\bm{t} | \bm{x}, \bm{w}, \beta)
+\end{equation}
+
+Los par\'ametros $\bm{w}$ que minimizan la distancia entre la curva $\bm{w}^T\bm{\phi}(\bm{x}_i)$ y los datos $\bm{t}$ son los que tienen mayor verosimilitud (demostraci\'on en el anexo).
+
+\begin{equation}
+ \underset{\bm{w}}{\text{ max }} P(\bm{t} | \bm{x}, \bm{w}, \beta) = \underset{\bm{w}}{\text{ min }} \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2 
+\end{equation}
+
+Aumentar la flexibilidad de la curvas $\bm{w}^T\bm{\phi}(\bm{x}_i)$ a trav\'es de modelos m\'as complejos, e.g. aumentando el grado de los modelos polinomiales, siempre permite reducir la distancia a los datos.
+Este enfoque conduce a un problema conocido como over-fitting (o sobreajuste).
+Las estrategias comunes para evitar el sobreajuste son, o agregar a la verosimilitud t\'erminos ad-hoc que penalicen la complejidad del modelo, o evaluando la verosimilitud en conjuntos de datos de validaci\'on distintos a los de entrenamiento.
+
+\subsubsection{Estimaci\'on Bayesiana}
+
+Aqu\'i veremos como un tratamiento Bayesiano de la regresi\'on linea no solo evita el over-fitting que surge del criterio de estimaci\'on puntual basado en m\'axima verosimilitud, sino que ofrece una forma natural para seleccionar la complejidad del modelo usando tan solo los datos de entrenamiento.
+
+\vspace{0.3cm}
+
+Antes de computar nuestra distribuci\'on de creencias a posteriori sobre los par\'ametros $\bm{w}$ es necesario definir la distribuci\'on de creencias a priori.
+
+\begin{equation}
+ p(\vm{w}) = N(\vm{w}| \vm{0}, \alpha^{-1} \vm{I})
+\end{equation}
+
+Dada la elecci\'on de una distribuci\'on Gaussiana a priori, la distribuci\'on a posteriori tambi\'en ser\'a Gaussiana.
+Esto surge de derivar de completar los cuadrados en el exponente y encontrar luego el coeficiente de normalizaci\'on.
+El resultado general se encuentra en la ecuaci\'on (\ref{eq:post}) y es lo \'unico que se necesita para derivar la posteriori y la evidencia.
+La distribuci\'on posteriori sobre $\vm{w}$ tiene como media
+
+\begin{equation}
+ \vm{m}_N = \beta  \vm{S}_N\vm{\Phi}^T \vm{t}
+\end{equation}
+
+y como covarianzas
+
+\begin{equation}
+ \vm{S}_N^{-1} = \alpha \vm{I} + \beta \vm{\Phi}^T\vm{\Phi}
+\end{equation}
+
+Esta soluci\'on anal\'itica considera a $\beta$ como constante conocida.
+Y como en los problemas de regresi\'on no buscamos inferir la distribuci\'on del vector de entrada $\vm{x}$, este t\'ermino tambi\'en lo podemos tratar como constante conocida.
+Luego, el modelo gr\'aficos es, 
+
+\begin{figure}[H]
+    \centering
+    \tikz{
+
+    \node[latent, fill=black!100, minimum size=2pt] (x) {} ; %
+    \node[const, right=of x] (c_x) {$\vm{X}$};
+    \node[latent, fill=black!20, yshift=-1.5cm] (t) {$\bm{t}$} ; %
+    \node[latent, fill=black!100, yshift=-1.5cm , xshift=-2cm,minimum size=2pt] (beta)
+    {} ; %
+    \node[const, above=of beta] (c_beta) {$\beta$};
+    \node[latent, fill=black!0, yshift=-1.5cm, xshift=2cm] (w) {$\vm{w}$};
+    \node[latent, fill=black!100, xshift=2cm, minimum size=2pt] (alpha) {} ; %
+    \node[const, right=of alpha] (c_alpha) {$\alpha$};
+    
+    \edge {x,beta,w} {t};
+    \edge {alpha} {w};
+    
+    \node[invisible, fill=black!0, minimum size=0pt, xshift=-0.52cm] (data_inv) {} ; %
+      
+    }  
+\end{figure}
+
+Y la evidencia del modelo es
+
+\begin{equation}
+ P(t) = \N(\bm{t}| \vm{0}, \beta^{-1} \vm{I} + \alpha^{-1}\bm{\Phi}\bm{\Phi}^T  )
+\end{equation}
+
+A modo de visualizaci\'on, mostramos que ocurre con las creencias sobre la ordenada al origen y la pendiente de un modelo lineal a medida que van llegando datos.
+
+ \begin{figure}[H]
+\begin{subfigure}[t]{0.32\textwidth} 
+\caption*{Verosimilitud} 
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+\caption*{Priori/Posteriori} 
+\includegraphics[width=\textwidth]{../../figures/linearRegression_posterior_0.pdf} 
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+\caption*{Espacio de datos} 
+\includegraphics[width=\textwidth]{../../figures/linearRegression_dataSpace_0.pdf} 
+\end{subfigure}
+
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_likelihood_1.pdf} 
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_posterior_1.pdf} 
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_dataSpace_1.pdf} 
+\end{subfigure}
+
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_likelihood_2.pdf} 
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_posterior_2.pdf} 
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_dataSpace_2.pdf} 
+\end{subfigure}
+\end{figure}
+
+\subsection{Selecci\'on de modelo}\label{ssec:seleccion}
+
+Cada vez que resolvemos a un problema de regresi\'on tenemos muchos modelos alternativos que podr\'iamos usar.
+Para decidir sobre los distintos modelos, siempre es buena idea pensar en t\'erminos Bayesianos.
+En este caso podemos computar cu\'al es nuestra distribuci\'on de creencias sobre los modelos dados los datos.
+
+\begin{equation*}
+ P(\text{M}|\text{D}) = \frac{P(\text{D}|\text{M})P(\text{M})}{ P(\text{D})}
+\end{equation*}
+
+En este caso no es posible calcular el denominador $P(\text{D})$, pero al comparar modelos este t\'ermino se cancela.
+
+\begin{equation*}
+  \frac{P(\text{M}_i|\text{D})}{P(\text{M}_j|\text{D})}  = \frac{P(\text{D}|\text{M}_i)\,P(\text{M}_i)}{ \underbrace{P(\text{D}|\text{M}_j)}_{\text{Evidencia!}}P(\text{M}_j)}  
+\end{equation*}
+
+Para comparar modelos solo necesitamos la predicci\'on a priori de los datos observados, es decir, su evidencia.
+La predicci\'on a priori, al ser una distribuci\'on de probabilidad que integrar 1, sufre una penalizaci\'on natural a medida que se le agregan dimensiones a los modelos.
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.6\textwidth]{../../figures/evidencia_de_modelos_alternativos} 
+\end{figure}
+
+Para verificar la utilidad de la evidencia (predicci\'on a priori de los datos observados), les proponemos realizar el siguiente experimento.
+
+\begin{itemize}
+  \item Generar datos de una sinoidal en el intervalo $[-0.5,0.5]$ con mucha precisi\'on $\beta^{-1} =25$
+ \item Ajustar regresiones polinomiales de grado 0 hasta 9 con mucha incertidumbre a priori, ejemplo precisi\'on $\alpha^{-1}=10^-{7}$
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+ \includegraphics[width=0.48\textwidth]{../../figures/model_selection_true_and_sample} 
+ \includegraphics[width=0.48\textwidth]{../../figures/model_selection_MAP} 
+\end{figure}
+
+Luego,
+
+\begin{itemize}
+ \item Seleccionar modelo basado en la evidencia
+ \item Comparar el comportamiento de la evidencia respecto al de m\'axima verosimilitud
+\end{itemize}
+
+\begin{figure}[H]     
+     \centering 
+     \begin{subfigure}[b]{0.47\textwidth}
+       \includegraphics[width=1\textwidth]{../../figures/model_selection_evidence}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.49\textwidth}
+       \includegraphics[width=1\textwidth]{../../figures/model_selection_maxLikelihood}
+     \end{subfigure}
+\end{figure}
+
+
+\subsection{La base de los algoritmos}\label{ssec:gaussiana}
+
+La regresi\'on lineal mediante transformaciones no lineales se encuentra en la base de los algoritmos m\'as importantes del \'area de aprendizaje autom\'atico e inteligencia artificial, lo cuales pueden clasificarse del siguiente modo:
+\begin{enumerate}
+ \setlength\itemsep{-1mm}
+ \item basadas en transformaciones no lineales fijas
+ \item basadas en transformaciones no lineales adaptativas
+ \item basadas en una jerarqu\'ia de transformaciones no lineales adaptativas
+\end{enumerate}
+
+Las redes neuronales profundas son un ejemplo de regresiones lineales basadas en una jerarqu\'ia de transformaciones adaptativas.
+Comprender en profundidad la regresi\'on lineal b\'asica, aquella basada en transformaciones fijas, es de gran ayuda para comprender aspectos que surgen en los algoritmos de aprendizaje autom\'atico e inteligencia artificial.
+
+\vspace{0.3cm}
+
+Cuando estos modelos son instanciados con distribuciones Gaussianas multivariada, se tiene la siguiente propiedad\footnote{Para ver c\'omo se llega a este resultado, leer el cap\'itulo 2 del libro de Bishop ``Pattern Recognition and Machine Learning''}
+ 
+\begin{framed}
+Dado una distirbuci\'on Gaussiana marginal $p(\vm{x})$ y una distribuci\'on Gaussiana condicional en donde $P(\vm{y}|\vm{x})$ tiene como media una funci\'on lineal sobre $\vm{x}$.
+\begin{align}
+    P(\vm{x}) &=  \N(\vm{x}|\bm{\mu},\bm{\Lambda}^{-1}) \\
+   P(\vm{y}|\vm{x}) &=  \N(\vm{y}|\vm{A}\vm{x}+\vm{b},\vm{L}^{-1})    
+\end{align}
+
+
+ Luego,  
+\begin{align}
+    P(\vm{y}) &=  \N(\vm{y}|\vm{A}\bm{\mu}+\vm{b},\, \vm{L}^{-1} + \vm{A}\vm{\Lambda}^{-1}\vm{A}^T) \\
+   P(\vm{x}|\vm{y}) &=  \N(\vm{x}|\vm{\Sigma}[\vm{A}^T \vm{L}(\vm{y}-\vm{b})+ \bm{\Lambda\mu}],\,  \vm{\Sigma})\label{eq:post}
+\end{align}
+
+donde, 
+\begin{equation}
+ \vm{\Sigma} = (\vm{\Lambda} + \vm{A}^T \vm{LA} )^{-1}
+\end{equation}
+\end{framed}
+
+
+\vspace{0.3cm}
+
+Utilicen este resultado para derivar la evidencia y la posteriori del modelo lineal Bayesiano.
+
+\newpage
+
+
+\section{Anexo}
+
+\subsection{M\'axima verosimilitud}
+
+\begin{equation}\label{eq:maximum_likelihood}
+ \begin{split}
+   \text{log } p(\bm{t} | \bm{x}, \bm{w}, \beta) & = \sum_{i=1}^{n} \text{log } N(t_i | \bm{w}^T \bm{\phi}(\bm{x}_i), \sigma)  \\
+  & =  \sum_{i=1}^{n} \text{log }  \frac{\sqrt{\beta} }{\sqrt{2\pi}} e^{\frac{-(t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2}{2\beta^{-1}} } = \sum_{i=1}^{n} \text{log } \frac{\sqrt{\beta} }{\sqrt{2\pi}} + \sum_{i=1}^{n} \text{log } e^{\frac{-(t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2}{2\beta^{-1}} } \\
+  & = n \text{log } \frac{\sqrt{\beta} }{\sqrt{2\pi}} + \sum_{i=1}^{n} \text{log } e^{\frac{-(t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2}{2\beta^{-1}} } = n \text{log } \frac{\sqrt{\beta} }{\sqrt{2\pi}} + \sum_{i=1}^{n}  \frac{-(t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2}{2\beta^{-1}} \\
+   &  = n \text{ log } \sqrt{\beta} - n \text{ log } \sqrt{2\pi} - \frac{\beta}{2} \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2   \\
+  & \propto  - \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2 
+ \end{split}
+\end{equation}
+
+\subsection{Multiplicaci\'on de normales}\label{multiplicacion_normales}
+
+Luego, el problema que tenemos que resolver es
+\begin{equation}
+ \int N(x;\mu_1,\sigma_1^2)N(x;\mu_2,\sigma_2^2) dx
+\end{equation}
+
+Por defnici\'on,
+\begin{equation}
+\begin{split}
+ N(x;y,\beta^2)N(x;\mu,\sigma^2) & = \frac{1}{\sqrt{2\pi}\sigma_1}e^{-\frac{(x-\mu_1)^2}{2\sigma_1^2}} \frac{1}{\sqrt{2\pi}\sigma_2}e^{-\frac{(x-\mu_2)^2}{2\sigma_2^2}}  \\
+ & = \frac{1}{2\pi\sigma_1\sigma_2}\text{exp}\Bigg(-\underbrace{\left( \frac{(x-\mu_1)^2}{2\sigma_1^2} + \frac{(x-\mu_2)^2}{2\sigma_2^2} \right)}_{\theta} \Bigg)
+\end{split}
+\end{equation}
+
+Luego,
+\begin{equation}
+ \theta = \frac{\sigma_2^2(x^2 + \mu_1^2 - 2x\mu_1) + \sigma_1^2(x^2 + \mu_2^2 - 2x\mu_2) }{2\sigma_1^2\sigma_2^2}
+\end{equation}
+
+Expando y reordeno los factores por potencias de $x$
+\begin{equation}
+ \frac{(\sigma_1^2 + \sigma_2^2) x^2 - (2\mu_1\sigma_2^2 + 2\mu_2\sigma_1^2) x + (\mu_1^2\sigma_2^2 + \mu_2^2\sigma_1^2)}{2\sigma_1^2\sigma_2^2}
+\end{equation}
+
+Divido al numerador y el denominador por el factor de $x^2$
+\begin{equation}
+ \frac{x^2 - 2\frac{(\mu_1\sigma_2^2 + \mu_2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) } x + \frac{(\mu_1^2\sigma_2^2 + \mu_2^2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) }}{2\frac{\sigma_1^2\sigma_2^2}{(\sigma_1^2 + \sigma_2^2)}}
+\end{equation}
+
+Esta ecuaci\'on es cuadr\'atica en x, y por lo tanto es proporcional a una funci\'on de densidad gausiana con desv\'io
+\begin{equation}
+\sigma_{\times} = \sqrt{\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}}  
+\end{equation}
+
+y media
+\begin{equation}
+ \mu_{\times} = \frac{(\mu_1\sigma_2^2 + \mu_2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) }
+\end{equation}
+
+Dado que un t\'ermino $\varepsilon = 0$ puede ser agregado para completar el cuadrado en $\theta$, esta prueba es suficiente cuando no se necesita una normalizaci\'on.
+Sea, 
+\begin{equation}
+ \varepsilon = \frac{\mu_{\times}^2-\mu_{\times}^2}{2\sigma_{\times}^2} = 0
+\end{equation}
+
+Al agregar este t\'ermino a $\theta$ tenemos
+\begin{equation}
+ \theta = \frac{x^2 - 2\mu_{\times}x + \mu_{\times}^2 }{2\sigma_{\times}^2} + \underbrace{\frac{ \frac{(\mu_1^2\sigma_2^2 + \mu_2^2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) } - \mu_{\times}^2}{2\sigma_{\times}^2}}_{\varphi}
+\end{equation}
+
+Reorganizando el t\'ermino $\varphi$
+\begin{equation}
+\begin{split}
+\varphi & = \frac{\frac{(\mu_1^2\sigma_2^2 + \mu_2^2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) } - \left(\frac{(\mu_1\sigma_2^2 + \mu_2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) }\right)^2 }{2\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}}  \\
+& = \frac{(\sigma_1^2 + \sigma_2^2)(\mu_1^2\sigma_2^2 + \mu_2^2\sigma_1^2) - (\mu_1\sigma_2^2 + \mu_2\sigma_1^2)^2}{\sigma_1^2 + \sigma_2^2}\frac{1}{2\sigma_1^2\sigma_2^2} \\[0.3cm]
+& = \frac{(\mu_1^2\sigma_1^2\sigma_2^2 + \cancel{\mu_2^2\sigma_1^4} + \bcancel{\mu_1^2\sigma_2^4} + \mu_2^2\sigma_1^2\sigma_2^2) - (\bcancel{\mu_1^2\sigma_2^4} + 2\mu_1\mu_2\sigma_1^2\sigma_2^2 + \cancel{\mu_2^2\sigma_1^4} )}{\sigma_1^2 + \sigma_2^2}  \frac{1}{2\sigma_1^2\sigma_2^2} \\[0.3cm] 
+& = \frac{(\sigma_1^2\sigma_2^2)(\mu_1^2 + \mu_2^2 - 2\mu_1\mu_2)}{\sigma_1^2 + \sigma_2^2}\frac{1}{2\sigma_1^2\sigma_2^2} = \frac{\mu_1^2 + \mu_2^2 - 2\mu_1\mu_2}{2(\sigma_1^2 + \sigma_2^2)} = \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)}
+\end{split}
+\end{equation}
+
+Luego,
+\begin{equation}
+ \theta = \frac{(x-\mu_{\times})^2}{2\sigma_{\times}^2} + \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)} 
+\end{equation}
+
+Colocando esta forma de $\theta$ en su lugar
+\begin{equation}
+\begin{split}
+ N(x;y,\beta^2)N(x;\mu,\sigma^2) & = \frac{1}{2\pi\sigma_1\sigma_2}\text{exp}\Bigg(-\underbrace{\left( \frac{(x-\mu_{\times})^2}{2\sigma_{\times}^2} + \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)} \right)}_{\theta} \Bigg) \\
+ & = \frac{1}{2\pi\sigma_1\sigma_2}\text{exp}\left(  - \frac{(x-\mu_{\times})^2}{2\sigma_{\times}^2} \right) \text{exp} \left( - \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)} \right) 
+\end{split}
+\end{equation}
+
+Multiplicando por $\sigma_{\times}\sigma_{\times}^{-1}$
+\begin{equation}
+\overbrace{\frac{\cancel{\sigma_1\sigma_2}}{\sqrt{\sigma_1^2+\sigma_2^2}}}^{\sigma_{\times}} \frac{1}{\sigma_{\times}} \frac{1}{2\pi\cancel{\sigma_1\sigma_2}}\text{exp}\left(  - \frac{(x-\mu_{\times})^2}{2\sigma_{\times}^2} \right) \text{exp} \left( - \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)} \right)
+\end{equation}
+
+Luego,
+\begin{equation}
+ \frac{1}{\sqrt{2\pi}\sigma_{\times}}\text{exp}\left(  - \frac{(x-\mu_{\times})^2}{2\sigma_{\times}^2} \right) \frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}} \text{exp} \left( - \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)} \right)
+\end{equation}
+
+Retonando a la integral
+\begin{equation}
+\begin{split}
+I & = \int N(x;\mu_{\times},\sigma_{\times}^2) \overbrace{N(\mu_1;\mu_2,\sigma_1^2 + \sigma_2^2)}^{\text{Escalar independiente de x}} dx \\[0.3cm]
+& = N(\mu_1;\mu_2,\sigma_1^2 + \sigma_2^2) \underbrace{\int N(x,\mu_{\times},\sigma_{\times}^2)  dx}_{\text{Integra 1}} \\
+& = N(\mu_1;\mu_2,\sigma_1^2 + \sigma_2^2)
+\end{split}
+\end{equation}
+
+
+
+
+\end{document}

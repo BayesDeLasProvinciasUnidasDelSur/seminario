@@ -152,7 +152,7 @@ plt.plot(X,t,'.', color='black')
 plt.savefig("model_selection_MAP.pdf",bbox_inches='tight')
 plt.close()    
 
-
+"""
 i=16
 belief = np.zeros((len(y_grilla),len(X_grilla),10))
 for d in range(10):#d=1
@@ -172,4 +172,4 @@ plt.plot(y_grilla,np.flip(belief[:,0,3]))
 plt.plot(y_grilla,np.flip(belief[:,0,9]))
 plt.savefig("model_selection_evidence_3_9_at_0.pdf",bbox_inches='tight')
 plt.close()    
-
+"""

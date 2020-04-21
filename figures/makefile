@@ -3,12 +3,15 @@
 ## /usr/bin/Rscript ##
 ######################
 
-all:
+all: R tex python
+
+R:
 	/usr/bin/Rscript main.R
 	rm Rplots.pdf
-	for i in *.tex; do pdflatex $i;done
+
+tex:
+	for i in $(shell ls *.tex); do pdflatex $$i;done
 
 python:
-	/usr/bin/python3 linearRegression.py
-	/usr/bin/python3 model_selection.py
+	for i in $(shell ls *.py); do python3 $$i;done
 
