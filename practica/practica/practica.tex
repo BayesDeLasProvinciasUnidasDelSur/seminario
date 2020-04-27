@@ -1,0 +1,43 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\input{../../aux/tex/encabezado.tex}
+\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+
+\usepackage{paracol}
+%opening
+\title{Pr\'actica}
+\author{Buenos Bayes}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+ Este documento tiene por objetivo servir de herramienta para introducirse en inferencia Bayesiana mediante problemas t\'ipicos, de dificultad variable, en sus aspectos pr\'acticos y te\'oricos.
+\end{abstract}
+
+\tableofcontents 
+
+%  \item \textbf{Habilidad en la industria del video juego} (Secci\'on \ref{sec:trueskill})
+%  \begin{enumerate}
+%   \item \textbf{Implementar} una estimaci\'on de habilidad sobre jugadores en el lenguaje de programci\'on de su preferencia (Subsecci\'on \ref{ssec:estimacion})
+%   \begin{enumerate}[i]
+%   \item Utilizar la librer\'ia TrueSkill de python o la respectiva a su lenguaje de programaci\'on
+%   \item Simular un jugador con oponentes al azar utilizando el modelo generativo
+%   \item Estimar la habilidad del jugador, considerando conocidos a los opnentes, $\sigma=1$
+%   \item Repetir el punto ii y iii, y observar como var\'ian las observaciones 
+%  \end{enumerate}
+%   \item \textbf{Derivar} la verosimilitud, la evidencia y la posterior del modelo TrueSkill usando el sum-product algorithm sobre su factor graph (Subsecci\'on \ref{ssec:sum_product})
+%  \end{enumerate} 
+% \end{enumerate}
+% \end{enumerate}
+
+\newpage
+\input{../practica1/contenido1.tex}
+\newpage
+\input{../practica2/regresionLinealSeleccion.tex}
+\newpage
+\input{../anexo/anexo.tex}
+
+
+\end{document}
