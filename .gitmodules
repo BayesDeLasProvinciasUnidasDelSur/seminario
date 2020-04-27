@@ -1,6 +1,6 @@
-[submodule "tex"]
-	path = tex
-	url = git@github.com:glandfried/tex.git
 [submodule "images"]
 	path = images
 	url = git@github.com:glandfried/images.git
+[submodule "biblio"]
+	path = biblio
+	url = git@github.com:bayesbuenosaires/biblio.git
