@@ -48,6 +48,7 @@ text(D[mid]+110,h, expression(mu[1]-mu[2]>0), col = 1, cex=2.1)
 #######################################
 # end 
 dev.off()
+system(paste("pdfcrop -m '0 0 0 0'",paste0(nombre,".pdf") ,paste0(nombre,".pdf")))
 setwd(oldwd)
 par(oldpar, new=F)
 #########################################

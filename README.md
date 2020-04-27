@@ -13,4 +13,10 @@ Las reuniones son a través de Discord .
 | 3 | Modelos gráficos y sum-product algorithm | Landfried  | estimado 12/05/2020  | Discord |  |
 | 4 | Sum-product algorithm  y estimación de habilidad  |  Landfried | estimado 26/05/2020 | Discord  | |
 | 5 | Estimación de habilidad, expectation propagation |  Landfried | estimado 09/06/2020 | Discord | | 
+|...|...|...|...|...|...| 
+|-|...|...|...|...|...| 
+
+## Bibliografía
+0. 
+
 
