@@ -1,3 +1,9 @@
 [submodule "aux/static"]
 	path = aux/static
 	url = git@github.com:bayesbuenosaires/static.git
+[submodule "aux/tex"]
+	path = aux/tex
+	url = git@github.com:bayesbuenosaires/tex.git
+[submodule "aux/biblio"]
+	path = aux/biblio
+	url = git@github.com:bayesbuenosaires/biblio.git
