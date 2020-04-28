@@ -1,8 +1,3 @@
-######################
-## R requirements   ##
-## /usr/bin/Rscript ##
-######################
-
 all: R tex python
 
 R:
