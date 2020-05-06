@@ -31,6 +31,6 @@ Las reuniones son a través de Discord .
 
 
 ## Bibliografía
-0. 
+0. [Bayesian optimization](https://distill.pub/2020/bayesian-optimization/) 
 
 
