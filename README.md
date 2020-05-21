@@ -33,6 +33,7 @@ Books:
 0. Pearl. [Causal Inference in Statistics: A premier](http://gen.lib.rus.ec/)
 
 Papers:
+
 0. [Constructing a logic of plausible inference: a guide to Cox's theorem](https://www.sciencedirect.com/science/article/pii/S0888613X03000513)
 0. [Factor Graphs and the Sum-product algorithm](https://ieeexplore.ieee.org/document/910572)
 0. [TrueSkill: A Bayesian Skill Rating System](https://papers.nips.cc/paper/3079-trueskilltm-a-bayesian-skill-rating-system)
