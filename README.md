@@ -46,4 +46,9 @@ Papers:
 
 Blogs:
 
-0. [Bayesian optimization](https://distill.pub/2020/bayesian-optimization/) 
+0. [Bayesian optimization](https://distill.pub/2020/bayesian-optimization/)
+
+Tools:
+
+0. [Gaussain process with pytroch](https://gpytorch.ai/)
+ 
