@@ -1,305 +1,327 @@
-\documentclass[shownotes]{beamer}
+\documentclass[shownotes,aspectratio=169]{beamer}
 \input{../../aux/tex/diapo_encabezado.tex}
 \input{../../aux/tex/tikzlibrarybayesnet.code.tex}
-
-\mode<presentation>
-{
-%   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
-%   \usecolortheme{default} % or try albatross, beaver, crane, ...
-%   \usefonttheme{default}  % or try serif, structurebold, ...
- \usetheme{Antibes}
- \usecolortheme[rgb={0.6,0.75,0}]{structure}%divido los RGB por 252
- \setbeamercolor{block title}{fg=white,bg=azuluca}
- \xdefinecolor{azuluca}{rgb}{0.02, 0.2, 0.18}
- \definecolor{greenblue}{rgb}{0.1, 0.55, 0.5}
-
- \setbeamercolor{palette quaternary}{fg=white,bg=azuluca}
- \setbeamertemplate{caption}[numbered]
- \setbeamercolor{item projected}{bg=black}
- \setbeamertemplate{enumerate items}[default]
- \setbeamertemplate{navigation symbols}{}
- %\setbeamercovered{transparent}
- \setbeamercolor{block title}{fg=black}
- \setbeamercolor{local structure}{fg=black}
-
-}
-
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
 \usepackage{todonotes}
 \setbeameroption{show notes}
 
-\title[Inferencia variacional]{Inferencia variacional}
-
-\institute[Bayes del sur]{\includegraphics[width=0.85\textwidth]{../../aux/static/peligro_predador}}
-
-\date{\today}
+%\title[Bayes del Sur]{}
 
 \begin{document}
 
+ \color{black!85}
+
 \small
+\setbeamercolor{background canvas}{bg=gray!18}
 
-\begin{frame}[noframenumbering]
+\begin{frame}[plain,noframenumbering]
  
- %\vspace{2cm}
-\maketitle
- \end{frame}
- 
-\section{Problema}
- 
-\begin{frame}
-\begin{textblock}{128}(0,8)
+ \begin{textblock}{80}(0,0)
 \begin{center}
- \large Enfoque Bayesiano
+ \huge  \textcolor{black!66}{Logia Bayesiana de las \\ Provincias Unidas del Sud}
 \end{center}
 \end{textblock}
-\vspace{1cm}
-Dado un modelo,
-\begin{equation*}
- p(x, \theta) = p(x | \theta) p(\theta)
-\end{equation*}
 
-\vspace{0.25cm}
-\pause
-\begin{center}
- Queremos calcular
-\end{center}
-
-$\bullet$ La posterior: 
-\begin{equation*}
- p(\theta|x) = \frac{p(x | \theta) p(\theta)}{p(x)}
-\end{equation*}
-
-% $\bullet$ La evidencia: 
-% \begin{equation*}
-%  p(x) = \int p(x | \theta) p(\theta) d\theta
-% \end{equation*}
-% 
-% $\bullet$ La predicci\'on: 
-% \begin{equation*}
-%  p(\tilde{x}|x) = \int p(\tilde{x} | \theta, x) p(\theta, x) d\theta
-% \end{equation*}
-% 
-
-
-
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+}
 \end{frame}
 
-\subsection{Aproximaciones}
-
-\begin{frame}
-\begin{textblock}{128}(0,8)
-\begin{center}
- \large Aproximaciones
-\end{center}
-\end{textblock}
-
-
-\begin{columns}[t]
-\begin{column}{0.5\textwidth}
- \centering \textbf{Inferencia variacional}
- 
-\begin{itemize}
-  \item[$\circ$] Sesgado
-  \item[$\circ$] R\'apido y escalable
- \end{itemize}
-
- 
- \end{column}
- \begin{column}{0.5\textwidth}
-\centering  \textbf{Cadenas de Markov}
-
-\begin{itemize}
-  \item[$\circ$] No sesgado
-  \item[$\circ$] Lento y no escalable
- \end{itemize}
-
-\end{column}
-\end{columns}
-
-
-\end{frame}
- 
-\section{Inferencia variacional}
-
-\begin{frame}
-\begin{textblock}{128}(0,8)
-\begin{center}
- \large Inferencia variacional
-\end{center}
-\end{textblock}
-
-Encontrar la mejor aproximaci\'on a la posterior
-
-\begin{equation*}
- p(\theta|x) \approx q(\theta)
-\end{equation*}
-
-\vspace{0.3cm}
-Que minimice una distancia $D$
-\begin{equation*}
- q(\theta) = \underset{q \in \mathcal{Q}}{\text{arg min}} \ \ D(q(\theta) \ || \ p(\theta|x))
-\end{equation*}
-\end{frame}
- 
-\begin{frame}
-\begin{textblock}{128}(0,8)
-\begin{center}
- \large Solcuiones
-\end{center}
-\end{textblock}
-
-$\bullet$ \textbf{Variational Bayes}
-
-\begin{equation*}
- q(\theta) = \underset{q \in \mathcal{Q}}{\text{arg min}} \ \ \text{KL}(q(\theta) \ || \ p(\theta|x))
-\end{equation*}
-
-\pause
+\begin{frame}[plain]
 \vspace{0.5cm}
-
-$\bullet$ \textbf{Expecatation Propagation}
-
-\begin{equation*}
- q(\theta) = \underset{q \in \mathcal{Q}}{\text{arg min}} \ \ \text{KL}(p(\theta|x) \ || \  q(\theta))
-\end{equation*}
-
+\begin{center} 
+ \LARGE Modelos con m\'ultiples param\'etros \\
+ 
+ \large Cap\'itulo 3
+\end{center}
 \end{frame}
 
-\subsection{Kullback-Leibler}
-
-\begin{frame}
- \begin{textblock}{128}(0,8)
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
 \begin{center}
- \large Kullback-Leibler
+ \Large Posteriori marginal
 \end{center}
 \end{textblock}
-\vspace{0.5cm}
-
-\begin{columns}[t]
-\begin{column}{0.5\textwidth}
-\centering
-$\text{KL}(q(\theta) \ || \ p(\theta|x))$
-
-\begin{equation*}
-  \int q(\theta) \log \frac{q(\theta)}{p(\theta|x)} d\theta
-\end{equation*}
-
- \end{column}
- \begin{column}{0.5\textwidth}
-\centering
- $\text{KL}( p(\theta|x) \ || \ q(\theta))$
-
+ \vspace{0.75cm}
+ 
+ \only<1->{
+ \begin{textblock}{160}(0,25)
  \begin{equation*}
-\int p(\theta|x) \log \frac{p(\theta|x)}{q(\theta)} d\theta
-\end{equation*}
-
- 
-\end{column}
-\end{columns}
-
- \vspace{0.5cm}
-\todo[inline]{IMAGEN}
-
-\end{frame}
-
-
-\section{Variationl Bayes}
-
-\begin{frame}
- \begin{textblock}{128}(0,8)
-\begin{center}
- \large Variationl Bayes
-\end{center}
-\end{textblock}
-
-\begin{equation*}
- \begin{split}
- \log p(x) &= \log p(x) \int q(\theta) d\theta =  \int q(\theta) \log p(x) d\theta \\
- & = \int q(\theta) \log \frac{p(x,\theta)}{p(\theta|x)} d\theta \\
- & = \int q(\theta) \log \frac{p(x,\theta)}{p(\theta|x)} \frac{q(\theta)}{q(\theta)} d\theta \\
- & = \int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} d\theta + \int q(\theta) \log \frac{q(\theta)}{p(\theta|x)} d\theta 
- \end{split}
-\end{equation*}
-
-
-\end{frame}
-
-\begin{frame}
-
-\begin{equation*}
- \log p(x)  = \underbrace{\int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} d\theta}_{\mathcal{L}(q(\theta))} + \underbrace{\int q(\theta) \log \frac{q(\theta)}{p(\theta|x)} d\theta}_{\text{KL}(q(\theta) \ || \ p(\theta|x))}  
-\end{equation*}
-
-
-\pause
-
-\begin{itemize}
- \item[$\bullet$] Evidence Lower Bound $\log p(x) \geq \mathcal{L}(q(\theta))$
- \item[$\bullet$] $ \underset{q \in \mathcal{Q}}{\text{arg max}} \ \mathcal{L}(q(\theta)) \Leftrightarrow\underset{q \in \mathcal{Q}}{\text{arg min}} \ \text{KL}(q(\theta) \ || \ p(\theta|x))$ 
-\end{itemize}
-
-
-\end{frame}
-
-\subsection{Evidence Lower Bound}
-
-\begin{frame}
- \begin{textblock}{128}(0,8)
-\begin{center}
- \large Evidence Lower Bound
-\end{center}
-\end{textblock}
-
-\begin{equation*}
- \begin{split}
- \mathcal{L}(q(\theta)) &= \int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} d\theta \\
- &= \int q(\theta) \log \frac{p(x|\theta) p(\theta)}{q(\theta)} d\theta \\
- & = \int q(\theta) \log p(x|\theta) d\theta + \int q(\theta) \log  \frac{ p(\theta)}{q(\theta)} d\theta \\
- & = \int q(\theta) \log p(x|\theta) d\theta - \int q(\theta) \log  \frac{ q(\theta)}{p(\theta)} d\theta \\
- & = \underbrace{{q(\theta)}[\log p(x|\theta)]}_{\text{m\'axima verosimilitud}} - \underbrace{\text{KL}(q(\theta) \ || \ p(\theta))}_{\text{prior}}
- \end{split}
-\end{equation*}
- 
-\end{frame}
-
-
-\begin{frame}
- \begin{textblock}{128}(0,8)
-\begin{center}
- \large Mean field approximation
-\end{center}
-\end{textblock}
-\vspace{0.5cm}
-
-Restricci\'on de independencia sobre $q$ para que se pueda factorizar,
-\begin{equation*}
- q(\theta) = \prod_{i=1}^m q_i(\theta_i)
-\end{equation*}
-
-\textbf{Block coordinate assent}: En cada paso fijamos todos los factores $q_i(\theta_i)$ salvo uno, y optimizamos con respeto al restante $q_j(\theta_j)$
-
-\begin{equation*}
- \underset{q_j \in \mathcal{Q}}{\text{arg max}} \ \mathcal{L}(q_j(\theta_j)\prod_{i\neq j}^m q_i(\theta_i))
-\end{equation*}
-
-\end{frame}
-
-\begin{frame}
- 
- 
- \todo[inline]{SEGUIR ACA}
- 
- \Wider[3cm]{
-\begin{equation*}
- \begin{split}
- \mathcal{L}(q(\theta)) &= \int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} d\theta \\
- & = \int q(\theta) \log p(x,\theta)d\theta - \int q(\theta) \log q(\theta) d\theta \\
- & = \int q_j(\theta_j) \big(\int \log p(x,\theta)\prod_{i\neq j}^m q_i(\theta_i) d\theta_i\big)d\theta_j - \int q_j(\theta_j) \log q_j(\theta_j)  d\theta_j + \text{cont} \\
-  & = E_j [E_{i\neq j} \log p(x,\theta) ] - E_j [ \log q_j(\theta_j) ] + \text{cont} \\
-\end{split}
-\end{equation*}
+  p(\theta_1,\theta_2|y) = \frac{p(y|\theta_1,\theta_2)p(\theta_1,\theta_2) }{p(y)}
+ \end{equation*}
+ \end{textblock}
  }
  
+ \only<2->{
+ \begin{textblock}{160}(0,45)
+ \begin{equation*}
+  p(\theta_1|y) = \int p(\theta_1,\theta_2|y) d\theta_2
+ \end{equation*} 
+ \end{textblock}
+ }
+ 
+ \begin{textblock}{160}(0,63)
+ \begin{center}
+ \only<3>{\textbf{Ejemplo}:  \ \ $p(y|\mu,\sigma) = \N(y| \mu,\sigma^2)$ \\}
+ \only<4>{\textbf{Ejemplo}:  \ \ $p(y|\mu,\sigma) = \N(y| \bm{\mu},\sigma^2)$ \\} 
+  \vspace{0.2cm}
+  \only<4>{\footnotesize muchas veces el inter\'es s\'olo es sobre $\mu$ }
+ \end{center}
+ \end{textblock}
+ 
 \end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Posteriori marginal \\
+ \large Ejemplo
+\end{center}
+\end{textblock}
+ \vspace{0.75cm}
+ 
+ \only<1->{
+ \begin{textblock}{160}(0,25)
+ \begin{equation*}
+  p(y|\mu,\sigma) = \N(y| \mu,\sigma^2)  \hspace{1cm} p(\mu, \sigma) \propto \sigma^{-2}
+ \end{equation*}
+ \end{textblock}
+ }
+
+ \only<2->{
+ \begin{textblock}{160}(0,35)
+ \begin{equation*}
+  p(\mu|\sigma,y) = \N(\mu|\overline{y},\sigma^2/n)
+ \end{equation*}
+ \end{textblock}
+ }
+ 
+  \only<3->{
+ \begin{textblock}{160}(0,45)
+ \begin{equation*}
+  p(\sigma|y) = \text{Inv-}\chi^2(n-1,s^2)
+ \end{equation*}
+ \end{textblock}
+ }
+
+ \only<4->{
+ \begin{textblock}{160}(0,55)
+ \begin{equation*}
+  p(\mu|y) = t_{n-1}(\overline{y},s^2/n)
+ \end{equation*}
+ \end{textblock}
+ }
+
+ 
+\end{frame}
+
+
+ 
+
+%  
+%  \begin{textblock}{160}(0,35)
+%  \begin{equation*}
+%  \begin{split}
+%  \only<2->{ p(\mu,\sigma|\bm{y}) &\propto p(\mu, \sigma) \prod_i^n p(\bm{y}_i|\mu,\sigma) \\}
+%  \only<3->{&= } \sigma^{-n}\sigma^{-2} \exp\Big( \frac{1}{2\sigma^2} \sum_i^n (\bm{y}_i - \mu)^2 \Big) \\
+%   \only<4->{&= } \sigma^{-(n+2)} \exp\Big( \frac{1}{2\sigma^2} [ n(\overline{y}-\mu)^2 + (n-1)s^2]\Big)
+%  \end{split}
+%  \end{equation*}
+%  
+%  con 
+%  \end{textblock}
+%  
+ 
+
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Gaussiana multivariada
+\end{center}
+\end{textblock}
+
+
+\begin{align*}
+\N(\vm{x}|\bm{\mu},\vm{\Sigma}) = \frac{1}{(2\pi)^{D/2}} \frac{1}{|\vm{\Sigma}|^{1/2}} \exp\left( - \frac{1}{2} (\vm{x}-\bm{\mu})^T \vm{\Sigma}^{-1} (\vm{x}-\bm{\mu}) \right)
+\end{align*}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+ \item[$\circ$] Con $\vm{x}$ y $\bm{\mu}$ vectores $D$-dimensionales
+ \item[$\circ$] Con $\vm{\Sigma}$ matriz de covarianza $D \times D$
+ \item[$\circ$] $|\Sigma|$ el determinante de $\Sigma$
+\end{itemize}
+
+ \end{frame}
+ 
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Gaussiana marginal y condicional.
+\end{center}
+\end{textblock}
+
+
+Dadas las distribuciones
+\begin{align*}
+    p(\vm{w}) &=  \N(\vm{w}|\bm{\mu},\bm{\Lambda}^{-1}) \\
+   p(\vm{y}|\vm{w}) &=  \N(\vm{y}|\vm{A}\vm{w}+\vm{b},\vm{L}^{-1})    
+\end{align*}
+
+
+Queremos probar,  
+\begin{align*}
+    p(\vm{y}) &=  \N(\vm{y}|\cdot,\cdot) \\ %\N(\vm{y}|\vm{A}\bm{\mu}+\vm{b},\, \vm{L}^{-1} + \vm{A}\vm{\Lambda}^{-1}\vm{A}^T) \\
+   p(\vm{w}|\vm{y}) &=  \N(\vm{y}|\cdot,\cdot) %\N(\vm{w}|\vm{\Sigma}[\vm{A}^T \vm{L}(\vm{y}-\vm{b})+ \bm{\Lambda\mu}],\,  \vm{\Sigma})\label{eq:post}
+\end{align*}
+% 
+% donde, 
+% \begin{equation*}
+%  \vm{\Sigma} = (\vm{\Lambda} + \vm{A}^T \vm{LA} )^{-1}
+% \end{equation*}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Distribuci\'on Gaussiana condicional.
+\end{center}
+\end{textblock}
+\vspace{0.5cm}
+
+Dado
+\begin{align*}
+ p(\vm{x}) = \N(\vm{x}|\bm{\mu},\vm{\Sigma})
+\end{align*}
+
+tal que
+\begin{align*}
+ \vm{x} = \begin{pmatrix} \vm{x}_a \\ \vm{x}_b \end{pmatrix} 
+ \ \ \
+ \bm{\mu} = \begin{pmatrix} \bm{\mu}_a \\ \bm{\mu}_b \end{pmatrix} 
+\ \ \
+ \vm{\Sigma} = \begin{pmatrix} \vm{\Sigma}_{aa} & \vm{\Sigma}_{ab} \\ \vm{\Sigma}_{ba} & \vm{\Sigma}_{bb} \end{pmatrix} 
+ \ \ \ 
+ \vm{\Sigma}^{-1} = \vm{\Lambda} = \begin{pmatrix} \vm{\Lambda}_{aa} & \vm{\Lambda}_{ab} \\ \vm{\Lambda}_{ba} & \vm{ \Lambda}_{bb} \end{pmatrix} 
+ \end{align*}
+
+Queremos encontrar,
+\begin{align*}
+ p(\vm{x}_a|\vm{x}_b) = \N(\vm{x}_a|\bm{\mu}_{a|b},\vm{\Sigma}_{a|b})
+\end{align*}
+
+\only<2>{
+ \begin{textblock}{160}(0,84)\centering \scriptsize
+Notar que $\bm{\Lambda}_{aa} \neq \bm{\Sigma}_{aa}^{-1}$
+ \end{textblock}
+ }
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Distribuci\'on Gaussiana condicional.
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{align*}
+ p(\vm{x}_a|\vm{x}_b) \propto p(\vm{x}_a,\vm{x}_b) \propto \exp\Big( -\frac{1}{2} (\vm{x}-\bm{\mu})^T \vm{\Sigma}^{-1} (\vm{x}-\bm{\mu}) \Big)
+\end{align*}
+
+\pause
+\vspace{0.25cm}
+
+\begin{align*}
+-\frac{1}{2}(\vm{x}-\bm{\mu})^T \vm{\Sigma}^{-1} (\vm{x}-\bm{\mu}) = -\frac{1}{2} \underbrace{\vm{x}^T \vm{\Sigma}^{-1} \vm{x}}_{\text{Cuadr\'atico}} +  \underbrace{\vm{x}^T \vm{\Sigma}^{-1} \bm{\mu}}_{\text{Lineal}} + \text{const} 
+\end{align*}
+
+ 
+\pause
+\vspace{0.25cm}
+
+\begin{align*}
+& -\frac{1}{2}(\vm{x}_a-\bm{\mu}_a)^T \vm{\Lambda}_{aa}^{-1} (\vm{x}_a-\bm{\mu}_a)
+ -\frac{1}{2}(\vm{x}_a-\bm{\mu}_a)^T \vm{\Lambda}_{ab}^{-1} (\vm{x}_b-\bm{\mu}_b) \\
+&  -\frac{1}{2}(\vm{x}_b-\bm{\mu}_b)^T \vm{\Lambda}_{ba}^{-1} (\vm{x}_a-\bm{\mu}_a)
+-\frac{1}{2}(\vm{x}_b-\bm{\mu}_b)^T \vm{\Lambda}_{bb}^{-1} (\vm{x}_b-\bm{\mu}_b) \\
+& = \\
+& -\frac{1}{2} \vm{x}_a^T \underbrace{\vm{\Lambda}_{aa}}_{\vm{\Sigma}_{a|b}^{-1}} \vm{x}_a + \vm{x}_a^T \big( \underbrace{\vm{\Lambda}_{aa} \bm{\mu}_a  - \vm{\Lambda}_{ab}(\vm{x}_b-\bm{\mu}_b)}_{\vm{\Sigma}_{a|b}^{-1}\bm{\mu}_{a|b}} \big) + \text{const}
+\end{align*}
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Distribuci\'on Gaussiana condicional
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{align*}
+ \vm{\Sigma}_{a|b} = \vm{\Lambda}_{aa}^{-1}
+\end{align*}
+
+\begin{align*}
+ \bm{\mu}_{a|b} & = \vm{\Sigma}_{a|b} \Big( \vm{\Lambda}_{aa} \bm{\mu}_a  - \vm{\Lambda}_{ab}(\vm{x}_b-\bm{\mu}_b)  \Big) \\
+ & = \bm{\mu}_a - \vm{\Lambda}_{aa}^{-1} \vm{\Lambda}_{ab}(\vm{x}_b-\bm{\mu}_b)
+\end{align*}
+
+\begin{align*}
+ \begin{pmatrix} \vm{A} & \vm{B} \\ \vm{C} & \vm{D} \end{pmatrix}  
+ = 
+ \begin{pmatrix} 
+ \vm{M} &  -\vm{M}\vm{B}\vm{D}^{-1}  \\
+ -\vm{D}^{-1}\vm{C}\vm{M}  & \vm{D}^{-1} \vm{C}\vm{M}\vm{B}\vm{D}^{-1} 
+ \end{pmatrix}
+ \hspace{0.8cm} \text{con } \vm{M} = (\vm{A}-\vm{B}\vm{D}^{-1}\vm{C})^{-1} 
+\end{align*}
+
+\begin{align*}
+ \vm{\Lambda}_{aa} & = ( \vm{\Sigma}_{aa} - \vm{\Sigma}_{ab} \vm{\Sigma}_{bb}^{-1} \vm{\Sigma}_{ba} )^{-1} \\
+ \vm{\Lambda}_{ab} & = -( \vm{\Sigma}_{aa} - \vm{\Sigma}_{ab} \vm{\Sigma}_{bb}^{-1} \vm{\Sigma}_{ba} )^{-1}  \vm{\Sigma}_{ab}  \vm{\Sigma}_{bb}^{-1}
+\end{align*}
+
+\begin{mdframed}[backgroundcolor=black!20]
+\begin{equation*}
+\begin{split}
+ \bm{\mu}_{a|b} & = \bm{\mu}_a + \vm{\Sigma}_{ab}  \vm{\Sigma}_{bb}^{-1} (\vm{x}_b-\bm{\mu}_b)\\
+ \bm{\Sigma}_{a|b} & = \vm{\Sigma}_{aa} - \vm{\Sigma}_{ab} \vm{\Sigma}_{bb}^{-1} \vm{\Sigma}_{ba} \\
+ \end{split}
+\end{equation*}
+\end{mdframed}
+
+
+
+
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.55\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
 
 
 \end{document}
