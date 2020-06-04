@@ -88,6 +88,7 @@ y_true = sinus_model(X_grilla , 0)
 plt.plot(X_grilla, y_true, '--', color="black")
 plt.plot(X,t,'.', color='black')
 plt.savefig("model_selection_true_and_sample.pdf",bbox_inches='tight')
+plt.savefig('model_selection_true_and_sample.png', bbox_inches='tight', transparent=True)
 plt.close()    
 
 
@@ -120,6 +121,7 @@ plt.close()
 plt.plot(10**log_evidence_joint)
 plt.plot(10**prior_predictive_online)
 plt.savefig("model_selection_evidence.pdf",bbox_inches='tight')
+plt.savefig('model_selection_evidence.png', bbox_inches='tight',transparent=True)
 plt.close()    
 
 plt.close()
@@ -127,16 +129,19 @@ plt.close()
 plt.plot(log_evidence_joint)
 plt.plot(prior_predictive_online)
 plt.savefig("model_selection_evidence_log.pdf",bbox_inches='tight')
+plt.savefig("model_selection_evidence_log.png",bbox_inches='tight',transparent=True)
 plt.close()        
 
 plt.close()
 plt.plot(np.log(maxLikelihood))
 plt.savefig("model_selection_maxLikelihood_log.pdf",bbox_inches='tight')
+plt.savefig("model_selection_maxLikelihood_log.png",bbox_inches='tight',transparent=True)
 plt.close()        
 
 plt.close()
 plt.plot(maxLikelihood)
 plt.savefig("model_selection_maxLikelihood.pdf",bbox_inches='tight')
+plt.savefig("model_selection_maxLikelihood.png",bbox_inches='tight',transparent=True)
 plt.close()        
 
 
@@ -150,6 +155,7 @@ y_map = Phi_grilla.dot(maxAposteriori[3])
 plt.plot(X_grilla,y_map, color="black"  )
 plt.plot(X,t,'.', color='black')
 plt.savefig("model_selection_MAP.pdf",bbox_inches='tight')
+plt.savefig("model_selection_MAP.png",bbox_inches='tight',transparent=True)
 plt.close()    
 
 """

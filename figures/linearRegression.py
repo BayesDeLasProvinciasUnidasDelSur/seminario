@@ -123,6 +123,7 @@ for i, N in list(enumerate(N_list[::-1])):#i=2;N=2
         plt.plot(w0,w1,'+',color="red")
         plt.tight_layout()
         plt.savefig("linearRegression_likelihood_{}.pdf".format(j))
+        plt.savefig("linearRegression_likelihood_{}.png".format(j), transparent=True)
         plt.close()
         
     # Posterior
@@ -131,6 +132,7 @@ for i, N in list(enumerate(N_list[::-1])):#i=2;N=2
     plt.plot(w0,w1,'+',color="red")
     plt.tight_layout()
     plt.savefig("linearRegression_posterior_{}.pdf".format(j))
+    plt.savefig("linearRegression_posterior_{}.png".format(j), transparent=True)
     plt.close()
 
     # Data space
@@ -138,6 +140,7 @@ for i, N in list(enumerate(N_list[::-1])):#i=2;N=2
     plt.ylim(-1., 1.)
     plt.plot(X_N, t_N,'.',color="black")
     plt.savefig("linearRegression_dataSpace_{}.pdf".format(j))
+    plt.savefig("linearRegression_dataSpace_{}.png".format(j), transparent=True)
     plt.close()
 
 
@@ -162,6 +165,7 @@ plt.plot([0.75,0.75],[-1,1],"-.",color="green")
 #plt.plot(X, t,'.',color="black",alpha=1)
 plt.tight_layout()
 plt.savefig("linearRegression_predictive.pdf",bbox_inches='tight')
+plt.savefig("linearRegression_predictive.png",bbox_inches='tight', transparent=True)
 plt.close()
 
 
@@ -171,6 +175,7 @@ plt.plot(X_grilla,belief[:,50],"--",color="red")
 plt.plot(X_grilla,belief[:,-1],"-.",color="green")
 plt.tight_layout()
 plt.savefig("linearRegression_predictive_longitudinal.pdf",bbox_inches='tight')
+plt.savefig("linearRegression_predictive_longitudinal.png",bbox_inches='tight', transparent=True)
 plt.close()
 
 
