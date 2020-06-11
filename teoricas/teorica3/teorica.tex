@@ -753,14 +753,23 @@ Funci\'on objetivo
 \only<4->{
 \begin{textblock}{160}(0,24)
 \begin{equation*}
-  \frac{P(\text{Modelo}_i|\text{Datos})}{P(\text{Modelo}_j|\text{Datos})}  = \frac{P(\text{Datos}|\text{Modelo}_i)\,\,P(\text{Modelo}_i)}{ \underbrace{P(\text{Datos}|\text{Modelo}_j)}_{\text{Evidencia!}}\, \underbrace{P(\text{Modelo}_j)}_{\text{Escalar } k } }
+  \frac{p(\text{Modelo}_i|\text{Datos})}{p(\text{Modelo}_j|\text{Datos})}  = \frac{p(\text{Datos}|\text{Modelo}_i)\,\,p(\text{Modelo}_i)}{ \underbrace{p(\text{Datos}|\text{Modelo}_j)}_{\text{Evidencia!}}\, \underbrace{p(\text{Modelo}_j)}_{\text{Escalar } k } }
 \end{equation*}
 \end{textblock}
 }
 
 
-\only<5>{
-\begin{textblock}{140}(10,55)
+\begin{textblock}{160}(0,40)
+\begin{equation*}
+\begin{split}
+\only<5->{p(\text{Datos}|\text{Modelo}) &= \sum_{h}^H p(\text{Datos}|\text{Hip\'otesis}=h,\text{Modelo}) p(\text{Hip\'otesis}=h|\text{Modelo}) } \\
+\only<6->{& = p(\text{D}_1|\text{M}) p(\text{D}_2|\text{D}_1, \text{M}) \dots p(\text{D}_N|\text{D}_{N-1} \dots \text{D}_1, \text{M}) }
+\end{split} 
+\end{equation*}
+\end{textblock}
+
+\only<7>{
+\begin{textblock}{140}(10,68)
 \begin{mdframed}[backgroundcolor=black!15]
 \footnotesize \centering Preferimos modelos con la \textbf{menor sorpresa conjunta}!
 \end{mdframed}
@@ -773,24 +782,32 @@ Funci\'on objetivo
 \begin{frame}[plain]
 \begin{textblock}{160}(0,0)
 \begin{center}
- \large Evidencia vs M\'axima verosimilitud
+ \large Evidencia vs M\'aximo A Posteriori \\
+ \normalsize offline
 \end{center}
 \end{textblock}
 
 
 
-\begin{textblock}{80}(0,16)
- \centering
+\begin{textblock}{80}(0,14)
+ \centering \footnotesize
+ \begin{align*}
+ p(\text{Datos}|\text{Modelo})
+\end{align*}
 Evidencia conjunta
 \end{textblock}
 
-\begin{textblock}{80}(80,16)
- \centering
- M\'axima verosimilitud
+\begin{textblock}{80}(80,14)
+ \centering \footnotesize
+\begin{align*}
+   p(\text{Datos}| h_{\text{MAP}}, \text{Modelo}) 
+\end{align*}
+ M\'aximo A Posteriori \\ \scriptsize
+ (Likelihood regularizado)
 \end{textblock}
 
 
-\begin{textblock}{140}(10,20)
+\begin{textblock}{140}(10,28)
      \centering 
        \begin{figure}[H]     
      \centering 
@@ -802,6 +819,50 @@ Evidencia conjunta
      \end{subfigure}
 \end{figure}
 \end{textblock}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,0)
+\begin{center}
+ \large Evidencia vs M\'aximo A Posteriori \\
+ \normalsize online
+\end{center}
+\end{textblock}
+
+
+\begin{textblock}{60}(0,14)
+ \centering \footnotesize
+ \begin{align*} 
+ p(\text{D}_1|\text{M}) \dots p(\text{D}_N|\text{D}_{N-1} \dots \text{D}_1, \text{M})
+\end{align*}
+Evidencia conjunta
+\end{textblock}
+
+\begin{textblock}{80}(60,14)
+ \centering \footnotesize
+\begin{align*}
+ p(\text{D}_1|h_0 , \text{M}) p(\text{D}_2|h_{\text{MAP}_1}, \text{D}_1, \text{M}) \dots p(\text{D}_N|h_{\text{MAP}_{N-1}} , \text{D}_{N-1} \dots \text{D}_1, \text{M})
+\end{align*}
+ M\'aximo A Posteriori
+\end{textblock}
+
+
+\begin{textblock}{140}(10,28)
+     \centering 
+       \begin{figure}[H]     
+     \centering 
+     \begin{subfigure}[b]{0.47\textwidth}
+       \includegraphics[width=1\textwidth]{../../figures/model_selection_evidence.png}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.49\textwidth}
+       \includegraphics[width=1\textwidth]{../../figures/model_selection_maxApriori_online.png}
+     \end{subfigure}
+\end{figure}
+\end{textblock}
+
 
 
 \end{frame}

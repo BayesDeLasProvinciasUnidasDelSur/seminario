@@ -61,7 +61,6 @@ def log_evidence(t, Phi, beta, alpha):
         - (N/2) * np.log(2*np.pi)
         
     return res
-          
 
 def sinus_model(X, variance):
     '''Sinus function plus noise'''
@@ -71,13 +70,12 @@ def polynomial_basis_function(x, degree=1):
     return x ** degree
 
 N = 20
-N_list = [0, 1, 2, 4,N]
 
 beta = (1/0.2)**2
 alpha = (5e-7) # Bishop usa alpha = 5e-3
 
 # Data 
-X =np.random.rand(N_list[-1],1)-0.5
+X =np.random.rand(N,1)-0.5
 t = sinus_model(X, 1/beta)
 
 # Grilla
@@ -93,12 +91,15 @@ plt.close()
 
 
 prior_predictive_online = np.zeros((10,1))
+prior_maxAposteriori_online = np.zeros((10,1))
+mean_square_error_MAP = np.zeros((10,1))
 prior_predictive_joint = np.zeros((10,1)) 
 log_evidence_joint = np.zeros((10,1)) 
+w_map = []
 maxAposteriori = []
-maxLikelihood = []
-for d in range(10):#d=1    
-    for i in range(N_list[-1]) :#i=10
+maxApriori = []
+for d in range(10):#d=0
+    for i in range(N) :#i=2
         X_priori = X[:i]
         t_priori = t[:i]
         x_posterior = X[i]
@@ -110,48 +111,72 @@ for d in range(10):#d=1
         
         prior_predictive_online[d,0] += np.log(predictive(t_posteriori, Phi_posteriori, beta, alpha, t_priori, Phi_priori ))
         
+        ## Otros indicadores.
+        w_map_prior = posterior(alpha, beta, t_priori, Phi_priori)[0]
+        prior_maxAposteriori_online[d,0] += np.log(likelihood(w_map_prior, t_posteriori, Phi_posteriori , beta))
+        mean_square_error_MAP[d,0] += (1/N) * ((t_posteriori - Phi_posteriori.dot(w_map_prior))**2)
+        
+                
     Phi =  polynomial_basis_function(X, np.array(range(d+1)) )
     prior_predictive_joint[d,0] = np.log(predictive(t, Phi, beta, alpha ))
     log_evidence_joint[d,0] = log_evidence(t, Phi, beta, alpha)
-    maxAposteriori.append(posterior(alpha, beta, t, Phi)[0]) 
-    maxLikelihood.append(likelihood(maxAposteriori[d], t, Phi, beta))
-    
+    w_map.append(posterior(alpha, beta, t, Phi)[0]) 
+    maxAposteriori.append(likelihood(w_map[d], t, Phi, beta))
+    # Joint max_a_priori
+    "Joint max a priori es igual para todas las complejidades (Es independiente de las cantidad de par\'ametros)"
+    Phi_priori =  polynomial_basis_function(X[:0], np.array(range(d+1)) )
+    t_priori =  t[:0]
+    w_maxAprior = posterior(alpha, beta, t_priori, Phi_priori )[0]
+    maxApriori.append(likelihood(w_maxAprior , t, Phi, beta)[0])
+
 plt.close()
 #plt.plot(prior_predictive_joint)
-plt.plot(10**log_evidence_joint)
-plt.plot(10**prior_predictive_online)
+plt.plot(np.exp(log_evidence_joint))
+plt.plot(np.exp(prior_predictive_online))
 plt.savefig("model_selection_evidence.pdf",bbox_inches='tight')
 plt.savefig('model_selection_evidence.png', bbox_inches='tight',transparent=True)
 plt.close()    
 
 plt.close()
+plt.plot(np.exp(prior_maxAposteriori_online))
+plt.savefig("model_selection_maxApriori_online.pdf",bbox_inches='tight')
+plt.savefig('model_selection_maxApriori_online.png', bbox_inches='tight',transparent=True)
+plt.close()
+
+plt.close()
+plt.plot(np.exp(prior_maxAposteriori_online/N))
+plt.savefig("model_selection_maxApriori_online_avg_prediction.pdf",bbox_inches='tight')
+plt.savefig('model_selection_maxApriori_online_avg_prediction.png', bbox_inches='tight',transparent=True)
+plt.close()
+
+
+plt.close()
 #plt.plot(prior_predictive_joint)
-plt.plot(log_evidence_joint)
-plt.plot(prior_predictive_online)
-plt.savefig("model_selection_evidence_log.pdf",bbox_inches='tight')
-plt.savefig("model_selection_evidence_log.png",bbox_inches='tight',transparent=True)
+plt.plot(np.exp(log_evidence_joint/N))
+plt.plot(np.exp(prior_predictive_online/N))
+plt.savefig("model_selection_evidence_avg_prediction.pdf",bbox_inches='tight')
+plt.savefig("model_selection_evidence_avg_prediction.png",bbox_inches='tight',transparent=True)
 plt.close()        
 
 plt.close()
-plt.plot(np.log(maxLikelihood))
+plt.plot(np.log(maxAposteriori))
 plt.savefig("model_selection_maxLikelihood_log.pdf",bbox_inches='tight')
 plt.savefig("model_selection_maxLikelihood_log.png",bbox_inches='tight',transparent=True)
 plt.close()        
 
 plt.close()
-plt.plot(maxLikelihood)
+plt.plot(maxAposteriori)
 plt.savefig("model_selection_maxLikelihood.pdf",bbox_inches='tight')
 plt.savefig("model_selection_maxLikelihood.png",bbox_inches='tight',transparent=True)
 plt.close()        
 
-
 for d in range(1,10):
     Phi_grilla = polynomial_basis_function(X_grilla, np.array(range(d+1)) )
-    y_map = Phi_grilla.dot(maxAposteriori[d])
+    y_map = Phi_grilla.dot(w_map[d])
     plt.plot(X_grilla,y_map  )
     #plt.ylim(-1.1,1.1)
 Phi_grilla = polynomial_basis_function(X_grilla, np.array(range(3+1)) )
-y_map = Phi_grilla.dot(maxAposteriori[3])
+y_map = Phi_grilla.dot(w_map[3])
 plt.plot(X_grilla,y_map, color="black"  )
 plt.plot(X,t,'.', color='black')
 plt.savefig("model_selection_MAP.pdf",bbox_inches='tight')
