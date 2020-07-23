@@ -31,6 +31,7 @@ Books:
 
 0. Bishop. [Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/)
 0. Pearl. [Causal Inference in Statistics: A premier](http://gen.lib.rus.ec/)
+0. Winn, Bishop et al. [Model-Based Machine Learning](http://mbmlbook.com/MBMLbook.pdf)
 
 Papers:
 
