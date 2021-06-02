@@ -1,12 +1,4 @@
-all: submodules pdf
-
-pdf:
-
-figs:
-	make -C figures
-
+all: submodules
 
 submodules: 
 	make -C aux
-
-
