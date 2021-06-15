@@ -1,0 +1,74 @@
+\documentclass{beamer}
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{csquotes}
+
+\usecolortheme{seahorse}
+\setlength{\parskip}{1em}
+
+\title{An Essay towards solving a Problem in the Doctrine of Chances}
+\subtitle{O un método para calcular la probabilidad exacta de todas las conclusiones basado en inducción}
+\author{Basado en el trabajo de Thomas Bayes}
+
+\begin{document}
+\begin{frame}[plain]
+    \maketitle
+\end{frame}
+
+\begin{frame}{Ensayo original}
+	Trabajo publicado y editado por Richard Price, dos años después de la muerte de Bayes.
+
+	La teoría de la probabilidad recién estaba naciendo.
+	Bayes usa el nombre "Doctrina de las Chances" basado en un libro de Abraham de Moivre
+
+	Algunas reimpresiones le cambian el nombre a ``Un método para calcular la probabilidad exacta de todas las conclusiones basado en inducción'', ya que es el problema real que busca resolver
+
+	En el proceso, va a discutir sobre probabilidad condicional y \textbf{probabilidad inversa}
+\end{frame}
+
+\begin{frame}{Problema a resolver}
+	\begin{itemize}
+		\item \textbf{Dado}: el número de veces que un evento sucedió exitosamente y el número de veces que falló.
+		\item \textbf{Queremos conocer} la chance de que la probabilidad de que su ocurrencia en un intento esté entre dos grados de probabilidad que pueden ser nombrados.
+	\end{itemize}
+
+	En términos actuales,
+	dados n intentos y x éxitos, con $X \sim Binomial(p, n)$,
+	queremos calcular $P(a < p < b | X = x)$
+
+	Es decir, es una pregunta sobre \textbf{la probabilidad de la probabilidad}.
+\end{frame}
+
+\begin{frame}{Definiciones}
+	\begin{displayquote}
+		The probability of any event is the ratio between the value at which an expectation depending on the happening of the event ought to be computed, and the chance of the thing expected upon it’s happening.  
+	\end{displayquote}
+
+	En español, ``La probabilidad de un evento está dada por la proporción entre el valor sobre el cual la esperanza debe ser computada, y la cosa esperada al suceder''.
+
+	Tanto de Moivre como Bayes usan la palabra ``expectation'' como ``el valor de un contrato que da un premio al suceder algo'', es decir, el precio de una apuesta.
+\end{frame}
+
+\begin{frame}{Definiciones}
+	Es decir, la probabilidad
+	\begin{itemize}
+		\item Se piensa en términos de apuestas
+		\item Debe ser el precio ¿racional? para entrar a una apuesta
+		\item Es una proporción, con respecto a un premio
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Regla de la suma}
+	Proposición 1: Cuando varios eventos son inconsistentes, la probabilidad de que suceda alguna es la suma de las probabilidades de cada una.
+	Corolario: Si tenemos certeza que debe suceder alguno de estos eventos, y el premio de la apuesta es de \$N, entonces la suma de los precios de las apuestas da \$N.
+
+	La proposición es un caso especial de la regla de la suma, y el corolario nos lleva a que la probabilidad debe sumar 1.
+\end{frame}
+
+\begin{frame}{Primer regla del producto}
+	Proposición 3: La probabilidad de que dos eventos consecutivos sucedan es el producto de la probabilidad del primero, y la probabilidad del segundo suponiendo que el primero sucedió.
+
+	Es decir, \textbf{si el evento A sucede antes que el evento B}, $P(A \land B) = P(A) P(B|A)$
+\end{frame}
+
+\end{document}
