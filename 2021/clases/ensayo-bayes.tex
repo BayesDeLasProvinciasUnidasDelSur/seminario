@@ -50,14 +50,14 @@
 
 	En español, ``La probabilidad de un evento está dada por la proporción entre el valor sobre el cual la esperanza debe ser computada, y la cosa esperada al suceder''.
 
-	Tanto de Moivre como Bayes usan la palabra ``expectation'' como ``el valor de un contrato que da un premio al suceder algo'', es decir, el precio de una apuesta.
+	Tanto de Moivre como Bayes usan la palabra ``expectation'' como ``el valor de un contrato que da un premio al suceder algo'', es decir, el precio para entrar a una apuesta.
 \end{frame}
 
 \begin{frame}{Definiciones}
 	Es decir, la probabilidad
 	\begin{itemize}
 		\item Se piensa en términos de apuestas
-		\item Debe ser el precio ¿racional? para entrar a una apuesta
+		\item Debe ser el precio \textbf{justo} para entrar a una apuesta
 		\item Es una proporción, con respecto a un premio
 	\end{itemize}
 \end{frame}
@@ -92,9 +92,11 @@
 \begin{frame}{El argumento de Bayes}
 	Proposición 4: si hay dos eventos consecutivos a ser determinados cada día, y la probabilidad del segundo es b/N y la probabilidad de ambos es P/N, y voy a recibir \$N si ambos suceden el primer día que el segundo sucede. Digo que, bajo estas condiciones, la probabilidad de obtener \$N es P/b.
 
-	$$P(\land_{1 \leq i < k} (\neg B_i) \land A_k | B_k) = \frac{P(A_i \land B_i)}{P(B_i)}$$
+    Es importante que la apuesta se hace el dia 0, antes de que suceda nada.\pause
 
-	Esto es algo que un objetivista puede aceptar, pero abre la puerta a un argumento en contra de esta mirada ya que no tiene sentido pedir que se cambie el precio de la apuesta una vez que ya entraste a esta
+    $$P(A_i) = P(A) \forall i \in \mathbb{N}$$
+    $$P(B_i) = P(B) \forall i \in \mathbb{N}$$
+	$$P(A_k | \land_{1 \leq i < k} (\neg B_i) \land  B_k) = \frac{P(A \land B)}{P(B)}$$
 \end{frame}
 
 \begin{frame}{Lema de Bayes}
@@ -173,22 +175,22 @@
 \begin{frame}{Distribución Beta}
 	$$P(p|n,k) = \frac{
 		\textcolor{blue}{P(k|n,p)}
-		\textcolor{red}{P(p)}
+		\textcolor{red}{P(p|n)}
 	}{
-		P(k)
+		P(k|n)
 	}$$
 	\pause
 
 	Como $k|n,p \sim Binom(n, p)$ y $p \sim Unif(0, 1)$:
 	$$P(p|n,k) = \frac{
-			\textcolor{blue}{\binom{n}{k} p^k (1-p)^{n-k}}
-			\textcolor{red}{\mathbb{I}(0,1)}
-		}{
-			P(k)
-		}$$
+		\textcolor{blue}{\binom{n}{k} p^k (1-p)^{n-k}}
+		\textcolor{red}{\mathbb{I}(0,1)}
+	}{
+		P(k|n)
+	}$$
 	\pause
 
-	¿Y $P(k)$? Volvamos al experimento de la mesa.
+	¿Y $P(k|n)$? Volvamos al experimento de la mesa.
 	\pause
 	$$
 		P(X=p) =

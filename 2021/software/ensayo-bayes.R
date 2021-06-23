@@ -1,25 +1,51 @@
-# install.package("manipulate")
-# install.package("shiny")
-# install.package("ggplot2")
+# install.packages("manipulate")
 library(manipulate)
-dx = 0.01
-x = seq(0, 1, dx)
 
-f = function(k,n,p) {
-  par(mfrow=c(1,2))
-  binom <- dbinom(0:n, n, p)
-  names(binom) <- 0:n
-  cols <- rep('grey', n+1)
-  cols[k+1] = 'red'
-  barplot(binom, col=cols)
-  plot(x, dbeta(x, k+1, n-k+1), type = "l")
-  abline(v=p, col='red')
+x <- runif(1, 0, 1)
+y <- runif(1, 0, 1)
+
+table <- function(reset, addBall, add10Balls) {
+  if (reset) {
+    x <<- runif(1, 0, 1)
+    y <<- runif(1, 0, 1)
+  }
+  if (addBall) {
+    x <<- append(x, runif(1, 0, 1))
+    y <<- append(y, runif(1, 0, 1))
+  }
+  if (add10Balls) {
+    x <<- append(x, runif(10, 0, 1))
+    y <<- append(y, runif(10, 0, 1))
+  }
+  cols <- ifelse(x < x[1],'red','green')
+  cols[1] <- 'black'
+  exitos <- sum(cols == 'green')
+  total <- length(x)-1
+  prop <- ifelse(total == 0, 'indefinido', exitos / total)
+  plot(x, y,
+       asp=1,
+       xlim=c(0,1), ylim=c(0,1),
+       col= cols,
+       main=paste("P =", 1-x[1], "\n",
+                  "Total =", total, "\n",
+                  "Éxitos/Total =", prop))
+  abline(v=0)
+  abline(v=1)
+  abline(h=0)
+  abline(h=1)
 }
+manipulate(
+  table(reset, addBall, add10Balls),
+  reset=button("Reset"),
+  addBall=button("Agregar bolita"),
+  add10Balls=button("Agregar 10 bolitas"))
 
-manipulate(f(k,n,p),
-           k=slider(0, 50, initial=5),
-           n=slider(0, 50, initial=10),
-           p=slider(0,1,initial=.5,step=.05))
 
-# library('shiny')
+
+# install.packages("shiny")
+# install.packages("ggplot2")
+# install.packages("png")
+# install.packages("markdown")
+# install.packages("knitr")
+#· library('shiny')
 # shiny::runGitHub('IS606', 'jbryer', subdir='inst/shiny/BayesBilliards')
