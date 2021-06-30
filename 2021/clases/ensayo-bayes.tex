@@ -30,6 +30,20 @@
 	En el proceso, va a discutir sobre probabilidad condicional y \textbf{probabilidad inversa}
 \end{frame}
 
+\begin{frame}{Primeros estudios de probabilidad}
+  \begin{itemize}
+    \item Siglo VIII: Primeros estudios (conocidos) de permutaciones y combinaciones, Al-Khalil
+    \item Siglo IX: Primeros estudios (conocidos) de uso de frecuencias para descifrar mensajes encriptados, Al-Khindi
+    \item 1654: Cartas entre Pascal y Fermat
+    \item 1713: Ars Conjectandi, Jacob Bernoulli (escrito entre 1684 y 1689)
+    \item 1718: The Doctrine of Chances, Primera Edición, De Moivre
+    \item 1763: An Essay towards solving a Problem in the Doctrine of Chances, Bayes
+    \item 1814: Essai philosophique sur les probabilités, Laplace
+  \end{itemize}
+
+  Esto es solo una selección personal, hubo otros trabajos relevantes durante estos siglos.
+\end{frame}
+
 \begin{frame}{Problema a resolver}
 	\begin{itemize}
 		\item \textbf{Dado}: el número de veces que un evento sucedió exitosamente y el número de veces que falló.
@@ -166,7 +180,7 @@
 	$$P(X=p) =
 		(n+1)
 		\textcolor{blue}{\binom{n}{k} p^k (1-p)^{n-k}}
-		\mathbb{I}(0,1)$$
+		\mathbb{I}(0 \leq p \leq 1)$$
 
 	Suena conocido... ¿Cómo llegamos de la binomial a la beta?
 	\footnote{En realidad, la Beta se define para $k,n \in \mathbb{R}$. Esta es la definición para $k,n \in \mathbb{N}$, que es lo más natural de pensar.}
@@ -184,7 +198,7 @@
 	Como $k|n,p \sim Binom(n, p)$ y $p \sim Unif(0, 1)$:
 	$$P(p|n,k) = \frac{
 		\textcolor{blue}{\binom{n}{k} p^k (1-p)^{n-k}}
-		\textcolor{red}{\mathbb{I}(0,1)}
+		\textcolor{red}{\mathbb{I}(0 \leq p \leq 1)}
 	}{
 		P(k|n)
 	}$$
@@ -196,8 +210,30 @@
 		P(X=p) =
 		(n+1)
 		\textcolor{blue}{\binom{n}{k} p^k (1-p)^{n-k}}
-		\textcolor{red}{\mathbb{I}(0,1)}
+		\textcolor{red}{\mathbb{I}(0 \leq p \leq 1)}
 	$$
+\end{frame}
+
+\begin{frame}{Estimacion puntual}
+  Ahora, en vez de tener una estimación en un solo número, tenemos la distribucion completa.
+  Esto es mucho más informativo.\pause
+
+  Pero, ¿qué pasa si queremos resumir en un solo número?
+  Si tenemos n éxitos en n ensayos, ¿decimos que p=1?
+\end{frame}
+
+\begin{frame}{Regla de la sucesión de Laplace}
+  Si tenemos X con distribución binomial, k éxitos en n ensayos:
+
+  $$E(X) = \frac{k+1}{n+2}$$
+
+  Es decir, es como $\frac{k}{n}$ pero imaginándose que hubo un fallo y un éxito más.\pause
+
+  En realidad, Laplace llegó a que
+
+  $$P(X_{n+1} = 1 | \sum_{i=1}^{n} X_i = k) = \frac{k+1}{n+2}$$
+
+  si $X_i | p \sim Bernoulli(p)$ son independientes al condicionar por $p$ y se usa un prior equiprobable $P(X_i) = \frac{1}{2}$.
 \end{frame}
 
 \end{document}

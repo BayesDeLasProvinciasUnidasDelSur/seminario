@@ -19,3 +19,8 @@ AB1 <- bayesTest (Vec.desc, Vec.base,
 
 p <- plot(AB1)
 p$posterior
+
+# Tarea
+# Hacer la integral para P(p1 < p2)
+
+summary(AB1)
