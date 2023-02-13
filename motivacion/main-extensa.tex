@@ -130,7 +130,7 @@
 % \begin{figure}[ht!]
 %     \centering
 %     \begin{subfigure}[b]{0.48\textwidth}
-%     \includegraphics[width=\linewidth]{../../aux/static/tsimane.jpg}
+%     \includegraphics[width=\linewidth]{../aux/static/tsimane.jpg}
 %     \caption{}
 %     \label{fig:multilevel-selection-7}
 %     \end{subfigure}
@@ -169,19 +169,19 @@
   \centering
   \tikz{
 
-    \node[latent] (d) {\includegraphics[width=0.10\textwidth]{../../aux/static/dedo.png}} ;
+    \node[latent] (d) {\includegraphics[width=0.10\textwidth]{../aux/static/dedo.png}} ;
     \node[const,below=of d] (nd) {\En{Hint}\Es{Pista}: $s$} ;
 
-    \node[latent, above=of d,yshift=-1.2cm, xshift=-1.3cm] (r) {\includegraphics[width=0.12\textwidth]{../../aux/static/regalo.png}} ;
+    \node[latent, above=of d,yshift=-1.2cm, xshift=-1.3cm] (r) {\includegraphics[width=0.12\textwidth]{../aux/static/regalo.png}} ;
     \node[const,above=of r] (nr) {\phantom{g}\En{Gift}\Es{Regalo}: $r$\phantom{g}} ;
 
-    \node[latent, fill=black!30, above=of d,yshift=-1.2cm, xshift=1.3cm] (c) {\includegraphics[width=0.12\textwidth]{../../aux/static/cerradura.png}} ;
+    \node[latent, fill=black!30, above=of d,yshift=-1.2cm, xshift=1.3cm] (c) {\includegraphics[width=0.12\textwidth]{../aux/static/cerradura.png}} ;
     \node[const,above=of c] (nc) {\phantom{g}\En{Election}\Es{Elección}: $c_1$\phantom{g}} ;
 
     \edge {r,c} {d};
 
-         \node[factor, minimum size=0.8cm, xshift=-1.3cm, yshift=2.5cm] (p1) {\includegraphics[width=0.075\textwidth]{../../aux/static/cerradura.png}} ;
-         \node[det, minimum size=0.8cm, yshift=2.5cm] (p2) {\includegraphics[width=0.085\textwidth]{../../aux/static/dedo.png}} ;
+         \node[factor, minimum size=0.8cm, xshift=-1.3cm, yshift=2.5cm] (p1) {\includegraphics[width=0.075\textwidth]{../aux/static/cerradura.png}} ;
+         \node[det, minimum size=0.8cm, yshift=2.5cm] (p2) {\includegraphics[width=0.085\textwidth]{../aux/static/dedo.png}} ;
          \node[factor, minimum size=0.8cm, xshift=1.3cm, yshift=2.5cm] (p3) {} ;
          \node[const, above=of p1, yshift=.05cm] (fp1) {$?$};
          \node[const, above=of p2, yshift=.05cm] (fp2) {$?$};
@@ -244,8 +244,8 @@
 
   \tikz{
 
-         \node[factor, minimum size=0.8cm, xshift=-1.3cm] (p1) {\includegraphics[width=0.075\textwidth]{../../aux/static/cerradura.png}} ;
-         \node[det, minimum size=0.8cm] (p2) {\includegraphics[width=0.085\textwidth]{../../aux/static/dedo.png}} ;
+         \node[factor, minimum size=0.8cm, xshift=-1.3cm] (p1) {\includegraphics[width=0.075\textwidth]{../aux/static/cerradura.png}} ;
+         \node[det, minimum size=0.8cm] (p2) {\includegraphics[width=0.085\textwidth]{../aux/static/dedo.png}} ;
          \node[factor, minimum size=0.8cm, xshift=1.3cm] (p3) {} ;
          \node[const, below=of p1, yshift=-.025cm] (fp1) {$1/3$};
          \node[const, below=of p2, yshift=-.025cm] (fp2) {$0$};
@@ -289,10 +289,7 @@
 \es{El proceso bayesiano de selección de las hipótesis alternativas (basado en la secuencia de sorpresas) es, como el proceso de selección evolutiva (secuencia de tasas de reproducción y supervivencia), de naturaleza multiplicativa.}%
 %
 \en{Because in them the impacts of losses are stronger than those of gains (for example, a single zero in the sequence produces an irreversible extinction) there is an advantage in favor of variants (hypotheses or life forms) that reduce fluctuations.}%
-\es{Debido a que en ellos los impactos de las pérdidas son más fuertes que los de las ganancias (por ejemplo, un único cero en la secuencia produce una extinción irreversible) existe una ventaja a favor de las variantes (hipótesis o formas de vida) que reducen las fluctuaciones~\cite{landfried-transitions}.}%
-%
-\en{This multiplicative structure of both selection processes has concrete consequences for life and knowledge.}%
-\es{Esta estructura multiplicativa de los procesos de selección tiene consecuencias concretas para la vida y el conocimiento.}%
+\es{Debido a que en ellos los impactos de las pérdidas son más fuertes que los de las ganancias (por ejemplo, un único cero en la secuencia produce una extinción irreversible) existe una ventaja a favor de las variantes (hipótesis o formas de vida) que reducen las fluctuaciones.}%
 
 % Parrafo
 
@@ -446,25 +443,27 @@ Queremos la apuesta que tenga mayor tasa de crecimiento $r$,
  \vspace{-0.1cm}
  \end{figure}
 
+
 % Parrafo
 
 \en{Although the bookmaker pays, as in the previous example, more for one option than for the other, the need to reduce fluctuations individually forces us to ignore the payouts, dividing the resources in the same proportion as the typical frequency $b=p$.}%
 \es{A pesar de la casa de apuestas pague, como en el ejemplo anterior, más por una opción que por la otra, la necesidad de reducir fluctuaciones individualmente nos obliga a ignorar los pagos, dividiendo los recursos en la misma proporción que la frecuencia típica $b=p$.}%
 %
-\en{But because once cooperation emerges it is no longer necessary to reduce fluctuations by individual diversification, an advantage appears in favor of cooperative specialization, which makes it possible to benefit from the best available option, further increasing the growth rate of all individuals in the cooperative group.}%
+\en{But because once cooperation emerges it is no longer necessary to reduce fluctuations by individual diversification, a new advantage in favor of cooperative specialization appears, making it possible to benefit from the best available option, further increasing the growth rate of all individuals in the cooperative group.}%
 \es{Pero debido a que una vez que emerge la cooperación deja de ser necesario reducir las fluctuaciones por diversificación individual, aparece una ventaja a favor de la especialización cooperativa, que permite sacar provecho de la mejor opción disponible, aumentando aún más la tasa de crecimiento de todos los individuos del grupo cooperativo.}%
 %
-\en{In a cooperative group of size $N$ the growth rate of individuals is the average of the resources that the group obtains at time step $T$, with $m_c$ and $m_s$ the number of individuals that obtained Cara and Seca at time step $T$, with $m_c + m_s = N$, and assuming that the previous resources $\omega(T-1)$ are equal for all members.}%
-\es{En un grupo cooperativo de tamaño $N$ la tasa de crecimiento de los individuos es el promedio de la recursos que el grupo obtiene en el paso temporal $T$, con $m_c$ y $m_s$ la cantidad de individuos que obtuvieron Cara y Seca en el paso temporal $T$, con $m_c + m_s = N$, y suponiendo que los recursos previos $\omega(T-1)$ son iguales para todas los miembros.}%
-
+\en{In a cooperative group of size $N$, where resources are divided equally, the growth rate of individuals is the average of the resources after $m_c$ and $m_s$ individuals obtain Heads and Tails respectively, with $m_c + m_s = N$.}%
+\es{En un grupo cooperativo de tamaño $N$, en el que los recursos se dividen en partes iguales, la tasa de crecimiento de los individuos es el promedio de la recursos luego de que $m_c$ y $m_s$ individuos obtienen Cara y Seca respectivamente, con $m_c + m_s = N$.}%
+%
 \begin{figure}[ht!]
 \vspace{-0.1cm}
 \centering
  \begin{subfigure}[c]{0.50\textwidth}
+ \vspace{-0.6cm}
   \begin{equation*}
 \begin{split}
-\omega(T) & = \frac{1}{N} \bigg( m_c \, \omega(T-1) \, Q_c  \, b + m_s \, \omega(T-1) \, Q_s  \, (1-b)  \bigg) \\
-& =\omega(T-1) \, \underbrace{\left( \frac{m_c}{N}   Q_c  \, b + \frac{m_s}{N} \, Q_s  \, (1-b)  \right)}_{\hfrac{\hfrac{\text{\scriptsize \En{with}\Es{con} $m_s$ \En{Heads}\Es{Caras} y $m_s$ \En{Tails}\Es{Secas}}}{\phantom{T}}}{\text{\footnotesize $\lim_{N \rightarrow \infty}p \,  Q_c  \, b + (1-p) \, Q_s  \, (1-b)$} } } \\[0.3cm]
+\omega(T) & = \frac{1}{N} \overbrace{\bigg( m_c \, \omega(T-1) \, Q_c  \, b + m_s \, \omega(T-1) \, Q_s  \, (1-b)  \bigg)}^{\hfrac{\text{\footnotesize \phantom{g}\En{Sum of all resources}\Es{Suma de todos los recursos}\phantom{g} }}{\text{\scriptsize (\En{with}\Es{con} $m_s$ \En{Heads}\Es{Caras} y $m_s$ \En{Tails}\Es{Secas})}}} \\
+& =\omega(T-1) \, \underbrace{\left( \frac{m_c}{N}   Q_c  \, b + \frac{m_s}{N} \, Q_s  \, (1-b)  \right)}_{\hfrac{\text{\scriptsize\phantom{Tg} $r$: \En{growth rate}\Es{Tasa de crecimiento}  \phantom{Tg}} }{\hfrac{\phantom{Tg}}{\text{\footnotesize $\lim_{N \rightarrow \infty}p \,  Q_c  \, b + (1-p) \, Q_s  \, (1-b)$} }} } \\[0.3cm]
 \end{split}
 \end{equation*}
   \end{subfigure}
@@ -474,22 +473,90 @@ Queremos la apuesta que tenga mayor tasa de crecimiento $r$,
  \end{flushright}
  \end{subfigure}
  \caption{
- \en{Reducing fluctuations through cooperation allows individuals to reach growth rates they would never achieve alone.}%
- \es{Reducir fluctuaciones por cooperación le permite a los individuos alcanzar tasas de crecimiento que jamás obtendrían solos.}%
- %
- \en{In the table (left) $\Delta$ represents the change in resources experienced by individuals at random.}%
- \es{En la tabla (izquierda) $\Delta$ representa el cambio en los recursos que sufren los individuos de forma aleatoria.}%
- %
- \en{In the figure (right), the colored curves are the trajectories of individuals playing alone, and the black line is the trajectory of individuals playing in cooperative groups.}%
- \es{En la figura (derecha), las curvas de colores son las trayectorias de los individuos jugando solos, y la recta negra es la trayectoria de los individuos jugando en grupos cooperativos.}%
+ \en{Growth rate in cooperative groups. Groups of infinite size have a growth rate equal to the arithmetic mean. In the figure, we see the growth rate for groups of size 1 to 5 (colors) for all posible bets (x-axis). As the group gets larger, the optimal bet becomes "specialized" to the best available option.}%
+ \es{Tasa de crecimiento en grupos cooperativos. Grupo de tamaño infinito tienen una tasa de crecimiento igual a la media aritmética. En la figura vemos la tasa de crecimiento para grupos de tamaño 1 a 5 (colores), para todas las posibles apuestas (eje x). A medida que el grupo se agranda, la apuesta óptima se va "especilizando" en la mejor opción disponible.}%
  }
- \label{fig:coop}
+ \label{fig:esp}
  \vspace{-0.1cm}
  \end{figure}
 
+% Parrafo
 
-\en{allowing higher level hypotheses (causal models, paradigms) to ``emerge'' from the data because, by making predictions with the contribution of all its component hypotheses, it produces better results than any of them alone.}
-\es{permitiendo que hipótesis de nivel superior (modelos causales, paradigmas) "emergan" de los datos porque, al realizar las predicciones con el aporte de todas las hipótesis que la componen, produce mejores resultados que cualquiera de ellas solas.}%
+\en{The multiplicative structure of hypothesis selection processes, by sequence of surprises, has concrete consequences for knowledge.}%
+\es{La estructura multiplicativa de los procesos de selección de hipótesis, por secuencia de sorpresas, tiene consecuencias concretas para el conocimiento.}%
+%
+\en{The advantage of cooperation is what makes higher level hypotheses (such as causal models or paradigms) to ``emerge from the data'' because, by making predictions with the contribution of all its component hypotheses, it produces better results than any of them alone.}
+\es{La ventaja de la cooperación es lo que hace que hipótesis de nivel superior (como modelos causales o paradigmas) ``emergan de los datos'' porque, al realizar las predicciones con el aporte de todas las hipótesis que la componen, produce mejores resultados que cualquiera de ellas solas.}%
+%
+\en{And finally, since with cooperation it is no longer necessary to reduce fluctuations by individual diversification, an advantage in favor of specialization arises producing the emergence of worldviews, such as science and culture, where highly specialized domain-specific paradigms coexist.}%
+\es{Y finalmente, debido a que con la cooperación deja de ser necesario reducir fluctuaciones por diversificación individual, surge una ventaja a favor de la especialización produciendo la emergencia de cosmovisiones, como la ciencia y la cultura, donde coexisten paradigmas altamente especializados a dominios particulares.}%
+
+% Parrafo
+
+%
+\en{In the same way, the multiplicative selection of life (by sequences of reproduction and survival rates) has produced throughout its history a series of evolutionary transitions in which entities capable of self-replication after the transition became part of an indissoluble cooperative unit.}%
+\es{De la misma forma, la selección multiplicativa de la vida (por secuencias de tasas de reproducción y supervivencia) ha producido a lo largo de su historia una serie de transiciones evolutivas en las que entidades capaces de autorreplicación luego de la transición pasaron a formar parte de unidades cooperativas indisolubles.}%
+%
+\en{Our own life depends on several levels of cooperation (with specialization), without which we are not able to survive: the union of our cells with mitochondria and the emergence of organelles; our multicellular organism and the emergence of organs; our society and the emergence of roles and groups; the coexistence between species and the emergence of ecosystems.}%
+\es{Nuestra propia vida depende de varios niveles de cooperación (con especialización), sin los cuales no somos capaces de sobrevivir: la unión de nuestras células con las mitocondrias y la emergencia de las organelas; nuestro organismo multicelular y la emergencia de los órganos; nuestra sociedad y la emergencia de los roles y grupos; la coexistencia entre especies y la emergencia de los ecosistemas.}%
+
+
+\begin{figure}[ht!]
+\centering
+ \begin{subfigure}[b]{0.25\textwidth} \centering
+  \includegraphics[width=\linewidth]{../aux/static/cloroplastos.jpg}
+  \caption*{\En{Cells}\Es{Células}}
+  \end{subfigure}
+ \begin{subfigure}[b]{0.23\textwidth} \centering
+  \includegraphics[width=\linewidth]{../aux/static/fotosintesis.jpg}
+  \caption*{\En{Organisms}\Es{Organismos}}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.235\textwidth} \centering
+ \includegraphics[width=\linewidth]{../aux/static/hormigas2.jpg}
+  \caption*{\En{Societies}\Es{Sociedades}}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.235\textwidth} \centering
+ \includegraphics[width=\linewidth]{../aux/static/tsimane2.jpg}
+  \caption*{\En{Ecosystems}\Es{Ecosistemas}}
+ \end{subfigure}
+ \caption{
+ \en{The emergence of higher level units in life.}%
+ \es{La emergencia de unidades de nivel superior en la vida.}%
+ }
+ \label{fig:trans}
+ \end{figure}
+
+
+\en{The emergence of higher level units is a permanent phenomenon in the history of life and knowledge because, under multiplicative selection processes, the defecting variants negatively affect their own long-term growth rate: this behavior, by increasing the fluctuations on whom it depends (the cooperators), also increases their own fluctuations.}%
+\es{La emergencia de unidades de nivel superior es un fenómeno permanente en la historia de la vida y del conocimiento debido a que, bajo procesos de selección multiplicativa las variantes desertoras afectan negativamente su propia tasa de crecimiento a largo plazo: este comportamiento, al aumentar las fluctuaciones que en quienes depende (las cooperadoras), aumenta también sus propias fluctuaciones.}%
+
+
+
+
+
+\en{For our species, the emergence of mutual understanding produced a radical change.}%
+\es{Para nuestra especie, el surgimiento de la comprensión mutua produjo un cambio radical.}%
+%
+\en{Before the cultural transition, we were in serious danger of extinction, as evidenced by the low diversity of the human genome.}%
+\es{Antes de la transición cultural, estábamos en grave peligro de extinción, lo que se evidencia en la baja diversidad del genoma humano.}%
+%
+\en{But when knowledge, that previously had to be rediscovered individually, became a common resource passed on from generation to generation, we were able to occupy all the ecological niches of the earth as no other terrestrial vertebrate had done before.}%
+\es{Pero cuando el conocimiento, que antes debía ser redescubierto individualmente, pasó a ser un recurso común transmitido de generación en generación, fuimos capaces de ocupar todos los nichos ecológicos de la tierra como ningún otro vertebrado terrestre lo había logrado antes.}
+
+% Parrafo
+
+
+
+%
+
+
+
+
+En las últimas décadas la biología evolutiva ha comenzado a adoptar la analogía de la ``tragedia de los comunes''~\cite{rankin2007-tragedyCommonsBiology}.
+%
+Este concepto contiene la idea de que los bienes comunes tienen una estructura de pagos isomorfa al dilema del prisionero de N jugadores~\cite{hardin1971-collectiveAsPrisionerDilema}.
+%
+En un dilema del prisionero de dos jugadores, cooperar implica un coste $c$ para que la otra persona reciba un beneficio b, con $b > c$, y desertar significa negarse a cooperar y no conlleva ningún coste.
 % \en{defectors is detrimental in the long run because it leads to an increase in the group's fluctuations and therefore also in their own.}%
 % \es{los desertores se ve perjudicado a largo plazo debido a que produce un aumento en las fluctuaciones del grupo y por lo tanto también en las suyas.}%
 % %
@@ -503,26 +570,7 @@ Queremos la apuesta que tenga mayor tasa de crecimiento $r$,
 
 % Parrafo [Con la vida pasa algo parecido]
 
-\en{In the same way, the multiplicative selection of life (by sequences of reproduction and survival rates) has produced throughout its history a series of evolutionary transitions in which entities capable of self-replication after the transition became part of an indissoluble cooperative unit.}%
-\es{De la misma forma, la selección multiplicativa de la vida (por secuencias de tasas de reproducción y supervivencia) ha producido a lo largo de su historia una serie de transiciones evolutivas en las que entidades capaces de autorreplicación luego de la transición pasaron a formar parte de unidades cooperativas indisolubles.}%
-%
-\en{Our own life depends on several levels of cooperation (with specialization), without which we are not able to survive: the union of our cells with mitochondria and the emergence of organelles; our multicellular organism and the emergence of organs; our society and the emergence of roles and groups; the coexistence between species and the emergence of ecosystems.}%
-\es{Nuestra propia vida depende de varios niveles de cooperación (con especialización), sin los cuales no somos capaces de sobrevivir: la unión de nuestras células con las mitocondrias y la emergencia de las organelas; nuestro organismo multicelular y la emergencia de los órganos; nuestra sociedad y la emergencia de los roles y grupos; la coexistencia entre especies y la emergencia de los ecosistemas.}%
-%
-\en{For our species, the emergence of mutual understanding produced a radical change.}%
-\es{Para nuestra especie, el surgimiento de la comprensión mutua produjo un cambio radical.}%
-%
-\en{Before the cultural transition, we were in serious danger of extinction, as evidenced by the low diversity of the human genome.}%
-\es{Antes de la transición cultural, estábamos en grave peligro de extinción, lo que se evidencia en la baja diversidad del genoma humano.}%
-%
-\en{But when knowledge, that previously had to be rediscovered individually, became a common resource passed on from generation to generation, we were able to occupy all the ecological niches of the earth as no other terrestrial vertebrate had done before.}%
-\es{Pero cuando el conocimiento, que antes debía ser redescubierto individualmente, pasó a ser un recurso común transmitido de generación en generación, fuimos capaces de ocupar todos los nichos ecológicos de la tierra como ningún otro vertebrado terrestre lo había logrado antes.}
 
-% Parrafo
-
-\en{The emergence of higher level units is a permanent phenomenon in the history of life and knowledge because, under multiplicative selection processes, the defecting variants negatively affect their own long-term growth rate: this behavior, by increasing the fluctuations on whom it depends (the cooperators), also increases their own fluctuations.}%
-\es{La emergencia de unidades de nivel superior es un fenómeno permanente en la historia de la vida y del conocimiento debido a que, bajo procesos de selección multiplicativa las variantes desertoras afectan negativamente su propia tasa de crecimiento a largo plazo: este comportamiento, al aumentar las fluctuaciones que en quienes depende (las cooperadoras), aumenta también sus propias fluctuaciones.}%
-%
 \en{The experience accumulated by the most diverse communities in the world has led, independently, to a universal obligation to give and receive, and to the development of technologies of reciprocity that maintain cohesion by re-activating community bonds through (festive or coercive) exchange rites.}%
 \es{La experiencia acumulada por las más diversas comunidades del mundo ha conducido, de forma independiente, a una obligación universal de dar y de recibir, y al desarrollo de tecnologías de reciprocidad que mantienen la cohesión mediante la a re-activar los vínculos comunitarios mediante ritos (festivos o coercitivos) de intercambio.}%
 %
