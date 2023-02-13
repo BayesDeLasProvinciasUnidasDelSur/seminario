@@ -7,6 +7,3 @@
 [submodule "aux/biblio"]
 	path = aux/biblio
 	url = git@github.com:bayesbuenosaires/biblio.git
-[submodule "software/variational-logisitic-regression"]
-	path = 2020/software/variational-logisitic-regression
-	url = git@github.com:BayesDeLasProvinciasUnidasDelSur/variational-logisitic-regression.git
